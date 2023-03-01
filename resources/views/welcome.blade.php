@@ -20,7 +20,7 @@
             @if (Route::has('login'))
                 <div class="bg-cyan-500 sm:fixed sm:top-0 sm:right-0 p-6 text-right">
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-blue-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Iniciar Sesion</a> --}}{{-- no es necesario logearse si ya esta en una sesion activa --}}
+                        <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-blue-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Iniciar Sesion</a>{{-- no es necesario logearse si ya esta en una sesion activa --}}
                     @else
                         <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Iniciar Sesion</a>
 
@@ -39,7 +39,7 @@
                                     
                                 </div>
 
-                                <h2 class="flex justify-center items-center mt-6 text-xl font-semibold text-gray-900">SCHOOLBOOK</h2>
+                                <h2 class="flex justify-center items-center mt-6 text-xl font-semibold text-gray-900">SCHOOLBOOKK</h2>
 
                                 <img class="w-12 h-12 pt-10" src="../images/SCHOOLBOOK_free-file.png" alt="">
                                 </p>
@@ -49,5 +49,5 @@
             </div>
 
     </body>
-    
+
 </html>
