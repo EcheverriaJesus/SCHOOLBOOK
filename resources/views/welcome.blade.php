@@ -35,13 +35,11 @@
 
                         <div class="p-6 rounded-lg shadow-2xl flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
                             <div class="">
-                                <div class="h-16 w-16 bg-red-50 flex items-center justify-center rounded-full">
-                                    
+                                <div class="h-40 w-36 bg-red-50 rounded-full">
+                                     <img class="w-12 h-12 pt-10" src="../images/CHOOLBOO_LOGO.png" alt="">
                                 </div>
 
-                                <h2 class="flex justify-center items-center mt-6 text-xl font-semibold text-gray-900">SCHOOLBOOKK</h2>
-
-                                <img class="w-12 h-12 pt-10" src="../images/SCHOOLBOOK_free-file.png" alt="">
+                                <img class="w-12 h-12 pt-10" src="../images/CHOOLBOO_LOGO.png" alt="">
                                 </p>
                             </div> 
                     </div>
