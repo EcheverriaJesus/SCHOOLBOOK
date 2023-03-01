@@ -45,11 +45,7 @@
                                 <img class="w-12 h-12 pt-10" src="../images/SCHOOLBOOK_free-file.png" alt="">
                                 </p>
                             </div> 
-                    
                     </div>
-                
             </div>
-           
-       
     </body>
 </html>
