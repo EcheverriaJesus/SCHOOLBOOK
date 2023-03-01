@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>SCHOOLBOK</title>
+        <title>SCHOOLBOK JN</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -16,8 +16,7 @@
         </style>
     </head>
     
-    <body class="flex">
-       
+    <body>
             @if (Route::has('login'))
                 <div class="bg-cyan-500 sm:fixed sm:top-0 sm:right-0 p-6 text-right">
                     @auth
@@ -32,7 +31,7 @@
                 </div>
             @endif
 
-            <div class="max-w-7xl mx-auto p-6 lg:p-8">
+            <div class="lg:p-8">
 
                         <div class="p-6 rounded-lg shadow-2xl flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
                             <div class="">
@@ -40,12 +39,15 @@
                                     
                                 </div>
 
-                                <h2 class="flex justify-center items-center mt-6 text-xl font-semibold text-gray-900">SchoolBook</h2>
+                                <h2 class="flex justify-center items-center mt-6 text-xl font-semibold text-gray-900">SCHOOLBOOK</h2>
 
                                 <img class="w-12 h-12 pt-10" src="../images/SCHOOLBOOK_free-file.png" alt="">
                                 </p>
                             </div> 
                     </div>
+
             </div>
+
     </body>
+    
 </html>
