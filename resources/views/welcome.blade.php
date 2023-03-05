@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>SCHOOLBOK</title>
+        <title>SCHOOLBOK JN</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -16,12 +16,11 @@
         </style>
     </head>
     
-    <body class="flex">
-       
+    <body>
             @if (Route::has('login'))
                 <div class="bg-cyan-500 sm:fixed sm:top-0 sm:right-0 p-6 text-right">
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-blue-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Iniciar Sesion</a> --}}{{-- no es necesario logearse si ya esta en una sesion activa --}}
+                        <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-blue-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Iniciar Sesion</a>{{-- no es necesario logearse si ya esta en una sesion activa --}}
                     @else
                         <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Iniciar Sesion</a>
 
@@ -32,20 +31,21 @@
                 </div>
             @endif
 
-            <div class="max-w-7xl mx-auto p-6 lg:p-8">
+            <div class="lg:p-8">
 
                         <div class="p-6 rounded-lg shadow-2xl flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
                             <div class="">
-                                <div class="h-16 w-16 bg-red-50 flex items-center justify-center rounded-full">
-                                    
+                                <div class="h-40 w-36 bg-red-50 rounded-full">
+                                     <img class="w-12 h-12 pt-10" src="../images/CHOOLBOO_LOGO.png" alt="">
                                 </div>
 
-                                <h2 class="flex justify-center items-center mt-6 text-xl font-semibold text-gray-900">SchoolBook</h2>
-
-                                <img class="w-12 h-12 pt-10" src="../images/SCHOOLBOOK_free-file.png" alt="">
+                                <img class="w-12 h-12 pt-10" src="../images/CHOOLBOO_LOGO.png" alt="">
                                 </p>
                             </div> 
                     </div>
+
             </div>
+
     </body>
+
 </html>
