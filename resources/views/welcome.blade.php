@@ -11,25 +11,26 @@
 </head>
 
 <body class="p-20">
+
     <header class="">
-        @if (Route::has('login'))
-            <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
-                @auth
-                    <a href="{{ url('/dashboard') }}"
-                        class="font-semibold text-gray-600 hover:text-blue-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Iniciar
-                        Sesion</a>{{-- no es necesario logearse si ya esta en una sesion activa --}}
-                @else
-                    <a href="{{ route('/') }}"
-                        class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Iniciar
-                        Sesion</a>
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}"
-                            class="ml-4 font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Registrar</a>
-                    @endif
-                @endauth
-            </div>
-        @endif
-    </header>
+                @if (Route::has('login'))
+                    <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
+                        @auth
+                            <a href="{{ url('/dashboard') }}"
+                                class="font-semibold text-gray-600 hover:text-blue-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Iniciar
+                                Sesion</a>{{-- no es necesario logearse si ya esta en una sesion activa --}}
+    @else
+                            <a href="{{ route('login') }}"
+                                class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Iniciar
+                                Sesion</a>
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}"
+                                    class="ml-4 font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Registrar</a>
+                            @endif
+                        @endauth
+                    </div>
+                @endif
+           </header>
 
     <div class="h-auto md:flex">
         <section
@@ -48,30 +49,9 @@
         </section>
 
         <section class="flex md:w-1/2 justify-center py-10 items-center bg-white">
-            
-            <form class="bg-white" method="POST" action="{{ route('/') }}">
-                @csrf
-
-{{-- inserccion de los campos para logeo --}}
-
+            <form class="bg-white">
                 <h1 class="text-gray-800 font-bold text-2xl mb-1">Bienvenido a SchoolBok!</h1>
-                <p class="text-sm font-normal text-gray-600 mb-7">Sistema de Control Escolar "Vicente Guerrero Saldaña"
-                </p>
-
-                <div>
-                    <x-label for="email" value="{{ __('Email') }}" />
-                    <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-                </div>
-    
-                <div class="mt-4">
-                    <x-label for="password" value="{{ __('Password') }}" />
-                    <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-                </div>
-
-                <x-button class="ml-4">
-                    {{ __('Log in') }}
-                </x-button>
-
+                <p class="text-sm font-normal text-gray-600 mb-7">Sistema de Control Escolar "Vicente Guerrero Saldaña"</p>
                 <div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor">
@@ -92,12 +72,12 @@
                         placeholder="Contraseña" />
                 </div>
                 <button type="submit"
-                    class="block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2">Iniciar
-                    Sesion</button>
+                    class="block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2">Iniciar Sesion</button>
                 <span class="text-sm ml-2 hover:text-blue-500 cursor-pointer">¿Olvido su contraseña?</span>
             </form>
         </section>
     </div>
-    
+
 </body>
+
 </html>
