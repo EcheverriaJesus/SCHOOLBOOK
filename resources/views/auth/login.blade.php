@@ -104,7 +104,10 @@
         @endif
             <form method="POST" action="{{ route('login') }}">
                 @csrf
-    
+    <div class="flex flex-col pb-7 ">
+        <H1 class="flex justify-center font-bold text-blue-800 text-2xl pb-2">SCHOOL BOOK</H1>
+        <H3>Sistema de Control Escolar Vicente Saldaña</H3>
+    </div>
                 <div>
                     <x-label for="email" value="{{ __('Email') }}" />
                     <x-input id="email" class="pl-4 block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" placeholder="Matricula"/>
@@ -112,7 +115,7 @@
     
                 <div class="mt-4">
                     <x-label for="password" value="{{ __('Password') }}" />
-                    <x-input id="password" class=" pl-4 block mt-1 w-full" type="password" name="password" required autocomplete="current-password" placeholder="Contraseña"/>
+                    <x-input id="password" class="bor pl-4 block mt-1 w-full" type="password" name="password" required autocomplete="current-password" placeholder="Contraseña"/>
                 </div>
     
                 <div class="block mt-4">
