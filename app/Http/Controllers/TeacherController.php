@@ -18,7 +18,7 @@ class TeacherController extends Controller
         return view('teacher.index', compact('teachers'));
     }
 
-    public function create(Request $request): Response
+    public function create(Request $request): View
     {
         return view('teacher.create');
     }

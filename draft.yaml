@@ -1,6 +1,5 @@
 models:
     Contribution:
-        id_contribution: id
         amount: integer
         status: boolean
         description: string:100
@@ -10,7 +9,6 @@ models:
         relationships:
             belongsTo: Student
     Tutor:
-        id_tutor: id
         tutor_name: string:50
         paternal_surname: string:50
         maternal_surname: string:50
@@ -21,7 +19,6 @@ models:
         relationships:
             belongsTo: Address, Student
     Document:
-        id_document: id
         document_name: string:50
         status: boolean
         file: string:5
@@ -29,7 +26,6 @@ models:
         relationships:
             belongsTo: Student
     Student:
-        id_student: id
         student_name: string:50
         paternal_surname: string:50
         maternal_surname: string:50
@@ -55,7 +51,6 @@ models:
         relationships:
             belongsTo: School_cycle, Student
     Address:
-        id_address: id 
         street: string:50 
         num_ext: string:10 
         num_int: string:10
@@ -71,21 +66,18 @@ models:
         relationships:
             belongsTo: Student, Class
     Classroom:
-        id_classroom: id 
         classroom_name: string:5 
         building: string:5 
         relationships:
             belongsTo: Class
     School_cycle:
-        id_cycle: id 
         cycle_name: string:100 
         start_date: date 
         end_date: date 
         status: boolean 
         relationships:
             hasMany: Cycle_student, Class
-    Qualification:
-        id_qualification: id 
+    Qualification: 
         bim1: float 
         bim2: float 
         bim3: float 
@@ -96,7 +88,6 @@ models:
             belongsTo: Subject
     
     Notice:
-        id_notice: id 
         title: string:100 
         description: string 
         start_date: date 
@@ -111,7 +102,6 @@ models:
         relationships:
             belongsTo: Class, Group
     Teacher:
-        id_teacher: id 
         first_name: string:50 
         father_surname: string:50 
         father's_last_name: string:50 
@@ -127,14 +117,12 @@ models:
         relationships:
             belongsTo: Address
             hasMany: Teacher_subject
-    Group:
-        id_group: id 
+    Group: 
         group_name: char 
         num_max_students: integer 
         relationships:
             hasMany: Group_class
-    Class:
-        id_class: id 
+    Class: 
         id_subject: foreignIdFor
         id_classroom: foreignIdFor
         id_history: foreignIdFor 
@@ -147,16 +135,14 @@ models:
         id_schedule: foreignIdFor 
         relationships:
             belongsTo: Class, Schedule
-    Schedule:
-        id_schedule: id 
+    Schedule: 
         start_time: time 
         end_time: time 
         day: date 
         id_class: foreignIdFor 
         relationships:
             hasMany: Class_schedule
-    Subject:
-        id_subject: id 
+    Subject: 
         subject_name: string:50 
         description: string:50 
         grade: integer 

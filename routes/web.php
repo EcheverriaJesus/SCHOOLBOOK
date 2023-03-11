@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +27,8 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::get('/teachers/create', [TeacherController::class,'create'])->name('teachers.create');
 
 
 Route::resource('contribution', App\Http\Controllers\ContributionController::class);

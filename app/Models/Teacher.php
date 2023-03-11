@@ -20,7 +20,7 @@ class Teacher extends Model
         'id_teacher',
         'first_name',
         'father_surname',
-        'father\'s_last_name',
+        'fathers_last_name',
         'phone',
         'email',
         'curp',
