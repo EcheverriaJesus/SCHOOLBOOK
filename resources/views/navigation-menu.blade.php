@@ -9,7 +9,7 @@
                 </svg>
             </button>
             <a class = "ml-1" href="{{ route('dashboard') }}">
-               <img src="{{asset('img/logoSchoolBook.png')}}" alt="logoSchoolBook" style="width: 100px; height: 60px">
+                <x-application-mark> </x-application-mark>
             </a>
         </div>
         {{-- Perfil y cerrar sesion  --}}
