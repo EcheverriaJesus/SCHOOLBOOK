@@ -1,4 +1,4 @@
-<form action="" class="space-y-5 md:w-1/2" wire:submit.prevent='crearProfesor'>
+<form action="" class="space-y-5 md:w-1/2" wire:submit.prevent='editarProfesor'>
     <x-validation-errors class="mb-4" />
     <!-- nombre -->
     <div>
@@ -113,17 +113,32 @@
         </div>
 
     </div> <!-- finalDomicilio-->
-
-    <!-- fotografia-->
+    <!-- Fotografia -->
     <div>
-        <x-label for="photo" value="{{ __('Seleccione la fotografia del docente') }}" />
-        <x-input id="photo" class="block w-full mt-1" wire:model="photo" type="file" accept="image/*" />
+        <x-label for="photo_new" :value="__('Seleccione la fotografia del docente')" />
+        <x-input wire:model="photo_new" id="photo_new" class="block w-full mt-1" type="file" accept="image/*" />
+        <div class="flex space-x-3">
+            <div class="block my-5 w-80 h-80">
+                <x-label :value="__('Fotografia actual')" class="my-2"/>
+                <img src="{{asset('storage/imageTeachers/'.$photo)}}" alt="{{'Imagen docente '}}">
+            </div>
+            <div class="block my-5 w-80 h-80">
+                @if ($photo_new)
+                <x-label :value="__('Fotografia nueva')" class="my-2"/>
+                <img src="{{$photo_new->temporaryUrl()}}">
+                @endif
+            </div>
+        </div>
     </div>
-
     <!-- Cedula profesional-->
     <div>
-        <x-label for="professional_license" value="{{ __('Seleccione la cedula profesional del docente (PDF)') }}" />
-        <x-input id="professional_license" class="block w-full mt-1" wire:model="professional_license" type="file" accept=".pdf" />
+        <x-label for="professional_license_new" value="{{ __('Seleccione la cedula profesional del docente (PDF)') }}" />
+        <x-input id="professional_license_new" class="block w-full mt-1" wire:model="professional_license_new" type="file" accept=".pdf" />
+        <a href="{{asset('storage/cedProfessional/'.$professional_license)}}" class="inline-flex items-center px-4 py-2 my-3 text-sm font-semibold tracking-widest text-white transition duration-150 ease-in-out bg-blue-700 border border-transparent rounded-md hover:bg-blue-600"
+            target="_blank"
+            rel="noreferrer noopener">
+            Ver Ced. Profesional Actual
+        </a>
     </div>
  
     <x-button class="ml-4">

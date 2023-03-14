@@ -113,7 +113,7 @@ models:
         major: string:50
         photo: string:255
         professional_license: string:255 
-        id_address: foreignIdFor 
+        address_id: foreignIdFor 
         relationships:
             belongsTo: Address
             hasMany: Teacher_subject

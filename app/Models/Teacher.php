@@ -17,7 +17,6 @@ class Teacher extends Model
      * @var array
      */
     protected $fillable = [
-        'id_teacher',
         'first_name',
         'father_surname',
         'fathers_last_name',
@@ -29,7 +28,7 @@ class Teacher extends Model
         'major',
         'photo',
         'professional_license',
-        'id_address',
+        'address_id',
     ];
 
     /**

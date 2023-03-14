@@ -16,7 +16,6 @@ class Classroom extends Model
      * @var array
      */
     protected $fillable = [
-        'id_classroom',
         'classroom_name',
         'building',
     ];

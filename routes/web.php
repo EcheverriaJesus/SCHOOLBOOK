@@ -31,8 +31,10 @@ Route::middleware([
     })->name('dashboard');
 });
 
+Route::get('/teachers', [TeacherController::class,'index'])->name('teachers.index');
 Route::get('/teachers/create', [TeacherController::class,'create'])->name('teachers.create');
-
+Route::get('/teachers/{teacher}',[TeacherController::class,'show'])->name('teachers.show');
+Route::get('/teachers/{teacher}/edit',[TeacherController::class,'edit'])->name('teachers.edit');
 
 Route::resource('contribution', App\Http\Controllers\ContributionController::class);
 

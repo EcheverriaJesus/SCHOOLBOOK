@@ -86,16 +86,11 @@ class CrearProfesor extends Component
             'major' => $datos['major'],
             'photo' => $datos['photo'],
             'professional_license' => $datos['professional_license'],
-            'id_address' => $direccion->id
+            'address_id' => $direccion->id
         ]);
         // Crear mensaje
         session()->flash('mensaje','Se registro al docente correctamente');
-        return redirect()->route('teachers.create');
-        //DB::transaction(function () {
-            //Se fuerda registro docente
-            
-        //});
-        
+        return redirect()->route('teachers.index');
     }
 
     public function render()

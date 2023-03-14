@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('major', 50);
             $table->string('photo', 255);
             $table->string('professional_license', 255);
-            $table->string('id_address');
+            $table->foreignId('address_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
