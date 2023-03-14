@@ -17,7 +17,6 @@ class Class extends Model
      * @var array
      */
     protected $fillable = [
-        'id_class',
         'id_subject',
         'id_classroom',
         'id_history',

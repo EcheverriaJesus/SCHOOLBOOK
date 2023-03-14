@@ -16,7 +16,6 @@ class Document extends Model
      * @var array
      */
     protected $fillable = [
-        'id_document',
         'document_name',
         'status',
         'file',

@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('notices', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_notice');
             $table->string('title', 100);
             $table->string('description');
             $table->date('start_date');

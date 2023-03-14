@@ -17,7 +17,6 @@ class SchoolCycle extends Model
      * @var array
      */
     protected $fillable = [
-        'id_cycle',
         'cycle_name',
         'start_date',
         'end_date',

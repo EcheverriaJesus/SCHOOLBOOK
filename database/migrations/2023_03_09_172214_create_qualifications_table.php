@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('qualifications', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_qualification');
             $table->float('bim1');
             $table->float('bim2');
             $table->float('bim3');

@@ -17,7 +17,6 @@ class Schedule extends Model
      * @var array
      */
     protected $fillable = [
-        'id_schedule',
         'start_time',
         'end_time',
         'day',

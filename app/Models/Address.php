@@ -17,7 +17,6 @@ class Address extends Model
      * @var array
      */
     protected $fillable = [
-        'id_address',
         'street',
         'num_ext',
         'num_int',

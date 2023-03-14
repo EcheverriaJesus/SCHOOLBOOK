@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_teacher');
             $table->string('first_name', 50);
             $table->string('father_surname', 50);
             $table->string('fathers_last_name', 50);
@@ -25,7 +24,7 @@ return new class extends Migration
             $table->string('major', 50);
             $table->string('photo', 255);
             $table->string('professional_license', 255);
-            $table->string('id_address');
+            $table->foreignId('address_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('contributions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_contribution');
             $table->integer('amount');
             $table->boolean('status');
             $table->string('description', 100);

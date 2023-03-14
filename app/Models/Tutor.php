@@ -16,7 +16,6 @@ class Tutor extends Model
      * @var array
      */
     protected $fillable = [
-        'id_tutor',
         'tutor_name',
         'paternal_surname',
         'maternal_surname',
