@@ -34,9 +34,9 @@ class Subject extends Model
         'id_subject' => 'integer',
     ];
 
-    public function class(): BelongsTo
+    public function classes(): BelongsTo
     {
-        return $this->belongsTo(Class::class);
+        return $this->belongsTo(classes::class);
     }
 
     public function idSubject(): BelongsTo

@@ -16,7 +16,6 @@ class Notice extends Model
      * @var array
      */
     protected $fillable = [
-        'id_notice',
         'title',
         'description',
         'start_date',

@@ -17,7 +17,6 @@ class SchoolCycle extends Model
      * @var array
      */
     protected $fillable = [
-        'id_cycle',
         'cycle_name',
         'start_date',
         'end_date',
@@ -44,7 +43,7 @@ class SchoolCycle extends Model
 
     public function classes(): HasMany
     {
-        return $this->hasMany(Class::class);
+        return $this->hasMany(Classes::class);
     }
 
     public function idCycle(): BelongsTo

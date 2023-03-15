@@ -1,47 +1,52 @@
 models:
     Contribution:
+        id_contribution: id
         amount: integer
         status: boolean
         description: string:100
         contribution_date: date
         deadline_date: date
-        id_student: foreignIdFor
+        student_id: foreignIdFor
         relationships:
             belongsTo: Student
     Tutor:
+        id_tutor: id
+        relationship: string:10
         tutor_name: string:50
         paternal_surname: string:50
         maternal_surname: string:50
         gender: string:10
         email: string
-        phone: string
-        id_address: foreignIdFor
+        phone: integer
+        address_id: foreignIdFor
         relationships:
             belongsTo: Address, Student
     Document:
+        id_document: id
         document_name: string:50
         status: boolean
         file: string:5
-        id_student: foreignIdFor
+        student_id: foreignIdFor
         relationships:
             belongsTo: Student
     Student:
+        id_student: id
         student_name: string:50
         paternal_surname: string:50
         maternal_surname: string:50
         grade: integer
         birth_date: date
-        curp: string:18
+        curp: string
         gender: string:10
-        email: string:50
-        phone: string
+        email: string
+        phone: integer
         status: boolean
         study_plan: string:100
-        photo: string:255
-        id_address: foreignIdFor
-        id_tutor: foreignIdFor
-        id_document: foreignIdFor
-        id_history: foreignIdFor
+        photo: string:500
+        address_id: foreignIdFor
+        tutor_id: foreignIdFor
+        document_id: foreignIdFor
+        history_id: foreignIdFor
         relationships:
             belongsTo: Address, Tutor
             hasMany: Student_cycle, Contribution, Document
@@ -51,9 +56,10 @@ models:
         relationships:
             belongsTo: School_cycle, Student
     Address:
+        home_address_id: id 
         street: string:50 
-        num_ext: string:10 
-        num_int: string:10
+        num_ext: string:50 
+        num_int: string:50 
         neighborhood: string:50 
         city: string:50 
         state: string:50 
@@ -61,23 +67,26 @@ models:
         relationships:
             hasMany: Student, Tutor, Teacher
     Student_class:
-        id_student: foreignIdFor 
-        id_class: foreignIdFor 
-        relationships:
+        student_id: foreignIdFor 
+        class_id: foreignIdFor 
+        relations:
             belongsTo: Student, Class
     Classroom:
+        classroom_id: id 
         classroom_name: string:5 
         building: string:5 
         relationships:
             belongsTo: Class
     School_cycle:
+        cycle_id: id 
         cycle_name: string:100 
         start_date: date 
         end_date: date 
         status: boolean 
-        relationships:
+        relations:
             hasMany: Cycle_student, Class
-    Qualification: 
+    Qualification:
+        id_qualification: id 
         bim1: float 
         bim2: float 
         bim3: float 
@@ -88,20 +97,23 @@ models:
             belongsTo: Subject
     
     Notice:
+        notice_id: id 
         title: string:100 
         description: string 
         start_date: date 
         end_date: date 
         status: boolean 
         recipient: string:50 
-        image: string:255 
-        
+        image: string:500 
+        relations:
+            belongsTo: user
     group_class:
-        id_class: foreignIdFor 
-        id_group: foreignIdFor 
-        relationships:
+        class_id: foreignIdFor 
+        group_id: foreignIdFor 
+        relations:
             belongsTo: Class, Group
     Teacher:
+        teacher_id: id 
         first_name: string:50 
         father_surname: string:50 
         father's_last_name: string:50 
@@ -111,51 +123,55 @@ models:
         rfc: string:50 
         education_level: string:50 
         major: string:50
-        photo: string:255
-        professional_license: string:255 
+        photo: string:500
+        professional_license: string:500 
         address_id: foreignIdFor 
-        relationships:
+        relations:
             belongsTo: Address
             hasMany: Teacher_subject
-    Group: 
+    Group:
+        group_id: id 
         group_name: char 
         num_max_students: integer 
-        relationships:
+        relations:
             hasMany: Group_class
-    Class: 
-        id_subject: foreignIdFor
-        id_classroom: foreignIdFor
-        id_history: foreignIdFor 
-        id_cycle: foreignIdFor 
-        relationships:
-            belongsTo: Subject, Classroom
-            hasMany: Class_group, Class_student, Class_schedule, School_cycle
-    Class_schedule:
-        id_class: foreignIdFor 
-        id_schedule: foreignIdFor 
-        relationships:
+    Class:
+        class_id: id 
+        subject_id: foreignIdFor
+        classroom_id: foreignIdFor
+        history_id: foreignIdFor 
+        cycle_id: foreignIdFor 
+        relations:
+            belongsTo: Subject, School_school_cycle
+            hasMany: Class_group, Class_student, Class_time_class, Classroom
+    Class_time_class:
+        class_id: foreignIdFor 
+        schedule_id: foreignIdFor 
+        relations:
             belongsTo: Class, Schedule
-    Schedule: 
+    Schedule:
+        schedule_id: id 
         start_time: time 
         end_time: time 
         day: date 
-        id_class: foreignIdFor 
-        relationships:
-            hasMany: Class_schedule
-    Subject: 
+        class_id: foreignIdFor 
+        relations:
+            hasMany: time_class
+    Subject:
+        subject_id: id 
         subject_name: string:50 
         description: string:50 
         grade: integer 
-        id_qualification: foreignIdFor 
-        relationships:
+        grade_id: foreignIdFor 
+        relations:
             belongsTo: Class
-            hasMany: Qualification, Teacher_subject
-    Teacher_subject:
-        id_subject: foreignIdFor 
-        id_teacher: foreignIdFor 
-        relationships:
+            hasMany: Grades, Teacher_subject
+    teacher_subject:
+        subject_subject: foreignIdFor 
+        teacher_id: foreignIdFor 
+        relations:
             belongsTo: Subject, Teacher
-seeders: Contribution, Tutor, Document, Student, Student_cycle, Address, Student_class, Classroom, School_cycle, Grade, User, Notice, Class_group, Teacher, Group, Class, Class_schedule, Schedule, Subject, Subject_teacher
+seeders: Contribution, Tutor, Document, Student, Student_cycle, Address, Student_class, Class, Classroom, School_cycle, Grade, User, Notice, Class_group, Teacher, Group, Class, Class, Class_time, Schedule, Subject, Subject_teacher
 controllers:
     Contribution:
         resource: web

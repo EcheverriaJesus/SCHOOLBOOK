@@ -16,7 +16,6 @@ class Classroom extends Model
      * @var array
      */
     protected $fillable = [
-        'id_classroom',
         'classroom_name',
         'building',
     ];
@@ -31,9 +30,9 @@ class Classroom extends Model
         'id_classroom' => 'integer',
     ];
 
-    public function class(): BelongsTo
+    public function classes(): BelongsTo
     {
-        return $this->belongsTo(Class::class);
+        return $this->belongsTo(Classes::class);
     }
 
     public function idClassroom(): BelongsTo

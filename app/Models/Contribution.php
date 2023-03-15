@@ -16,7 +16,6 @@ class Contribution extends Model
      * @var array
      */
     protected $fillable = [
-        'id_contribution',
         'amount',
         'status',
         'description',

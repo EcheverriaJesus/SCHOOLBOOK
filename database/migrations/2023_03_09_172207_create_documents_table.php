@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_document');
             $table->string('document_name', 50);
             $table->boolean('status');
             $table->string('file', 5);

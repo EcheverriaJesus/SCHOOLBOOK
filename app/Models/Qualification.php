@@ -16,7 +16,6 @@ class Qualification extends Model
      * @var array
      */
     protected $fillable = [
-        'id_qualification',
         'bim1',
         'bim2',
         'bim3',
