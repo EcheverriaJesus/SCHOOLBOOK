@@ -1,0 +1,180 @@
+<?php
+
+namespace Tests\Feature\Http\Controllers;
+
+use App\Models\Document;
+use App\Models\IdDocument;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use JMac\Testing\Traits\AdditionalAssertions;
+use Tests\TestCase;
+
+/**
+ * @see \App\Http\Controllers\DocumentController
+ */
+class DocumentControllerTest extends TestCase
+{
+    use AdditionalAssertions, RefreshDatabase, WithFaker;
+
+    /**
+     * @test
+     */
+    public function index_displays_view(): void
+    {
+        $documents = Document::factory()->count(3)->create();
+
+        $response = $this->get(route('document.index'));
+
+        $response->assertOk();
+        $response->assertViewIs('document.index');
+        $response->assertViewHas('documents');
+    }
+
+
+    /**
+     * @test
+     */
+    public function create_displays_view(): void
+    {
+        $response = $this->get(route('document.create'));
+
+        $response->assertOk();
+        $response->assertViewIs('document.create');
+    }
+
+
+    /**
+     * @test
+     */
+    public function store_uses_form_request_validation(): void
+    {
+        $this->assertActionUsesFormRequest(
+            \App\Http\Controllers\DocumentController::class,
+            'store',
+            \App\Http\Requests\DocumentStoreRequest::class
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function store_saves_and_redirects(): void
+    {
+        $id_document = IdDocument::factory()->create();
+        $document_name = $this->faker->word;
+        $status = $this->faker->boolean;
+        $file = $this->faker->word;
+        $id_student = $this->faker->word;
+
+        $response = $this->post(route('document.store'), [
+            'id_document' => $id_document->id,
+            'document_name' => $document_name,
+            'status' => $status,
+            'file' => $file,
+            'id_student' => $id_student,
+        ]);
+
+        $documents = Document::query()
+            ->where('id_document', $id_document->id)
+            ->where('document_name', $document_name)
+            ->where('status', $status)
+            ->where('file', $file)
+            ->where('id_student', $id_student)
+            ->get();
+        $this->assertCount(1, $documents);
+        $document = $documents->first();
+
+        $response->assertRedirect(route('document.index'));
+        $response->assertSessionHas('document.id', $document->id);
+    }
+
+
+    /**
+     * @test
+     */
+    public function show_displays_view(): void
+    {
+        $document = Document::factory()->create();
+
+        $response = $this->get(route('document.show', $document));
+
+        $response->assertOk();
+        $response->assertViewIs('document.show');
+        $response->assertViewHas('document');
+    }
+
+
+    /**
+     * @test
+     */
+    public function edit_displays_view(): void
+    {
+        $document = Document::factory()->create();
+
+        $response = $this->get(route('document.edit', $document));
+
+        $response->assertOk();
+        $response->assertViewIs('document.edit');
+        $response->assertViewHas('document');
+    }
+
+
+    /**
+     * @test
+     */
+    public function update_uses_form_request_validation(): void
+    {
+        $this->assertActionUsesFormRequest(
+            \App\Http\Controllers\DocumentController::class,
+            'update',
+            \App\Http\Requests\DocumentUpdateRequest::class
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function update_redirects(): void
+    {
+        $document = Document::factory()->create();
+        $id_document = IdDocument::factory()->create();
+        $document_name = $this->faker->word;
+        $status = $this->faker->boolean;
+        $file = $this->faker->word;
+        $id_student = $this->faker->word;
+
+        $response = $this->put(route('document.update', $document), [
+            'id_document' => $id_document->id,
+            'document_name' => $document_name,
+            'status' => $status,
+            'file' => $file,
+            'id_student' => $id_student,
+        ]);
+
+        $document->refresh();
+
+        $response->assertRedirect(route('document.index'));
+        $response->assertSessionHas('document.id', $document->id);
+
+        $this->assertEquals($id_document->id, $document->id_document);
+        $this->assertEquals($document_name, $document->document_name);
+        $this->assertEquals($status, $document->status);
+        $this->assertEquals($file, $document->file);
+        $this->assertEquals($id_student, $document->id_student);
+    }
+
+
+    /**
+     * @test
+     */
+    public function destroy_deletes_and_redirects(): void
+    {
+        $document = Document::factory()->create();
+
+        $response = $this->delete(route('document.destroy', $document));
+
+        $response->assertRedirect(route('document.index'));
+
+        $this->assertModelMissing($document);
+    }
+}
