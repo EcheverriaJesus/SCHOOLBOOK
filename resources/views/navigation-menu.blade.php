@@ -12,7 +12,7 @@
                 <x-application-mark> </x-application-mark>
             </a>
         </div>
-        <h1 class="flex justify-start font-semibold text-2xl text-black">Bienvenido a SCHOOLBOOK</h1>
+        <h1 class="hidden sm:flex flotar justify-start font-semibold text-2xl text-black">Bienvenido a SCHOOLBOOK</h1>
         {{-- Perfil y cerrar sesion  --}}
         <div class="flex items-center">
             

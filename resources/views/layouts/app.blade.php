@@ -19,7 +19,7 @@
     @livewireStyles
 </head>
 
-<body class="w-full h-auto font-sans antialiased">
+<body class="w-full h-auto font-sans antialiased bg-slate-200">
     <x-banner />
     <!-- Page Heading -->
     <div class="min-h-screen">
@@ -40,8 +40,10 @@
     </div>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    @livewireScripts  {{-- Se manda a traer para eliminar un docente --}}
     @stack('modals')
-    @livewireScripts
+    @stack('scripts')
+    
 </body>
 
 </html>

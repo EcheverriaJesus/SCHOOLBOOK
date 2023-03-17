@@ -2,7 +2,7 @@
     <!-- nombre -->
     <div>
         <x-label for="first_name" value="{{ __('Nombre (es)') }}" />
-        <x-input id="first_name" class="block w-full mt-1" type="text" wire:model="first_name"
+        <x-input id="first_name" class="block w-full mt-1" type="text" wire:model="first_name" {{-- DEJAR WIRE  --}}
             :value="old('first_name')" />
         <div class="block mt-2">
             <x-alert-danger :messages="$errors->get('first_name')"/>
