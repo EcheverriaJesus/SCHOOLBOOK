@@ -49,13 +49,15 @@
  --}}
  <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
+   
+    
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
+    @vite(['resources/css/main.scss', 'resources/js/app.js'])
     <title>Log in</title>
 </head>
 
@@ -82,7 +84,7 @@
            </header> --}}
 
     <div class="h-full md:flex">
-        <section class="rounded-2xl relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-blue-800 to-purple-700 i justify-around items-center hidden">
+        <section class="flotar rounded-2xl relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-blue-800 to-purple-700 i justify-around items-center hidden">
             <div>
                 <img class="w-64º h-40 pt-10" src="../images/logo_schoolbook_blanco.png" alt="">
                 {{-- <h1 class="text-white font-bold text-4xl font-sans">SchoolBook</h1> --}}
