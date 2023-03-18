@@ -136,7 +136,7 @@
                 Ver Ced. Profesional Actual
             </a>
           </div>
-        <div class="flex pb-4">
+        <div     class="flex pb-4">
             <div class="block my-5 w-80 h-auto">
                 <x-label :value="__('Fotografia actual')" class="my-2"/>
                 <img src="{{asset('storage/imageTeachers/'.$photo)}}" alt="{{'Imagen docente '}}">
@@ -161,4 +161,3 @@
      </div>
 </section>
 </form>
-

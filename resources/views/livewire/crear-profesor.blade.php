@@ -1,6 +1,8 @@
 <form action="" class="space-y-5 md:w-1/2" wire:submit.prevent='crearProfesor'>
-    <!-- nombre -->
-    <div>
+    
+    <section class="bg-white w-auto sm:bg-white w-full h-auto shadow-2xl rounded-xl mb-10 p-6 space-y-6 border">
+        <h2 class="flex justify-center text-xl font-bold text-indigo-600">Informacion Personal</h2>
+         <div>
         <x-label for="first_name" value="{{ __('Nombre (es)') }}" />
         <x-input id="first_name" class="block w-full mt-1" type="text" wire:model="first_name" {{-- DEJAR WIRE  --}}
             :value="old('first_name')" />
@@ -64,8 +66,15 @@
             <x-alert-danger :messages="$errors->get('rfc')"/>
         </div>
     </div>
+    </section>
+    <!-- nombre -->
+   
 
-    <!-- Nivel de estudios -->
+
+<section class="bg-white w-auto sm:bg-white w-full h-auto shadow-2xl rounded-xl mb-10 p-6 space-y-6 border">
+    <h2 class="flex justify-center text-xl font-bold text-indigo-600">Informacion de Estudios</h2>
+         
+     <!-- Nivel de estudios -->
     <div>
         <x-label for="education_level" value="{{ __('Nivel de estudios') }}" />
         <select id="education_level" wire:model="education_level" class="block w-full mt-1 border-gray-300">
@@ -87,7 +96,13 @@
             <x-alert-danger :messages="$errors->get('major')"/>
         </div>
     </div>
-    <!-- domicilio -->
+</section>
+
+   
+<!-- domicilio -->
+<section class="bg-white w-auto sm:bg-white w-full h-auto shadow-2xl rounded-xl mb-10 p-6 space-y-6 border">
+    <h2 class="flex justify-center text-xl font-bold text-indigo-600">Informacion del Domicilio</h2>
+         
     <div>
         <x-label class="text-lg font-bold" for="especialidad" value="{{ __('Domicilio') }}" />
     </div>
@@ -162,9 +177,14 @@
         </div>
 
     </div> <!-- finalDomicilio-->
+</section>
+
+    
 
     <!-- fotografia-->
-    <div>
+    <section class="bg-white w-auto sm:bg-white w-full h-auto shadow-2xl rounded-xl mb-10 p-6 space-y-6 border">
+        <h2 class="flex justify-center text-xl font-bold text-indigo-600">Mas Informacion</h2>
+         <div>
         <x-label for="photo" value="{{ __('Seleccione la fotografia del docente') }}" />
         <x-input id="photo" class="block w-full mt-1" wire:model="photo" type="file" accept="image/*" />
         <div class="block mt-2">
@@ -185,5 +205,7 @@
     <x-button class="ml-4">
         {{ __('Guardar') }}
     </x-button>
+    </section>
+   
 
 </form>

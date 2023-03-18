@@ -15,8 +15,8 @@
     </div>
 
     {{-- Informacion del Docente --}}
-    <article class="bg-white w-auto sm:bg-white w-full h-auto shadow-xl rounded-xl mb-10">
-        <h2 class="pb-5 flex justify-center text-xl font-bold text-indigo-600">Informacion General</h2>
+    <article class="bg-white w-auto sm:bg-white w-full h-auto shadow-xl rounded-xl mb-10 border">
+        <h2 class="pb-5 pt-5 flex justify-center text-xl font-bold text-indigo-600">General</h2>
         <section class="sm:flex justify-around pb-5">
             <div class="flex justify-center items-center h-auto">
                 <img class="transition delay-700 duration-300 ease-in-out w-40 overflow-hidden rounded-[50%] shadow-2xl flex items-center justify-center"
@@ -50,8 +50,8 @@
     </article>
 
     {{-- Informacion Academica --}}
-    <section class="bg-white w-auto sm:bg-white w-full h-auto shadow-xl rounded-xl mb-10">
-        <h2 class="pb-5 flex justify-center text-xl font-bold text-indigo-600">Informacion Academica</h2>
+    <section class="bg-white w-auto sm:bg-white w-full h-auto shadow-xl rounded-xl mb-10 border">
+        <h2 class="pb-5 pt-5 flex justify-center text-xl font-bold text-indigo-600">Academica</h2>
         <div class="flex justify-around pb-5">
             <p class="text-base font-semibold">Nivel de estudios:
                 <span class="font-normal normal-case text-gray-600">{{ $teacher->education_level }}</span>
@@ -63,8 +63,8 @@
     </section>
 
     {{-- Informacion Contacto --}}
-    <section class="bg-white w-auto sm:bg-white w-full h-auto shadow-xl rounded-xl mb-10">
-        <h2 class="pb-5 flex justify-center text-xl font-bold text-indigo-600">Informacion de Contacto</h2>
+    <section class="bg-white w-auto sm:bg-white w-full h-auto shadow-xl rounded-xl mb-10 border">
+        <h2 class="pb-5 pt-5 flex justify-center text-xl font-bold text-indigo-600">Contacto</h2>
         <div class="p-4 grid grid-cols-2 space-y-3">
             <p class="text-base font-semibold">Calle:
                 <span class="font-normal normal-case text-gray-600">{{ $teacher->address->street }}</span>
