@@ -12,7 +12,7 @@
         </a>
     </div>
     
-    <div class="bg-white w-auto sm:bg-white w-full h-auto shadow-2xl rounded-xl mb-10 p-6 space-y-6 border">
+    <div class="w-auto w-full h-auto p-6 mb-10 space-y-6 bg-white border shadow-2xl sm:bg-white rounded-xl">
         @forelse($teachers as $teacher)
         <div class="p-6 bg-white border-b border-gray-200 md:flex md:justify-between md:items-center">
             <div class="space-y-1">
@@ -64,6 +64,9 @@
         @empty
         <p class="p-3 text-sm text-center text-gray-600"> No hay profesores por mostrar</p>
         @endforelse
+    </div>
+    <div class="mt-10">
+        {{$teachers->links()}}
     </div>
 </div>
 

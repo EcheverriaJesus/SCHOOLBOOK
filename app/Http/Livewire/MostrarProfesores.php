@@ -33,7 +33,7 @@ class MostrarProfesores extends Component
 
     public function render()
     {
-        $teachers = Teacher::all();
+        $teachers = Teacher::paginate(8);
         return view('livewire.mostrar-profesores',[
             'teachers' => $teachers,
         ]);
