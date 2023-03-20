@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,8 @@ Route::get('/teachers', [TeacherController::class,'index']) -> middleware('auth:
 Route::get('/teachers/create', [TeacherController::class,'create']) -> middleware('auth:sanctum') ->name('teachers.create');
 Route::get('/teachers/{teacher}',[TeacherController::class,'show'])-> middleware('auth:sanctum')->name('teachers.show');
 Route::get('/teachers/{teacher}/edit',[TeacherController::class,'edit'])-> middleware('auth:sanctum')->name('teachers.edit');
+
+Route::get('/students', [StudentController::class,'index']) -> middleware('auth:sanctum')->name('students.index');
 
 Route::resource('contribution', App\Http\Controllers\ContributionController::class);
 
