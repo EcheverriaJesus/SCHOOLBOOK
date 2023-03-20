@@ -61,7 +61,7 @@
 
 <body class="p-20 h-screen">
 
-    {{-- <header class="">
+     <header class="">
                 @if (Route::has('login'))
                     <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
                         @auth
@@ -79,7 +79,7 @@
                         @endauth
                     </div>
                 @endif
-           </header> --}}
+           </header> 
 
     <div class="h-full md:flex">
         <section class="rounded-2xl relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-blue-800 to-purple-700 i justify-around items-center hidden">

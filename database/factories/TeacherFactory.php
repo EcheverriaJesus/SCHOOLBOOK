@@ -25,7 +25,7 @@ class TeacherFactory extends Factory
             'id_teacher' => IdTeacher::factory(),
             'first_name' => $this->faker->firstName,
             'father_surname' => $this->faker->regexify('[A-Za-z0-9]{50}'),
-            'father's_last_name' => $this->faker->regexify('[A-Za-z0-9]{50}'),
+            'fathers_last_name' => $this->faker->regexify('[A-Za-z0-9]{50}'),
             'phone' => $this->faker->phoneNumber,
             'email' => $this->faker->safeEmail,
             'curp' => $this->faker->word,
