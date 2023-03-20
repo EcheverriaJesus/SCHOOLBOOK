@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Address;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\IdTeacher;
@@ -22,19 +23,18 @@ class TeacherFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_teacher' => IdTeacher::factory(),
             'first_name' => $this->faker->firstName,
-            'father_surname' => $this->faker->regexify('[A-Za-z0-9]{50}'),
-            'father's_last_name' => $this->faker->regexify('[A-Za-z0-9]{50}'),
+            'father_surname' => $this->faker->lastName,
+            'fathers_last_name' => $this->faker->lastName,
             'phone' => $this->faker->phoneNumber,
-            'email' => $this->faker->safeEmail,
-            'curp' => $this->faker->word,
-            'rfc' => $this->faker->regexify('[A-Za-z0-9]{50}'),
-            'education_level' => $this->faker->regexify('[A-Za-z0-9]{50}'),
-            'major' => $this->faker->regexify('[A-Za-z0-9]{50}'),
-            'photo' => $this->faker->regexify('[A-Za-z0-9]{255}'),
-            'professional_license' => $this->faker->regexify('[A-Za-z0-9]{255}'),
-            'id_address' => $this->faker->word,
+            'email' => $this->faker->email,
+            'curp' => "OEAF771012HMCRGR09",
+            'rfc' => "QUMA470929F37",
+            'education_level' => "nivelEstudios",
+            'major' => "especialidadPrueba",
+            'photo' => "9raz59Htm1dd1kAJb563OWNktKBhibbHZ5ltpuSE.jpg",
+            'professional_license' => "c6ZuYVbKn2wAHRHDx5F8GBJpy5BJX5UCb7iosphh.pdf",
+            'address_id' => Address::all()->random()->id,
         ];
     }
 }
