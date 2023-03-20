@@ -1,0 +1,18 @@
+.flotar{
+animation: alternate infinite flotar 3s;
+}
+@keyframes flotar {
+from{
+transform: translateX(0%);
+}  
+to{
+transform: translateX(0%) translateY(15%);
+} 
+}
+
+.filtro{
+&:hover{
+    transition-duration: 0.5s;
+    transform: scale(0.9);
+}
+}

@@ -104,7 +104,7 @@ models:
     Teacher:
         first_name: string:50 
         father_surname: string:50 
-        father's_last_name: string:50 
+        fathers_last_name: string:50 
         phone: string 
         email: string 
         curp: string 

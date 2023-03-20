@@ -2,7 +2,7 @@
     <x-application-logo class="block w-auto h-12" />
 
     <h1 class="mt-8 text-2xl font-medium text-gray-900">
-        Welcome to your Jetstream application!
+        Welcome!
     </h1>
 </div>
 
