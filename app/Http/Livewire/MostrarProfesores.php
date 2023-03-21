@@ -9,9 +9,17 @@ use Illuminate\Support\Facades\Storage;
 
 class MostrarProfesores extends Component
 {
+    public $searchTerm;
+
     protected $listeners = [
-        'deleteTeacher'
+        'deleteTeacher',
+        'search' => 'setData'
     ];
+
+    public function setData($searchTerm)
+    {
+        $this->searchTerm = $searchTerm;
+    }
 
     public function deleteTeacher(Teacher $teacher)
     {   
@@ -32,10 +40,19 @@ class MostrarProfesores extends Component
     }
 
     public function render()
-    {
-        $teachers = Teacher::paginate(8);
+    { 
+        $searchTerm = $this->searchTerm;
+        $data = Teacher::all();
+        $teachers = Teacher::when($this->searchTerm,function($query){
+            $query->where('first_name','LIKE',"%" .$this->searchTerm ."%")
+            ->orWhere('father_surname','LIKE',"%" .$this->searchTerm ."%")
+            ->orWhere('fathers_last_name','LIKE',"%" .$this->searchTerm ."%");
+        })
+        ->paginate(8);
         return view('livewire.mostrar-profesores',[
             'teachers' => $teachers,
+            'searchTerm' => $searchTerm,
+            'data' => $data,
         ]);
     }
 }
