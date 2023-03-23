@@ -20,7 +20,7 @@
                     </div>
                     @endif
                     <div class="p-5 md:justify-center md:flex">
-                        <livewire:crear-profesor />
+                        <livewire:crear-profesor />    
                     </div>
                 </div>
             </div>
