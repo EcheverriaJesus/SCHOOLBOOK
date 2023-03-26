@@ -10,7 +10,6 @@
             <x-alert-danger :messages="$errors->get('first_name')"/>
         </div>
     </div>
-
     <!-- apellido_paterno -->
     <div>
         <x-label for="father_surname" value="{{ __('Apellido paterno') }}" />
@@ -20,7 +19,6 @@
             <x-alert-danger :messages="$errors->get('father_surname')"/>
         </div>
     </div>
-
     <!-- apellido_materno-->
     <div>
         <x-label for="fathers_last_name" value="{{ __('Apellido materno') }}" />
@@ -30,7 +28,6 @@
             <x-alert-danger :messages="$errors->get('fathers_last_name')"/>
         </div>
     </div>
-
     <!-- telefono -->
     <div>
         <x-label for="phone" value="{{ __('Teléfono') }}" />

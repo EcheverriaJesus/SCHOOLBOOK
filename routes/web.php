@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\NoticeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,11 +32,31 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('/teachers', [TeacherController::class,'index']) -> middleware('auth:sanctum')
-->name('teachers.index');
+/* Route::get('/teachers', [TeacherController::class,'index']) -> middleware('auth:sanctum') ->name('teachers.index');
 Route::get('/teachers/create', [TeacherController::class,'create']) -> middleware('auth:sanctum') ->name('teachers.create');
 Route::get('/teachers/{teacher}',[TeacherController::class,'show'])-> middleware('auth:sanctum')->name('teachers.show');
 Route::get('/teachers/{teacher}/edit',[TeacherController::class,'edit'])-> middleware('auth:sanctum')->name('teachers.edit');
+ */
+
+Route::resource('teachers', TeacherController::class)
+    ->middleware('auth:sanctum')
+    ->names([
+        'index' => 'teachers.index',
+        'create' => 'teachers.create',
+        'show' => 'teachers.show',
+        'edit' => 'teachers.edit',
+    ]);
+
+/* La ruta del index.notices no se usa, en su lugar se usa la de dashboard para el modulo inicio */
+
+Route::resource('notices', NoticeController::class, ['except' => ['index']])
+    ->middleware('auth:sanctum')
+    ->names([
+        'create' => 'notices.create',
+        'show' => 'notices.show',
+        'edit' => 'notices.edit',
+    ]);
+
 
 Route::resource('contribution', App\Http\Controllers\ContributionController::class);
 
@@ -52,10 +73,6 @@ Route::resource('address', App\Http\Controllers\AddressController::class);
 Route::resource('classroom', App\Http\Controllers\ClassroomController::class);
 
 Route::resource('qualification', App\Http\Controllers\QualificationController::class);
-
-Route::resource('notice', App\Http\Controllers\NoticeController::class);
-
-Route::resource('teacher', App\Http\Controllers\TeacherController::class);
 
 Route::resource('group', App\Http\Controllers\GroupController::class);
 

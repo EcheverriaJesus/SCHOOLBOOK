@@ -138,7 +138,7 @@
                     @endif
     
                     <x-button class="ml-4">
-                        {{ __('Log in') }}
+                        {{ __('teachers.index') }}
                     </x-button>
                 </div>
             </form>

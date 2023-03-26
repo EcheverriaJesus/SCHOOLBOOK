@@ -11,11 +11,12 @@ use Illuminate\View\View;
 
 class NoticeController extends Controller
 {
-    public function index(Request $request): Response
+    public function index(Request $request): View
     {
-        $notices = Notice::all();
+        /* $notices = Notice::all();
 
-        return view('notice.index', compact('notices'));
+        return view('notice.index', compact('notices')); */
+        return view('notice.index');
     }
 
     public function create(Request $request): Response
