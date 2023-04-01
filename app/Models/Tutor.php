@@ -22,7 +22,7 @@ class Tutor extends Model
         'gender',
         'email',
         'phone',
-        'id_address',
+        'address_id',
     ];
 
     /**
@@ -32,7 +32,6 @@ class Tutor extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'id_tutor' => 'integer',
     ];
 
     public function address(): BelongsTo
@@ -43,10 +42,5 @@ class Tutor extends Model
     public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);
-    }
-
-    public function idTutor(): BelongsTo
-    {
-        return $this->belongsTo(IdTutor::class);
     }
 }

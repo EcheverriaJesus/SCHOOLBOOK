@@ -21,8 +21,8 @@ class ClassScheduleFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_class' => $this->faker->word,
-            'id_schedule' => $this->faker->word,
+            'class_id' => $this->faker->word,
+            'schedule_id' => $this->faker->word,
         ];
     }
 }

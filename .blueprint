@@ -32,25 +32,25 @@ created:
     - database/factories/ScheduleFactory.php
     - database/factories/SubjectFactory.php
     - database/factories/TeacherSubjectFactory.php
-    - database/migrations/2023_03_09_172205_create_contributions_table.php
-    - database/migrations/2023_03_09_172206_create_tutors_table.php
-    - database/migrations/2023_03_09_172207_create_documents_table.php
-    - database/migrations/2023_03_09_172208_create_students_table.php
-    - database/migrations/2023_03_09_172209_create_student_cycles_table.php
-    - database/migrations/2023_03_09_172210_create_addresses_table.php
-    - database/migrations/2023_03_09_172211_create_student_classes_table.php
-    - database/migrations/2023_03_09_172212_create_classrooms_table.php
-    - database/migrations/2023_03_09_172213_create_school_cycles_table.php
-    - database/migrations/2023_03_09_172214_create_qualifications_table.php
-    - database/migrations/2023_03_09_172215_create_notices_table.php
-    - database/migrations/2023_03_09_172216_create_group_classes_table.php
-    - database/migrations/2023_03_09_172217_create_teachers_table.php
-    - database/migrations/2023_03_09_172218_create_groups_table.php
-    - database/migrations/2023_03_09_172219_create_classes_table.php
-    - database/migrations/2023_03_09_172220_create_class_schedules_table.php
-    - database/migrations/2023_03_09_172221_create_schedules_table.php
-    - database/migrations/2023_03_09_172222_create_subjects_table.php
-    - database/migrations/2023_03_09_172223_create_teacher_subjects_table.php
+    - database/migrations/2023_04_01_014500_create_contributions_table.php
+    - database/migrations/2023_04_01_014501_create_tutors_table.php
+    - database/migrations/2023_04_01_014502_create_documents_table.php
+    - database/migrations/2023_04_01_014503_create_students_table.php
+    - database/migrations/2023_04_01_014504_create_student_cycles_table.php
+    - database/migrations/2023_04_01_014505_create_addresses_table.php
+    - database/migrations/2023_04_01_014506_create_student_classes_table.php
+    - database/migrations/2023_04_01_014507_create_classrooms_table.php
+    - database/migrations/2023_04_01_014508_create_school_cycles_table.php
+    - database/migrations/2023_04_01_014509_create_qualifications_table.php
+    - database/migrations/2023_04_01_014510_create_notices_table.php
+    - database/migrations/2023_04_01_014511_create_group_classes_table.php
+    - database/migrations/2023_04_01_014512_create_teachers_table.php
+    - database/migrations/2023_04_01_014513_create_groups_table.php
+    - database/migrations/2023_04_01_014514_create_classes_table.php
+    - database/migrations/2023_04_01_014515_create_class_schedules_table.php
+    - database/migrations/2023_04_01_014516_create_schedules_table.php
+    - database/migrations/2023_04_01_014517_create_subjects_table.php
+    - database/migrations/2023_04_01_014518_create_teacher_subjects_table.php
     - app/Models/Contribution.php
     - app/Models/Tutor.php
     - app/Models/Document.php
@@ -104,34 +104,9 @@ created:
     - tests/Feature/Http/Controllers/ClassControllerTest.php
     - tests/Feature/Http/Controllers/ScheduleControllerTest.php
     - tests/Feature/Http/Controllers/SubjectControllerTest.php
-    - app/Http/Requests/ContributionStoreRequest.php
-    - app/Http/Requests/ContributionUpdateRequest.php
-    - app/Http/Requests/TutorStoreRequest.php
-    - app/Http/Requests/TutorUpdateRequest.php
-    - app/Http/Requests/DocumentStoreRequest.php
-    - app/Http/Requests/DocumentUpdateRequest.php
-    - app/Http/Requests/StudentStoreRequest.php
-    - app/Http/Requests/StudentUpdateRequest.php
-    - app/Http/Requests/School_cycleStoreRequest.php
-    - app/Http/Requests/School_cycleUpdateRequest.php
-    - app/Http/Requests/AddressStoreRequest.php
-    - app/Http/Requests/AddressUpdateRequest.php
-    - app/Http/Requests/ClassroomStoreRequest.php
-    - app/Http/Requests/ClassroomUpdateRequest.php
-    - app/Http/Requests/QualificationStoreRequest.php
-    - app/Http/Requests/QualificationUpdateRequest.php
-    - app/Http/Requests/NoticeStoreRequest.php
-    - app/Http/Requests/NoticeUpdateRequest.php
-    - app/Http/Requests/TeacherStoreRequest.php
-    - app/Http/Requests/TeacherUpdateRequest.php
-    - app/Http/Requests/GroupStoreRequest.php
-    - app/Http/Requests/GroupUpdateRequest.php
-    - app/Http/Requests/ClassStoreRequest.php
-    - app/Http/Requests/ClassUpdateRequest.php
-    - app/Http/Requests/ScheduleStoreRequest.php
-    - app/Http/Requests/ScheduleUpdateRequest.php
-    - app/Http/Requests/SubjectStoreRequest.php
-    - app/Http/Requests/SubjectUpdateRequest.php
+updated:
+    - routes/web.php
+skipped:
     - resources/views/contribution/index.blade.php
     - resources/views/contribution/create.blade.php
     - resources/views/contribution/show.blade.php
@@ -188,29 +163,27 @@ created:
     - resources/views/subject/create.blade.php
     - resources/views/subject/show.blade.php
     - resources/views/subject/edit.blade.php
-updated:
-    - routes/web.php
 models:
     Membership: { team_id: 'biginteger unsigned', user_id: 'biginteger unsigned', role: 'string nullable' }
     Team: { user_id: 'biginteger unsigned', name: string, personal_team: boolean }
     TeamInvitation: { team_id: 'biginteger unsigned', email: string, role: 'string nullable' }
     User: { name: string, email: string, email_verified_at: 'datetime nullable', password: string, two_factor_secret: 'text nullable', two_factor_recovery_codes: 'text nullable', two_factor_confirmed_at: 'datetime nullable', remember_token: 'string:100 nullable', current_team_id: 'biginteger unsigned nullable', profile_photo_path: 'string:2048 nullable' }
-    Contribution: { id_contribution: id, amount: integer, status: boolean, description: 'string:100', contribution_date: date, deadline_date: date, id_student: foreignIdFor, relationships: { belongsTo: Student } }
-    Tutor: { id_tutor: id, tutor_name: 'string:50', paternal_surname: 'string:50', maternal_surname: 'string:50', gender: 'string:10', email: string, phone: string, id_address: foreignIdFor, relationships: { belongsTo: 'Address, Student' } }
-    Document: { id_document: id, document_name: 'string:50', status: boolean, file: 'string:5', id_student: foreignIdFor, relationships: { belongsTo: Student } }
-    Student: { id_student: id, student_name: 'string:50', paternal_surname: 'string:50', maternal_surname: 'string:50', grade: integer, birth_date: date, curp: 'string:18', gender: 'string:10', email: 'string:50', phone: string, status: boolean, study_plan: 'string:100', photo: 'string:255', id_address: foreignIdFor, id_tutor: foreignIdFor, id_document: foreignIdFor, id_history: foreignIdFor, relationships: { belongsTo: 'Address, Tutor', hasMany: 'Student_cycle, Contribution, Document' } }
-    Student_cycle: { id_student: foreignIdFor, id_cycle: foreignIdFor, relationships: { belongsTo: 'School_cycle, Student' } }
-    Address: { id_address: id, street: 'string:50', num_ext: 'string:10', num_int: 'string:10', neighborhood: 'string:50', city: 'string:50', state: 'string:50', country: 'string:50', relationships: { hasMany: 'Student, Tutor, Teacher' } }
-    Student_class: { id_student: foreignIdFor, id_class: foreignIdFor, relationships: { belongsTo: 'Student, Class' } }
-    Classroom: { id_classroom: id, classroom_name: 'string:5', building: 'string:5', relationships: { belongsTo: Class } }
-    School_cycle: { id_cycle: id, cycle_name: 'string:100', start_date: date, end_date: date, status: boolean, relationships: { hasMany: 'Cycle_student, Class' } }
-    Qualification: { id_qualification: id, bim1: float, bim2: float, bim3: float, bim4: float, bim5: float, promedio_final: float, relationships: { belongsTo: Subject } }
-    Notice: { id_notice: id, title: 'string:100', description: string, start_date: date, end_date: date, status: boolean, recipient: 'string:50', image: 'string:255' }
-    group_class: { id_class: foreignIdFor, id_group: foreignIdFor, relationships: { belongsTo: 'Class, Group' } }
-    Teacher: { id_teacher: id, first_name: 'string:50', father_surname: 'string:50', "father's_last_name": 'string:50', phone: string, email: string, curp: string, rfc: 'string:50', education_level: 'string:50', major: 'string:50', photo: 'string:255', professional_license: 'string:255', id_address: foreignIdFor, relationships: { belongsTo: Address, hasMany: Teacher_subject } }
-    Group: { id_group: id, group_name: char, num_max_students: integer, relationships: { hasMany: Group_class } }
-    Class: { id_class: id, id_subject: foreignIdFor, id_classroom: foreignIdFor, id_history: foreignIdFor, id_cycle: foreignIdFor, relationships: { belongsTo: 'Subject, Classroom', hasMany: 'Class_group, Class_student, Class_schedule, School_cycle' } }
-    Class_schedule: { id_class: foreignIdFor, id_schedule: foreignIdFor, relationships: { belongsTo: 'Class, Schedule' } }
-    Schedule: { id_schedule: id, start_time: time, end_time: time, day: date, id_class: foreignIdFor, relationships: { hasMany: Class_schedule } }
-    Subject: { id_subject: id, subject_name: 'string:50', description: 'string:50', grade: integer, id_qualification: foreignIdFor, relationships: { belongsTo: Class, hasMany: 'Qualification, Teacher_subject' } }
-    Teacher_subject: { id_subject: foreignIdFor, id_teacher: foreignIdFor, relationships: { belongsTo: 'Subject, Teacher' } }
+    Contribution: { amount: integer, status: boolean, description: 'string:100', contribution_date: date, deadline_date: date, student_id: foreignIdFor, relationships: { belongsTo: Student } }
+    Tutor: { tutor_name: 'string:50', paternal_surname: 'string:50', maternal_surname: 'string:50', gender: 'string:10', email: string, phone: string, address_id: foreignIdFor, relationships: { belongsTo: 'Address, Student' } }
+    Document: { document_name: 'string:50', status: boolean, file: 'string:5', student_id: foreignIdFor, relationships: { belongsTo: Student } }
+    Student: { student_name: 'string:50', paternal_surname: 'string:50', maternal_surname: 'string:50', grade: integer, birth_date: date, curp: 'string:18', gender: 'string:10', email: 'string:50', phone: string, status: boolean, study_plan: 'string:100', photo: 'string:255', address_id: foreignIdFor, tutor_id: foreignIdFor, document_id: foreignIdFor, relationships: { belongsTo: 'Address, Tutor', hasMany: 'Student_cycle, Contribution, Document' } }
+    Student_cycle: { student_id: foreignIdFor, cycle_id: foreignIdFor, relationships: { belongsTo: 'School_cycle, Student' } }
+    Address: { street: 'string:50', num_ext: 'string:10', num_int: 'string:10', neighborhood: 'string:50', city: 'string:50', state: 'string:50', country: 'string:50', relationships: { hasMany: 'Student, Tutor, Teacher' } }
+    Student_class: { student_id: foreignIdFor, class_id: foreignIdFor, relationships: { belongsTo: 'Student, Class' } }
+    Classroom: { classroom_name: 'string:5', building: 'string:5', relationships: { belongsTo: Class } }
+    School_cycle: { cycle_name: 'string:100', start_date: date, end_date: date, status: boolean, relationships: { hasMany: 'Cycle_student, Class' } }
+    Qualification: { bim1: float, bim2: float, bim3: float, bim4: float, bim5: float, promedio_final: float, relationships: { belongsTo: Subject } }
+    Notice: { title: 'string:100', description: string, start_date: date, end_date: date, status: boolean, recipient: 'string:50', image: 'string:255' }
+    group_class: { class_id: foreignIdFor, group_id: foreignIdFor, relationships: { belongsTo: 'Class, Group' } }
+    Teacher: { first_name: 'string:50', father_surname: 'string:50', fathers_last_name: 'string:50', phone: string, email: string, curp: string, rfc: 'string:50', education_level: 'string:50', major: 'string:50', photo: 'string:255', professional_license: 'string:255', address_id: foreignIdFor, relationships: { belongsTo: Address, hasMany: Teacher_subject } }
+    Group: { group_name: char, num_max_students: integer, relationships: { hasMany: Group_class } }
+    Class: { subject_id: foreignIdFor, classroom_id: foreignIdFor, history_id: foreignIdFor, cycle_id: foreignIdFor, relationships: { belongsTo: 'Subject, Classroom', hasMany: 'Class_group, Class_student, Class_schedule, School_cycle' } }
+    Class_schedule: { class_id: foreignIdFor, schedule_id: foreignIdFor, relationships: { belongsTo: 'Class, Schedule' } }
+    Schedule: { start_time: time, end_time: time, day: date, class_id: foreignIdFor, relationships: { hasMany: Class_schedule } }
+    Subject: { subject_name: 'string:50', description: 'string:50', grade: integer, qualification_id: foreignIdFor, relationships: { belongsTo: Class, hasMany: 'Qualification, Teacher_subject' } }
+    Teacher_subject: { subject_id: foreignIdFor, teacher_id: foreignIdFor, relationships: { belongsTo: 'Subject, Teacher' } }

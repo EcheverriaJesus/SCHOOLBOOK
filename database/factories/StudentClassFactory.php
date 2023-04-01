@@ -21,8 +21,8 @@ class StudentClassFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_student' => $this->faker->word,
-            'id_class' => $this->faker->word,
+            'student_id' => $this->faker->word,
+            'class_id' => $this->faker->word,
         ];
     }
 }

@@ -38,17 +38,11 @@ class Teacher extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'id_teacher' => 'integer',
     ];
 
     public function address(): BelongsTo
     {
         return $this->belongsTo(Address::class);
-    }
-
-    public function idTeacher(): BelongsTo
-    {
-        return $this->belongsTo(IdTeacher::class);
     }
 
     public function teacherSubjects(): HasMany

@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Address extends Model
@@ -33,7 +32,6 @@ class Address extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'id_address' => 'integer',
     ];
 
     public function students(): HasMany
@@ -49,10 +47,5 @@ class Address extends Model
     public function teachers(): HasMany
     {
         return $this->hasMany(Teacher::class);
-    }
-
-    public function idAddress(): BelongsTo
-    {
-        return $this->belongsTo(IdAddress::class);
     }
 }

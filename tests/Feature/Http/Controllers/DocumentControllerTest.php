@@ -3,7 +3,6 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Document;
-use App\Models\IdDocument;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use JMac\Testing\Traits\AdditionalAssertions;
@@ -60,26 +59,23 @@ class DocumentControllerTest extends TestCase
      */
     public function store_saves_and_redirects(): void
     {
-        $id_document = IdDocument::factory()->create();
         $document_name = $this->faker->word;
         $status = $this->faker->boolean;
         $file = $this->faker->word;
-        $id_student = $this->faker->word;
+        $student_id = $this->faker->word;
 
         $response = $this->post(route('document.store'), [
-            'id_document' => $id_document->id,
             'document_name' => $document_name,
             'status' => $status,
             'file' => $file,
-            'id_student' => $id_student,
+            'student_id' => $student_id,
         ]);
 
         $documents = Document::query()
-            ->where('id_document', $id_document->id)
             ->where('document_name', $document_name)
             ->where('status', $status)
             ->where('file', $file)
-            ->where('id_student', $id_student)
+            ->where('student_id', $student_id)
             ->get();
         $this->assertCount(1, $documents);
         $document = $documents->first();
@@ -137,18 +133,16 @@ class DocumentControllerTest extends TestCase
     public function update_redirects(): void
     {
         $document = Document::factory()->create();
-        $id_document = IdDocument::factory()->create();
         $document_name = $this->faker->word;
         $status = $this->faker->boolean;
         $file = $this->faker->word;
-        $id_student = $this->faker->word;
+        $student_id = $this->faker->word;
 
         $response = $this->put(route('document.update', $document), [
-            'id_document' => $id_document->id,
             'document_name' => $document_name,
             'status' => $status,
             'file' => $file,
-            'id_student' => $id_student,
+            'student_id' => $student_id,
         ]);
 
         $document->refresh();
@@ -156,11 +150,10 @@ class DocumentControllerTest extends TestCase
         $response->assertRedirect(route('document.index'));
         $response->assertSessionHas('document.id', $document->id);
 
-        $this->assertEquals($id_document->id, $document->id_document);
         $this->assertEquals($document_name, $document->document_name);
         $this->assertEquals($status, $document->status);
         $this->assertEquals($file, $document->file);
-        $this->assertEquals($id_student, $document->id_student);
+        $this->assertEquals($student_id, $document->student_id);
     }
 
 

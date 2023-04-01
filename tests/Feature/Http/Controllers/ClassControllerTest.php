@@ -3,7 +3,6 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Class;
-use App\Models\IdClass;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use JMac\Testing\Traits\AdditionalAssertions;
@@ -60,26 +59,23 @@ class ClassControllerTest extends TestCase
      */
     public function store_saves_and_redirects(): void
     {
-        $id_class = IdClass::factory()->create();
-        $id_subject = $this->faker->word;
-        $id_classroom = $this->faker->word;
-        $id_history = $this->faker->word;
-        $id_cycle = $this->faker->word;
+        $subject_id = $this->faker->word;
+        $classroom_id = $this->faker->word;
+        $history_id = $this->faker->word;
+        $cycle_id = $this->faker->word;
 
         $response = $this->post(route('class.store'), [
-            'id_class' => $id_class->id,
-            'id_subject' => $id_subject,
-            'id_classroom' => $id_classroom,
-            'id_history' => $id_history,
-            'id_cycle' => $id_cycle,
+            'subject_id' => $subject_id,
+            'classroom_id' => $classroom_id,
+            'history_id' => $history_id,
+            'cycle_id' => $cycle_id,
         ]);
 
         $classes = Class::query()
-            ->where('id_class', $id_class->id)
-            ->where('id_subject', $id_subject)
-            ->where('id_classroom', $id_classroom)
-            ->where('id_history', $id_history)
-            ->where('id_cycle', $id_cycle)
+            ->where('subject_id', $subject_id)
+            ->where('classroom_id', $classroom_id)
+            ->where('history_id', $history_id)
+            ->where('cycle_id', $cycle_id)
             ->get();
         $this->assertCount(1, $classes);
         $class = $classes->first();
@@ -137,18 +133,16 @@ class ClassControllerTest extends TestCase
     public function update_redirects(): void
     {
         $class = Class::factory()->create();
-        $id_class = IdClass::factory()->create();
-        $id_subject = $this->faker->word;
-        $id_classroom = $this->faker->word;
-        $id_history = $this->faker->word;
-        $id_cycle = $this->faker->word;
+        $subject_id = $this->faker->word;
+        $classroom_id = $this->faker->word;
+        $history_id = $this->faker->word;
+        $cycle_id = $this->faker->word;
 
         $response = $this->put(route('class.update', $class), [
-            'id_class' => $id_class->id,
-            'id_subject' => $id_subject,
-            'id_classroom' => $id_classroom,
-            'id_history' => $id_history,
-            'id_cycle' => $id_cycle,
+            'subject_id' => $subject_id,
+            'classroom_id' => $classroom_id,
+            'history_id' => $history_id,
+            'cycle_id' => $cycle_id,
         ]);
 
         $class->refresh();
@@ -156,11 +150,10 @@ class ClassControllerTest extends TestCase
         $response->assertRedirect(route('class.index'));
         $response->assertSessionHas('class.id', $class->id);
 
-        $this->assertEquals($id_class->id, $class->id_class);
-        $this->assertEquals($id_subject, $class->id_subject);
-        $this->assertEquals($id_classroom, $class->id_classroom);
-        $this->assertEquals($id_history, $class->id_history);
-        $this->assertEquals($id_cycle, $class->id_cycle);
+        $this->assertEquals($subject_id, $class->subject_id);
+        $this->assertEquals($classroom_id, $class->classroom_id);
+        $this->assertEquals($history_id, $class->history_id);
+        $this->assertEquals($cycle_id, $class->cycle_id);
     }
 
 

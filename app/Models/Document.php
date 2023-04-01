@@ -19,7 +19,7 @@ class Document extends Model
         'document_name',
         'status',
         'file',
-        'id_student',
+        'student_id',
     ];
 
     /**
@@ -29,17 +29,11 @@ class Document extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'id_document' => 'integer',
         'status' => 'boolean',
     ];
 
     public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);
-    }
-
-    public function idDocument(): BelongsTo
-    {
-        return $this->belongsTo(IdDocument::class);
     }
 }

@@ -17,11 +17,10 @@ class Subject extends Model
      * @var array
      */
     protected $fillable = [
-        'id_subject',
         'subject_name',
         'description',
         'grade',
-        'id_qualification',
+        'qualification_id',
     ];
 
     /**
@@ -31,17 +30,11 @@ class Subject extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'id_subject' => 'integer',
     ];
 
-    public function classes(): BelongsTo
+    public function class(): BelongsTo
     {
-        return $this->belongsTo(classes::class);
-    }
-
-    public function idSubject(): BelongsTo
-    {
-        return $this->belongsTo(IdSubject::class);
+        return $this->belongsTo(Class::class);
     }
 
     public function qualifications(): HasMany

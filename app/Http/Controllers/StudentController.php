@@ -18,7 +18,7 @@ class StudentController extends Controller
         return view('student.index', compact('students'));
     }
 
-    public function create(Request $request): Response
+    public function create(Request $request): View
     {
         return view('student.create');
     }
@@ -32,12 +32,12 @@ class StudentController extends Controller
         return redirect()->route('student.index');
     }
 
-    public function show(Request $request, Student $student): Response
+    public function show(Request $request, Student $student): View
     {
         return view('student.show', compact('student'));
     }
 
-    public function edit(Request $request, Student $student): Response
+    public function edit(Request $request, Student $student): View
     {
         return view('student.edit', compact('student'));
     }

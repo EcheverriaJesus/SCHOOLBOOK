@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Http\Controllers;
 
-use App\Models\IdStudent;
 use App\Models\Student;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -61,7 +60,6 @@ class StudentControllerTest extends TestCase
      */
     public function store_saves_and_redirects(): void
     {
-        $id_student = IdStudent::factory()->create();
         $student_name = $this->faker->word;
         $paternal_surname = $this->faker->word;
         $maternal_surname = $this->faker->word;
@@ -74,13 +72,11 @@ class StudentControllerTest extends TestCase
         $status = $this->faker->boolean;
         $study_plan = $this->faker->word;
         $photo = $this->faker->word;
-        $id_address = $this->faker->word;
-        $id_tutor = $this->faker->word;
-        $id_document = $this->faker->word;
-        $id_history = $this->faker->word;
+        $address_id = $this->faker->word;
+        $tutor_id = $this->faker->word;
+        $document_id = $this->faker->word;
 
         $response = $this->post(route('student.store'), [
-            'id_student' => $id_student->id,
             'student_name' => $student_name,
             'paternal_surname' => $paternal_surname,
             'maternal_surname' => $maternal_surname,
@@ -93,14 +89,12 @@ class StudentControllerTest extends TestCase
             'status' => $status,
             'study_plan' => $study_plan,
             'photo' => $photo,
-            'id_address' => $id_address,
-            'id_tutor' => $id_tutor,
-            'id_document' => $id_document,
-            'id_history' => $id_history,
+            'address_id' => $address_id,
+            'tutor_id' => $tutor_id,
+            'document_id' => $document_id,
         ]);
 
         $students = Student::query()
-            ->where('id_student', $id_student->id)
             ->where('student_name', $student_name)
             ->where('paternal_surname', $paternal_surname)
             ->where('maternal_surname', $maternal_surname)
@@ -113,10 +107,9 @@ class StudentControllerTest extends TestCase
             ->where('status', $status)
             ->where('study_plan', $study_plan)
             ->where('photo', $photo)
-            ->where('id_address', $id_address)
-            ->where('id_tutor', $id_tutor)
-            ->where('id_document', $id_document)
-            ->where('id_history', $id_history)
+            ->where('address_id', $address_id)
+            ->where('tutor_id', $tutor_id)
+            ->where('document_id', $document_id)
             ->get();
         $this->assertCount(1, $students);
         $student = $students->first();
@@ -174,7 +167,6 @@ class StudentControllerTest extends TestCase
     public function update_redirects(): void
     {
         $student = Student::factory()->create();
-        $id_student = IdStudent::factory()->create();
         $student_name = $this->faker->word;
         $paternal_surname = $this->faker->word;
         $maternal_surname = $this->faker->word;
@@ -187,13 +179,11 @@ class StudentControllerTest extends TestCase
         $status = $this->faker->boolean;
         $study_plan = $this->faker->word;
         $photo = $this->faker->word;
-        $id_address = $this->faker->word;
-        $id_tutor = $this->faker->word;
-        $id_document = $this->faker->word;
-        $id_history = $this->faker->word;
+        $address_id = $this->faker->word;
+        $tutor_id = $this->faker->word;
+        $document_id = $this->faker->word;
 
         $response = $this->put(route('student.update', $student), [
-            'id_student' => $id_student->id,
             'student_name' => $student_name,
             'paternal_surname' => $paternal_surname,
             'maternal_surname' => $maternal_surname,
@@ -206,10 +196,9 @@ class StudentControllerTest extends TestCase
             'status' => $status,
             'study_plan' => $study_plan,
             'photo' => $photo,
-            'id_address' => $id_address,
-            'id_tutor' => $id_tutor,
-            'id_document' => $id_document,
-            'id_history' => $id_history,
+            'address_id' => $address_id,
+            'tutor_id' => $tutor_id,
+            'document_id' => $document_id,
         ]);
 
         $student->refresh();
@@ -217,7 +206,6 @@ class StudentControllerTest extends TestCase
         $response->assertRedirect(route('student.index'));
         $response->assertSessionHas('student.id', $student->id);
 
-        $this->assertEquals($id_student->id, $student->id_student);
         $this->assertEquals($student_name, $student->student_name);
         $this->assertEquals($paternal_surname, $student->paternal_surname);
         $this->assertEquals($maternal_surname, $student->maternal_surname);
@@ -230,10 +218,9 @@ class StudentControllerTest extends TestCase
         $this->assertEquals($status, $student->status);
         $this->assertEquals($study_plan, $student->study_plan);
         $this->assertEquals($photo, $student->photo);
-        $this->assertEquals($id_address, $student->id_address);
-        $this->assertEquals($id_tutor, $student->id_tutor);
-        $this->assertEquals($id_document, $student->id_document);
-        $this->assertEquals($id_history, $student->id_history);
+        $this->assertEquals($address_id, $student->address_id);
+        $this->assertEquals($tutor_id, $student->tutor_id);
+        $this->assertEquals($document_id, $student->document_id);
     }
 
 

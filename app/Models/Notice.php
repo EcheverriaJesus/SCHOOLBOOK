@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Notice extends Model
 {
@@ -32,14 +31,8 @@ class Notice extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'id_notice' => 'integer',
         'start_date' => 'date',
         'end_date' => 'date',
         'status' => 'boolean',
     ];
-
-    public function idNotice(): BelongsTo
-    {
-        return $this->belongsTo(IdNotice::class);
-    }
 }

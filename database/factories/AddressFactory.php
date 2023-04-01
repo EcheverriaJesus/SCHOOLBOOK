@@ -5,7 +5,6 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\Address;
-use App\Models\IdAddress;
 
 class AddressFactory extends Factory
 {
@@ -22,7 +21,6 @@ class AddressFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_address' => IdAddress::factory(),
             'street' => $this->faker->streetName,
             'num_ext' => $this->faker->regexify('[A-Za-z0-9]{10}'),
             'num_int' => $this->faker->regexify('[A-Za-z0-9]{10}'),

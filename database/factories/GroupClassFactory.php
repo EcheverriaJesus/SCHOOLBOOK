@@ -21,8 +21,8 @@ class GroupClassFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_class' => $this->faker->word,
-            'id_group' => $this->faker->word,
+            'class_id' => $this->faker->word,
+            'group_id' => $this->faker->word,
         ];
     }
 }

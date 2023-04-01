@@ -31,7 +31,6 @@ class Qualification extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'id_qualification' => 'integer',
         'bim1' => 'float',
         'bim2' => 'float',
         'bim3' => 'float',
@@ -43,10 +42,5 @@ class Qualification extends Model
     public function subject(): BelongsTo
     {
         return $this->belongsTo(Subject::class);
-    }
-
-    public function idQualification(): BelongsTo
-    {
-        return $this->belongsTo(IdQualification::class);
     }
 }

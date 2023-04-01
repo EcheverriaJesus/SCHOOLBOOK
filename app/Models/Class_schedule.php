@@ -16,8 +16,8 @@ class ClassSchedule extends Model
      * @var array
      */
     protected $fillable = [
-        'id_class',
-        'id_schedule',
+        'class_id',
+        'schedule_id',
     ];
 
     /**

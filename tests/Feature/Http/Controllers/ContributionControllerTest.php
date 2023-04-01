@@ -3,7 +3,6 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Contribution;
-use App\Models\IdContribution;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -61,32 +60,29 @@ class ContributionControllerTest extends TestCase
      */
     public function store_saves_and_redirects(): void
     {
-        $id_contribution = IdContribution::factory()->create();
         $amount = $this->faker->numberBetween(-10000, 10000);
         $status = $this->faker->boolean;
         $description = $this->faker->text;
         $contribution_date = $this->faker->date();
         $deadline_date = $this->faker->date();
-        $id_student = $this->faker->word;
+        $student_id = $this->faker->word;
 
         $response = $this->post(route('contribution.store'), [
-            'id_contribution' => $id_contribution->id,
             'amount' => $amount,
             'status' => $status,
             'description' => $description,
             'contribution_date' => $contribution_date,
             'deadline_date' => $deadline_date,
-            'id_student' => $id_student,
+            'student_id' => $student_id,
         ]);
 
         $contributions = Contribution::query()
-            ->where('id_contribution', $id_contribution->id)
             ->where('amount', $amount)
             ->where('status', $status)
             ->where('description', $description)
             ->where('contribution_date', $contribution_date)
             ->where('deadline_date', $deadline_date)
-            ->where('id_student', $id_student)
+            ->where('student_id', $student_id)
             ->get();
         $this->assertCount(1, $contributions);
         $contribution = $contributions->first();
@@ -144,22 +140,20 @@ class ContributionControllerTest extends TestCase
     public function update_redirects(): void
     {
         $contribution = Contribution::factory()->create();
-        $id_contribution = IdContribution::factory()->create();
         $amount = $this->faker->numberBetween(-10000, 10000);
         $status = $this->faker->boolean;
         $description = $this->faker->text;
         $contribution_date = $this->faker->date();
         $deadline_date = $this->faker->date();
-        $id_student = $this->faker->word;
+        $student_id = $this->faker->word;
 
         $response = $this->put(route('contribution.update', $contribution), [
-            'id_contribution' => $id_contribution->id,
             'amount' => $amount,
             'status' => $status,
             'description' => $description,
             'contribution_date' => $contribution_date,
             'deadline_date' => $deadline_date,
-            'id_student' => $id_student,
+            'student_id' => $student_id,
         ]);
 
         $contribution->refresh();
@@ -167,13 +161,12 @@ class ContributionControllerTest extends TestCase
         $response->assertRedirect(route('contribution.index'));
         $response->assertSessionHas('contribution.id', $contribution->id);
 
-        $this->assertEquals($id_contribution->id, $contribution->id_contribution);
         $this->assertEquals($amount, $contribution->amount);
         $this->assertEquals($status, $contribution->status);
         $this->assertEquals($description, $contribution->description);
         $this->assertEquals(Carbon::parse($contribution_date), $contribution->contribution_date);
         $this->assertEquals(Carbon::parse($deadline_date), $contribution->deadline_date);
-        $this->assertEquals($id_student, $contribution->id_student);
+        $this->assertEquals($student_id, $contribution->student_id);
     }
 
 

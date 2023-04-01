@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\IdTeacher;
 use App\Models\Teacher;
 
 class TeacherFactory extends Factory
@@ -22,7 +21,6 @@ class TeacherFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_teacher' => IdTeacher::factory(),
             'first_name' => $this->faker->firstName,
             'father_surname' => $this->faker->regexify('[A-Za-z0-9]{50}'),
             'fathers_last_name' => $this->faker->regexify('[A-Za-z0-9]{50}'),
@@ -34,7 +32,7 @@ class TeacherFactory extends Factory
             'major' => $this->faker->regexify('[A-Za-z0-9]{50}'),
             'photo' => $this->faker->regexify('[A-Za-z0-9]{255}'),
             'professional_license' => $this->faker->regexify('[A-Za-z0-9]{255}'),
-            'id_address' => $this->faker->word,
+            'address_id' => $this->faker->word,
         ];
     }
 }

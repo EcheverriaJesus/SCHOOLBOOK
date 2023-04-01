@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('description', 100);
             $table->date('contribution_date');
             $table->date('deadline_date');
-            $table->string('id_student');
+            $table->string('student_id');
             $table->timestamps();
         });
     }

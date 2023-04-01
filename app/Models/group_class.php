@@ -16,8 +16,8 @@ class GroupClass extends Model
      * @var array
      */
     protected $fillable = [
-        'id_class',
-        'id_group',
+        'class_id',
+        'group_id',
     ];
 
     /**

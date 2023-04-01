@@ -3,7 +3,6 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Group;
-use App\Models\IdGroup;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use JMac\Testing\Traits\AdditionalAssertions;
@@ -60,18 +59,15 @@ class GroupControllerTest extends TestCase
      */
     public function store_saves_and_redirects(): void
     {
-        $id_group = IdGroup::factory()->create();
         $group_name = $this->faker->randomLetter;
         $num_max_students = $this->faker->numberBetween(-10000, 10000);
 
         $response = $this->post(route('group.store'), [
-            'id_group' => $id_group->id,
             'group_name' => $group_name,
             'num_max_students' => $num_max_students,
         ]);
 
         $groups = Group::query()
-            ->where('id_group', $id_group->id)
             ->where('group_name', $group_name)
             ->where('num_max_students', $num_max_students)
             ->get();
@@ -131,12 +127,10 @@ class GroupControllerTest extends TestCase
     public function update_redirects(): void
     {
         $group = Group::factory()->create();
-        $id_group = IdGroup::factory()->create();
         $group_name = $this->faker->randomLetter;
         $num_max_students = $this->faker->numberBetween(-10000, 10000);
 
         $response = $this->put(route('group.update', $group), [
-            'id_group' => $id_group->id,
             'group_name' => $group_name,
             'num_max_students' => $num_max_students,
         ]);
@@ -146,7 +140,6 @@ class GroupControllerTest extends TestCase
         $response->assertRedirect(route('group.index'));
         $response->assertSessionHas('group.id', $group->id);
 
-        $this->assertEquals($id_group->id, $group->id_group);
         $this->assertEquals($group_name, $group->group_name);
         $this->assertEquals($num_max_students, $group->num_max_students);
     }

@@ -29,10 +29,9 @@ class Student extends Model
         'status',
         'study_plan',
         'photo',
-        'id_address',
-        'id_tutor',
-        'id_document',
-        'id_history',
+        'address_id',
+        'tutor_id',
+        'document_id',
     ];
 
     /**
@@ -42,7 +41,6 @@ class Student extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'id_student' => 'integer',
         'birth_date' => 'date',
         'status' => 'boolean',
     ];
@@ -55,11 +53,6 @@ class Student extends Model
     public function tutor(): BelongsTo
     {
         return $this->belongsTo(Tutor::class);
-    }
-
-    public function idStudent(): BelongsTo
-    {
-        return $this->belongsTo(IdStudent::class);
     }
 
     public function studentCycles(): HasMany

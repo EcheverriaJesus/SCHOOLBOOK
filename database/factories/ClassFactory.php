@@ -5,7 +5,6 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\Class;
-use App\Models\IdClass;
 
 class ClassFactory extends Factory
 {
@@ -22,11 +21,10 @@ class ClassFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_class' => IdClass::factory(),
-            'id_subject' => $this->faker->word,
-            'id_classroom' => $this->faker->word,
-            'id_history' => $this->faker->word,
-            'id_cycle' => $this->faker->word,
+            'subject_id' => $this->faker->word,
+            'classroom_id' => $this->faker->word,
+            'history_id' => $this->faker->word,
+            'cycle_id' => $this->faker->word,
         ];
     }
 }

@@ -13,7 +13,9 @@ class TeacherController extends Controller
 {
     public function index(Request $request): View
     {
-        return view('teacher.index');
+        $teachers = Teacher::all();
+
+        return view('teacher.index', compact('teachers'));
     }
 
     public function create(Request $request): View
