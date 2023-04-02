@@ -49,7 +49,7 @@ class EditarAlumno extends Component
         'status' => 'required|boolean',
         // 'status' => 'required|string|max:20',
         'study_plan' => 'required|string|max:100',
-        'photo' => 'required|image|max:1024',
+        // 'photo' => 'required|image|max:1024',
         'photo_new' => 'nullable|image|max:1024',
         'street' => ['required','regex:/^[A-Za-z0-9áéíóúüñÁÉÍÓÚÜÑ.,\-()#&\/\s]{1,50}$/'],
         'num_int' => ['required','regex:/^[0-9]+[a-zA-Z]*$/'],

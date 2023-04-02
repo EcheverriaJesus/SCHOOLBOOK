@@ -104,7 +104,7 @@ class CrearAlumno extends Component
                 'status' => $datos['status'],
                 'study_plan' => $datos['study_plan'],
                 'photo' => $datos['photo'],
-                'address_id' => $direccion->id,
+                'address_id' => $direccion->id
                 // 'id_tutor' => $tutor->id,
                 // 'document_name' => $datos['document_name'],
                 // 'file' => $datos['file']
