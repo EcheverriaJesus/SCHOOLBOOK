@@ -18,8 +18,18 @@
             <div class="space-y-1">
             <p class="text-2xl font-bold text-gray-600">{{$student->student_name.' '.$student->paternal_surname.'
                     '.$student->maternal_surname}}</p>
-                <p class="text-gray-500 tetxt-sm">{{'Estado: '.$student->status}}</p>
                 <p class="text-gray-500 tetxt-sm">{{'Grado: '.$student->grade}}</p>
+                <p class="text-gray-500 tetxt-sm">
+                    @switch($student->status)
+                    @case('0')
+                        {{'Estado: Inactivo'}}
+                        @break
+                    @case('1')
+                        {{'Estado: Activo'}}
+                        @break
+                    @default
+                    @endswitch
+                </p>
             </div>
             <div class="flex flex-col items-stretch gap-3 mt-5 md:mt-0 md:flex-row">
                 <a href="{{route('students.show', $student)}}"

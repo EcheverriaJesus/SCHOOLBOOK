@@ -46,7 +46,16 @@
                     <span class="font-normal normal-case text-gray-600">{{ $student->phone }}</span>
                 </p>
                 <p class="text-base font-semibold">Estado:
-                    <span class="font-normal normal-case text-gray-600">{{ $student->status }}</span>
+                    <span class="font-normal normal-case text-gray-600">@switch($student->status)
+                        @case('0')
+                            {{'Inactivo'}}
+                            @break
+                        @case('1')
+                            {{'Activo'}}
+                            @break
+                        @default
+                        @endswitch
+                    </span>
                 </p>
             </div>
         </section>

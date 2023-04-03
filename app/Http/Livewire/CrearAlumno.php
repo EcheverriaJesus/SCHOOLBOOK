@@ -43,7 +43,7 @@ class CrearAlumno extends Component
             'gender' => 'required|string|max:10',
             'email' => 'required|email',           
             'phone' => 'required|digits:10',
-            'status' => 'required|string|max:20',
+            'status' => 'required|boolean',
             'study_plan' => 'required|string|max:100',
             'photo' => 'required|image|max:1024',
             'street' => ['required','regex:/^[A-Za-z0-9áéíóúüñÁÉÍÓÚÜÑ.,\-()#&\/\s]{1,50}$/'],

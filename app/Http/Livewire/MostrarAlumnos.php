@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 class MostrarAlumnos extends Component
 {
     protected $listeners = [
-        'deleteTeacher'
+        'deleteStudent'
     ];
 
     public function deleteStudent(Student $student)
