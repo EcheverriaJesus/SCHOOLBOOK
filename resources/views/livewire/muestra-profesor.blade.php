@@ -1,13 +1,8 @@
+<x-button_back>
+    <x-slot name="route"> {{route('teachers.index')}} </x-slot>
+     {{ __('teachers.index') }}
+   </x-button_back>
 <div class="p-10">
-    <div class="flex justify-start">
-        <a href="{{ route('teachers.index') }}" class="p-1 bg-indigo-600 rounded-full">
-            <svg width="24" height="24" fill="none" stroke="#ffffff" stroke-width="2" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75">
-                </path>
-            </svg>
-        </a>
-    </div>
     <div class="flex justify-center mb-5">
         <h3 class="my-3 text-3xl font-bold text-gray-800">
             Información del profesor

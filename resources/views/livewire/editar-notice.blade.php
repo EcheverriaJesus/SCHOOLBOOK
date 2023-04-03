@@ -1,3 +1,1 @@
-<div>
-    {{-- The best athlete wants his opponent at his best. --}}
-</div>
+<h2>Editar Imagenes</h2>

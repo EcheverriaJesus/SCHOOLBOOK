@@ -57,7 +57,6 @@ Route::resource('notices', NoticeController::class, ['except' => ['index']])
         'edit' => 'notices.edit',
     ]);
 
-
 Route::resource('contribution', App\Http\Controllers\ContributionController::class);
 
 Route::resource('tutor', App\Http\Controllers\TutorController::class);

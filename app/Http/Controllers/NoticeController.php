@@ -19,7 +19,7 @@ class NoticeController extends Controller
         return view('notice.index');
     }
 
-    public function create(Request $request): Response
+    public function create(Request $request): View
     {
         return view('notice.create');
     }
@@ -38,11 +38,14 @@ class NoticeController extends Controller
         return view('notice.show', compact('notice'));
     }
 
-    public function edit(Request $request, Notice $notice): Response
+    public function edit(Request $request, Notice $notice): View
     {
         return view('notice.edit', compact('notice'));
     }
-
+    /* public function edit(Request $request, Teacher $teacher): View
+    {
+        return view('teacher.edit', compact('teacher'));
+    } */
     public function update(NoticeUpdateRequest $request, Notice $notice): Response
     {
         $notice->update($request->validated());
