@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('document_name', 50);
             $table->boolean('status');
-            $table->string('file', 5);
-            $table->string('student_id');
+            $table->string('file', 255);
             $table->timestamps();
         });
     }

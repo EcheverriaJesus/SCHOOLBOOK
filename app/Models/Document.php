@@ -18,8 +18,7 @@ class Document extends Model
     protected $fillable = [
         'document_name',
         'status',
-        'file',
-        'student_id',
+        'file'
     ];
 
     /**

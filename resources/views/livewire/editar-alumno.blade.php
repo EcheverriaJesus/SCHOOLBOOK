@@ -70,9 +70,9 @@
     <x-label for="status" value="{{ __('Estatus') }}" />
     <div class="mt-1" class="inline-flex items-center ml-6">
         <label for="status_true" >
-            <input id="status_true" type="radio" class="form-radio" name="status" value="1" {{ $status ? 'checked' : '' }} wire:model="status">
+            <input id="status_true" type="radio" class="form-radio" name="student_status" value="1" {{ $student_status ? 'checked' : '' }} wire:model="student_status">
             <span class="ml-2">{{ __('Activo') }}</span>
-            <input id="status_false" type="radio" class="form-radio" name="status" value="0" {{ !$status ? 'checked' : '' }} wire:model="status">
+            <input id="status_false" type="radio" class="form-radio" name="student_status" value="0" {{ !$student_status ? 'checked' : '' }} wire:model="student_status">
             <span class="ml-2">{{ __('Inactivo') }}</span>
         </label>            
     </div>
@@ -157,6 +157,44 @@
             </div>
         
        <!-- finalDomicilio-->
+
+        <!-- Seccion Documentos -->
+  <section class="bg-white w-auto sm:bg-white w-full h-auto shadow-2xl rounded-xl mb-10 p-6 space-y-6 border">
+    <h2 class="flex justify-center text-xl font-bold text-indigo-600">Documentos </h2>
+         
+    <div>
+        <x-label class="text-lg font-bold" for="especialidad" value="{{ __('Documentos del Alumno') }}" />
+    </div>
+    <div class="p-2 border border-slate-200">
+        <!-- Nombre del Documento -->
+    <div>
+        <x-label for="document_name" value="{{ __('Nombre del Documento') }}" />
+        <x-input id="document_name" class="block w-full mt-1" type="text" wire:model="document_name"
+            :value="old('document_name')" />
+    </div>
+
+         <!-- Status document-->
+<div>
+    <x-label for="status" value="{{ __('Estatus') }}" />
+    <div class="mt-1" class="inline-flex items-center ml-6">
+        <label for="status_true">
+            <input id="status_true" type="radio" class="form-radio" name="document_status" value="1" {{ $document_status ? 'checked' : '' }} wire:model="document_status">
+            <span class="ml-2">{{ __('Activo') }}</span>
+            <input id="status_false" type="radio" class="form-radio" name="document_status" value="0" {{ !$document_status ? 'checked' : '' }} wire:model="document_status">
+            <span class="ml-2">{{ __('Inactivo') }}</span>
+        </label>            
+    </div>
+</div>
+
+
+         <!-- Archivo-->
+    <div>
+        <x-label for="file" value="{{ __('Seleccione el archivo (PDF)') }}" />
+        <x-input id="file" class="block w-full mt-1" wire:model="file" type="file"
+            accept=".pdf" />
+    </div>
+    </div>
+</section>
     <x-button class="ml-4">
         {{ __('Guardar') }}
     </x-button>

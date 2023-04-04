@@ -88,4 +88,20 @@
             </p>
         </div>
     </section>
+
+    {{-- Documentacion --}}
+    <section class="bg-white w-auto sm:bg-white w-full h-auto shadow-xl rounded-xl mb-10 border">
+        <h2 class="pb-5 pt-5 flex justify-center text-xl font-bold text-indigo-600">Documentos</h2>
+        <div class="p-4 grid grid-cols-2 space-y-3">
+            <p class="text-base font-semibold">Nombre del Documento:
+                <span class="font-normal normal-case text-gray-600">{{ $student->document->document_name }}</span>
+            </p>
+            <p class="text-base font-semibold">Estado del Documento:
+                <span class="font-normal normal-case text-gray-600">{{ $student->document->document_status }}</span>
+            </p>
+            <p class="text-base font-semibold">Archivo:
+                <span class="font-normal normal-case text-gray-600">{{ $student->document->file }}</span>
+            </p>
+        </div>
+    </section>
 </div>

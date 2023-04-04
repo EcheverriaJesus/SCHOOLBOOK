@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Address;
+use App\Models\Document;
 use App\Models\Student;
 use Livewire\WithFileUploads;
 use Livewire\Component;
@@ -12,6 +13,7 @@ class EditarAlumno extends Component
 {
     public $student_id;
     public $address_id;
+    public $document_id;
     public $student_name;
     public $paternal_surname;
     public $maternal_surname;
@@ -22,6 +24,7 @@ class EditarAlumno extends Component
     public $email;
     public $phone;
     public $status;
+    public $student_status;
     public $study_plan;
     public $photo;
     public $photo_new;
@@ -33,6 +36,10 @@ class EditarAlumno extends Component
     public $state;
     public $country;
     public $address;
+    public $document;
+    public $document_name;
+    public $document_status;
+    public $file;
 
     use WithFileUploads;
 
@@ -47,9 +54,9 @@ class EditarAlumno extends Component
         'email' => 'required|email',           
         'phone' => 'required|digits:10',
         'status' => 'required|boolean',
-        // 'status' => 'required|string|max:20',
+        'student_status' => 'required|boolean',
+        'document_status' => 'required|boolean',
         'study_plan' => 'required|string|max:100',
-        // 'photo' => 'required|image|max:1024',
         'photo_new' => 'nullable|image|max:1024',
         'street' => ['required','regex:/^[A-Za-z0-9áéíóúüñÁÉÍÓÚÜÑ.,\-()#&\/\s]{1,50}$/'],
         'num_int' => ['required','regex:/^[0-9]+[a-zA-Z]*$/'],
@@ -59,13 +66,14 @@ class EditarAlumno extends Component
         'state' => ['required','regex:/^[A-Za-zÁÉÍÓÚÑÜáéíóúñü\s]+$/'],
         'country' => ['required','regex:/^[A-Za-zÁÉÍÓÚÑÜáéíóúñü\s-]+$/'],
         // 'tutor_name' => 'required|string|max:40',
-        // 'document_name' => 'required|string|max:40',
-        // 'file' => 'required|mimes:pdf'
+        'document_name' => 'required|string|max:40',
+        'file' => 'required|mimes:pdf'
     ];
 
     public function mount(Student $student){
         $this->student_id = $student->id;
         $this->address_id = $student->address_id; 
+        $this->document_id = $student->document_id; 
         $this->student_name = $student->student_name;
         $this->paternal_surname = $student->paternal_surname;
         $this->maternal_surname = $student->maternal_surname;
@@ -75,7 +83,7 @@ class EditarAlumno extends Component
         $this->gender = $student->gender;
         $this->email = $student->email;
         $this->phone = $student->phone;
-        $this->status = $student->status;
+        $this->status = $student->student_status;
         $this->study_plan = $student->study_plan;
         $this->photo = $student->photo;
         $this->street = $student->address->street;
@@ -85,6 +93,9 @@ class EditarAlumno extends Component
         $this->city = $student->address->city;
         $this->state = $student->address->state;
         $this->country = $student->address->country;
+        $this->document_name = $student->document->document_name;
+        $this->status = $student->document->student_status;
+        $this->file = $student->document->file;
     }
 
     public function editarAlumno()
@@ -94,6 +105,7 @@ class EditarAlumno extends Component
         //Encontrar el Alumno y dirección a editar (objeto ORM)
         $student = Student::find($this->student_id);
         $address = Address::find($this->address_id);
+        $document = Document::find($this->document_id);
         //Hay una imagen nueva ??
         if($this->photo_new){
             //Se guarda la imagen y se obtiene la ruta
@@ -114,7 +126,7 @@ class EditarAlumno extends Component
         $student->gender = $datos['gender'];
         $student->email = $datos['email'];
         $student->phone = $datos['phone'];
-        $student->status = $datos['status'];
+        $student->status = $datos['student_status'];
         $student->study_plan = $datos['study_plan'];
         // photo student
         $student->photo = $datos['photo'] ?? $student->photo;
@@ -130,6 +142,14 @@ class EditarAlumno extends Component
         $address->state = $datos['state'];
         $address->country = $datos['country'];
         $address->save();
+
+        //Asignar los valores Document
+        $document->document_name = $datos['document_name'];
+        $document->status = $datos['document_status'];
+        $document->file = $datos['file'];
+        $document->save();
+
+
         //redireccionar with message
         session()->flash('mensaje','Los datos del Alumno se actualizarón correctamente');
         return redirect()->route('students.index');

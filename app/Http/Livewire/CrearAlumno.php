@@ -21,6 +21,8 @@ class CrearAlumno extends Component
         public $email;
         public $phone;
         public $status;
+        public $student_status;
+        public $document_status;
         public $study_plan;
         public $photo;
         public $street;
@@ -30,6 +32,8 @@ class CrearAlumno extends Component
         public $city;
         public $state;
         public $country;
+        public $document_name;
+        public $file;
 
         use WithFileUploads;
         
@@ -43,7 +47,8 @@ class CrearAlumno extends Component
             'gender' => 'required|string|max:10',
             'email' => 'required|email',           
             'phone' => 'required|digits:10',
-            'status' => 'required|boolean',
+            'student_status' => 'required|boolean',
+            'document_status' => 'required|boolean',
             'study_plan' => 'required|string|max:100',
             'photo' => 'required|image|max:1024',
             'street' => ['required','regex:/^[A-Za-z0-9áéíóúüñÁÉÍÓÚÜÑ.,\-()#&\/\s]{1,50}$/'],
@@ -54,8 +59,8 @@ class CrearAlumno extends Component
             'state' => ['required','regex:/^[A-Za-zÁÉÍÓÚÑÜáéíóúñü\s]+$/'],
             'country' => ['required','regex:/^[A-Za-zÁÉÍÓÚÑÜáéíóúñü\s-]+$/'],
             // 'tutor_name' => 'required|string|max:40',
-            // 'document_name' => 'required|string|max:40',
-            // 'file' => 'required|mimes:pdf'
+            'document_name' => 'required|string|max:40',
+            'file' => 'required|mimes:pdf'
         ];
 
         public function crearAlumno(){
@@ -85,11 +90,11 @@ class CrearAlumno extends Component
         //         'phone' => $datos['phone'],
         //         'id_address' => $direccion->id
         //     ]);
-            // $Document = Document::create([
-            //     'document_name' => $datos['document_name'],
-            //     'status' => $datos['status'],
-            //     'file' => $datos['file'],
-            // ]);
+            $documentos = Document::create([
+              'document_name' => $datos['document_name'],
+              'status' => $datos['document_status'],
+              'file' => $datos['file'],
+            ]);
 
             Student::create([
                 'student_name' => $datos['student_name'],
@@ -101,10 +106,11 @@ class CrearAlumno extends Component
                 'gender' => $datos['gender'],
                 'email' => $datos['email'],
                 'phone' => $datos['phone'],
-                'status' => $datos['status'],
+                'status' => $datos['student_status'],
                 'study_plan' => $datos['study_plan'],
                 'photo' => $datos['photo'],
-                'address_id' => $direccion->id
+                'address_id' => $direccion->id,
+                'document_id' => $documentos->id
                 // 'id_tutor' => $tutor->id,
                 // 'document_name' => $datos['document_name'],
                 // 'file' => $datos['file']
