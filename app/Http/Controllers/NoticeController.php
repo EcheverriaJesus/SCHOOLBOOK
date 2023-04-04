@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
+
 class NoticeController extends Controller
 {
     public function index(Request $request): View
@@ -58,7 +59,7 @@ class NoticeController extends Controller
     public function destroy(Request $request, Notice $notice): Response
     {
         $notice->delete();
-
+        
         return redirect()->route('notice.index');
     }
 }

@@ -1,6 +1,10 @@
+@php
+$notices = App\Models\Notice::all();
+$noticesCount = count($notices);
+@endphp
+
 <div>
     {{-- Boton asignar --}}
-
 <div class="flex justify-end">
     <a href="{{route('notices.create')}}"
         class="flex items-center px-4 py-2 font-semibold tracking-widest text-white transition duration-150 ease-in-out bg-blue-700 border rounded-md tet-sm border-transparet hover:bg-blue-600">
@@ -9,44 +13,32 @@
             <path stroke-linecap="round" stroke-linejoin="round"
                 d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
         </svg>
-        <label class="ml-1 text-sm">Asignar Imagenes</label>
+        <label class="ml-1 text-sm">Agregar Aviso</label>
     </a>
 </div>
 
 <!-- Slider -->
 <div class="mb-4 relative w-full" data-carousel="slide">
     <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-         <!-- Item 1 -->
-         @foreach (App\Models\Notice::all() as $notice)
+         {{-- Imagenes --}}
+         @foreach ($notices as $notice)
          <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" src="{{ asset('storage/imageNotice/' . $notice->image) }}"alt="{{ 'Imagen aviso ' . $notice->title }}">
+            <img class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" 
+            src="{{ asset('storage/imageNotice/' . $notice->image) }}"
+            alt="{{ 'Imagen aviso ' . $notice->title }}">
         </div>
 @endforeach
+    </div>
 
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="https://dsc.itiguala.edu.mx/assets/img/ItiCarru2.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-        </div>
-        <!-- Item 3 -->
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="https://itiguala.edu.mx/wp-content/uploads/banner-7.png" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-        </div>
-        <!-- Item 4 -->
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="https://itiguala.edu.mx/wp-content/uploads/151238074_1657928021046625_8186322131214457636_o-960x336.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-        </div>
-        <!-- Item 5 -->
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="https://itiguala.edu.mx/wp-content/uploads/banner-4.png" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-        </div>
-    </div>
-    <!-- Slider indicators -->
+    <!-- Botones -->
     <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
-        <button type="button" class="w-4 h-4 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-        <button type="button" class="w-4 h-4 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-        <button type="button" class="w-4 h-4 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
-        <button type="button" class="w-4 h-4 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
-        <button type="button" class="w-4 h-4 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
+        @for ($i = 0; $i < $noticesCount; $i++)
+             <button type="button" class="w-4 h-4 rounded-full" 
+             aria-current={{ $i == 0 ? 'true' : 'false' }} aria-label="Slide {{ $i + 1 }}" 
+             data-carousel-slide-to="{{ $i }}"></button>
+        @endfor
     </div>
+
     <!--Boton para regresar imagen en el slider -->
     <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
         <span class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
@@ -64,7 +56,7 @@
 </div>
 
 {{-- Targetas para los avisos --}}
-@foreach (App\Models\Notice::all() as $notice)
+@foreach ($notices as $notice)
 
 {{-- Imagen --}}
    <div class="bg-white w-auto sm:bg-white w-full h-auto shadow-2xl rounded-xl mb-10 p-6 space-y-6 border">
@@ -77,11 +69,11 @@
          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $notice->description }}</p>
      </div>
 <div>
- <div class="flex gap-4">
+ <div class="flex flex-col">
         <p class="font-semibold">Fecha de Publicacion: </p>
         <p class="text-slate-400 font-normal tracking-wider">{{ $notice->start_date }}</p>
     </div>
-    <div class="flex gap-4">
+    <div class="flex flex-col">
         <p class="font-semibold">Dirijido a: </p>
         <p class="text-slate-400 font-normal tracking-wider">{{ $notice->recipient }}</p>
     </div>

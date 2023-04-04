@@ -89,7 +89,7 @@
     Livewire.on('mostrarAlerta', (teacherId) => {
     Swal.fire({
         title: '¿Eliminar Profesor?',
-        text: "Una profesor Eliminado ya no se podrá recuperar.",
+        text: "Un profesor Eliminado ya no se podrá recuperar.",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
