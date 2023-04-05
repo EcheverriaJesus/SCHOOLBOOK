@@ -90,18 +90,7 @@
         </div>
     </div>
 
-    <!-- Status 
-    <div>
-    <x-label for="status" value="{{ __('Estatus') }}" />
-    <div class="mt-1" class="inline-flex items-center ml-6">
-        <label for="status_true" >
-            <input id="status_true" type="radio" class="form-radio" name="status" value="1" {{ $status ? 'checked' : '' }} wire:model="status">
-            <span class="ml-2">{{ __('Activo') }}</span>
-            <input id="status_false" type="radio" class="form-radio" name="status" value="0" {{ !$status ? 'checked' : '' }} wire:model="status">
-            <span class="ml-2">{{ __('Inactivo') }}</span>
-        </label>            
-    </div> -->
-
+    <!-- status alumno -->
 <div>
     <x-label for="status" value="{{ __('Estatus') }}" />
     <div class="mt-1" class="inline-flex items-center ml-6">

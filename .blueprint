@@ -32,25 +32,25 @@ created:
     - database/factories/ScheduleFactory.php
     - database/factories/SubjectFactory.php
     - database/factories/TeacherSubjectFactory.php
-    - database/migrations/2023_04_04_012147_create_contributions_table.php
-    - database/migrations/2023_04_04_012148_create_tutors_table.php
-    - database/migrations/2023_04_04_012149_create_documents_table.php
-    - database/migrations/2023_04_04_012150_create_students_table.php
-    - database/migrations/2023_04_04_012151_create_student_cycles_table.php
-    - database/migrations/2023_04_04_012152_create_addresses_table.php
-    - database/migrations/2023_04_04_012153_create_student_classes_table.php
-    - database/migrations/2023_04_04_012154_create_classrooms_table.php
-    - database/migrations/2023_04_04_012155_create_school_cycles_table.php
-    - database/migrations/2023_04_04_012156_create_qualifications_table.php
-    - database/migrations/2023_04_04_012157_create_notices_table.php
-    - database/migrations/2023_04_04_012158_create_group_classes_table.php
-    - database/migrations/2023_04_04_012159_create_teachers_table.php
-    - database/migrations/2023_04_04_012200_create_groups_table.php
-    - database/migrations/2023_04_04_012201_create_classes_table.php
-    - database/migrations/2023_04_04_012202_create_class_schedules_table.php
-    - database/migrations/2023_04_04_012203_create_schedules_table.php
-    - database/migrations/2023_04_04_012204_create_subjects_table.php
-    - database/migrations/2023_04_04_012205_create_teacher_subjects_table.php
+    - database/migrations/2023_04_05_183708_create_contributions_table.php
+    - database/migrations/2023_04_05_183709_create_tutors_table.php
+    - database/migrations/2023_04_05_183710_create_documents_table.php
+    - database/migrations/2023_04_05_183711_create_students_table.php
+    - database/migrations/2023_04_05_183712_create_student_cycles_table.php
+    - database/migrations/2023_04_05_183713_create_addresses_table.php
+    - database/migrations/2023_04_05_183714_create_student_classes_table.php
+    - database/migrations/2023_04_05_183715_create_classrooms_table.php
+    - database/migrations/2023_04_05_183716_create_school_cycles_table.php
+    - database/migrations/2023_04_05_183717_create_qualifications_table.php
+    - database/migrations/2023_04_05_183718_create_notices_table.php
+    - database/migrations/2023_04_05_183719_create_group_classes_table.php
+    - database/migrations/2023_04_05_183720_create_teachers_table.php
+    - database/migrations/2023_04_05_183721_create_groups_table.php
+    - database/migrations/2023_04_05_183722_create_classes_table.php
+    - database/migrations/2023_04_05_183723_create_class_schedules_table.php
+    - database/migrations/2023_04_05_183724_create_schedules_table.php
+    - database/migrations/2023_04_05_183725_create_subjects_table.php
+    - database/migrations/2023_04_05_183726_create_teacher_subjects_table.php
     - app/Models/Contribution.php
     - app/Models/Tutor.php
     - app/Models/Document.php
@@ -171,7 +171,7 @@ models:
     Contribution: { amount: integer, status: boolean, description: 'string:100', contribution_date: date, deadline_date: date, student_id: foreignIdFor, relationships: { belongsTo: Student } }
     Tutor: { tutor_name: 'string:50', paternal_surname: 'string:50', maternal_surname: 'string:50', gender: 'string:10', email: string, phone: string, address_id: foreignIdFor, relationships: { belongsTo: 'Address, Student' } }
     Document: { document_name: 'string:50', status: boolean, file: 'string:255', relationships: { belongsTo: Student } }
-    Student: { student_name: 'string:50', paternal_surname: 'string:50', maternal_surname: 'string:50', grade: integer, birth_date: date, curp: 'string:18', gender: 'string:10', email: 'string:50', phone: string, status: boolean, study_plan: 'string:100', photo: 'string:255', address_id: foreignIdFor, tutor_id: foreignIdFor, document_id: foreignIdFor, relationships: { belongsTo: 'Address, Tutor', hasMany: 'Student_cycle, Contribution, Document' } }
+    Student: { student_name: 'string:50', paternal_surname: 'string:50', maternal_surname: 'string:50', grade: integer, birth_date: date, curp: 'string:18', gender: 'string:10', email: 'string:50', phone: string, status: boolean, study_plan: 'string:100', photo: 'string:255', address_id: foreignIdFor, tutor_id: foreignIdFor, document_id: foreignIdFor, relationships: { belongsTo: 'Address, Tutor, Document', hasMany: 'Student_cycle, Contribution' } }
     Student_cycle: { student_id: foreignIdFor, cycle_id: foreignIdFor, relationships: { belongsTo: 'School_cycle, Student' } }
     Address: { street: 'string:50', num_ext: 'string:10', num_int: 'string:10', neighborhood: 'string:50', city: 'string:50', state: 'string:50', country: 'string:50', relationships: { hasMany: 'Student, Tutor, Teacher' } }
     Student_class: { student_id: foreignIdFor, class_id: foreignIdFor, relationships: { belongsTo: 'Student, Class' } }

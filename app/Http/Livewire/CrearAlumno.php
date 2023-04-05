@@ -142,7 +142,7 @@ class CrearAlumno extends Component
             $documentos = Document::create([
               'document_name' => $datos['document_name'],
               'status' => $datos['document_status'],
-              'file' => $datos['file'],
+              'file' => $datos['file']
             ]);
 
             Student::create([

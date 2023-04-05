@@ -90,6 +90,33 @@
         </div>
     </section>
 
+{{-- Documentacion --}}
+    <section class="bg-white w-auto sm:bg-white w-full h-auto shadow-xl rounded-xl mb-10 border">
+        <h2 class="pb-5 pt-5 flex justify-center text-xl font-bold text-indigo-600">Documentos</h2>
+        <div class="p-4 grid grid-cols-2 space-y-3">
+            <p class="text-base font-semibold">Nombre del Documento:
+                <span class="font-normal normal-case text-gray-600">{{ $student->document->document_name }}</span>
+            </p>
+            <p class="text-base font-semibold">Estado del Documento:
+                    <span class="font-normal normal-case text-gray-600">
+                        @switch($student->document->status)
+                        @case('0')
+                            {{'Inactivo'}}
+                            @break
+                        @case('1')
+                            {{'Activo'}}
+                            @break
+                        @default
+                        @endswitch
+                    </span>
+                </p>
+            <a href="{{ asset('storage/fileStudents/' . $student->file) }}" target="_blank"
+                    rel="noreferrer noopener"
+                    class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white transition duration-150 ease-in-out bg-blue-700 border border-transparent rounded-md hover:bg-blue-600">
+                    Ver Documento Alumno
+                </a>
+        </div>
+    </section>
 
     {{-- Datos Tutor--}}
     <section class="bg-white w-auto sm:bg-white w-full h-auto shadow-xl rounded-xl mb-10 border">

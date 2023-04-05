@@ -174,19 +174,23 @@
     </section>
 
 
-         <!-- Seccion Documentos -->
+           <!-- Seccion Documentos -->
   <section class="bg-white w-auto sm:bg-white w-full h-auto shadow-2xl rounded-xl mb-10 p-6 space-y-6 border">
-    <h2 class="flex justify-center text-xl font-bold text-indigo-600">Documentos del Alumno </h2>
+    <h2 class="flex justify-center text-xl font-bold text-indigo-600">Documentos </h2>
+         
+    <div>
+        <x-label class="text-lg font-bold" for="especialidad" value="{{ __('Documentos del Alumno') }}" />
+    </div>
     <div class="p-2 border border-slate-200">
         <!-- Nombre del Documento -->
-        @foreach ($student->documents as $document)
     <div>
-        <x-label for="document_name_{{ $document->id }}" value="{{ __('Nombre del Documento') }}" />
-        <x-input id="document_name_{{ $document->id }}" class="block w-full mt-1" type="text"
-            wire:model="documents.{{ $loop->index }}.document_name"
-            :value="old('documents.'.$loop->index.'.document_name', $document->document_name)" />
+        <x-label for="document_name" value="{{ __('Nombre del Documento') }}" />
+        <x-input id="document_name" class="block w-full mt-1" type="text" wire:model="document_name" {{-- DEJAR WIRE  --}}
+            :value="old('document_name')" />
+        <div class="block mt-2">
+            <x-alert-danger :messages="$errors->get('document_name')"/>
+        </div>
     </div>
-@endforeach
 
          <!-- Status document-->
 <div>
@@ -202,10 +206,17 @@
 </div>
          <!-- Archivo-->
     <div>
-        <x-label for="file" value="{{ __('Seleccione el archivo (PDF)') }}" />
-        <x-input id="file" class="block w-full mt-1" wire:model="file" type="file"
+        <x-label for="file_new" value="{{ __('Seleccione el archivo (PDF)') }}" />
+        <x-input id="file_new" class="block w-full mt-1" wire:model="file_new" type="file"
             accept=".pdf" />
     </div>
+    <div>
+            <a href="{{asset('storage/fileStudents/'.$file)}}" class="flex justify-center items-center px-4 py-2 my-3 text-sm font-semibold tracking-widest text-white transition duration-150 ease-in-out bg-blue-700 border border-transparent rounded-md hover:bg-blue-600"
+                target="_blank"
+                rel="noreferrer noopener">
+                Archivo Actual Alumno
+            </a>
+          </div>
     </div>
 </section>
 

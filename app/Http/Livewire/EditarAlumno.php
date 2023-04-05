@@ -108,10 +108,9 @@ class EditarAlumno extends Component
     ];
 
     public function mount(Student $student){
-        $this->document_id = Student::with('documents')->find($student)->documents->first()->id;
         $this->student_id = $student->id;
         $this->address_id = $student->address_id; 
-        // $this->document_id = $student->document_id; 
+        $this->document_id = $student->document_id; 
         $this->tutor_id = $student->tutor_id; 
         $this->student_name = $student->student_name;
         $this->paternal_surnameS = $student->paternal_surname;
@@ -136,8 +135,8 @@ class EditarAlumno extends Component
         $this->stateS = $student->address->state;
         $this->countryS = $student->address->country;
         $this->document_name = $student->document->document_name;
-        // $this->document_status = $student->document->status;
-        // $this->file = $student->document->file;
+        $this->document_status = $student->document->status;
+        $this->file = $student->document->file;
         $this->tutor_name = $student->tutor->tutor_name;
         $this->paternal_surnameT = $student->tutor->paternal_surname;
         $this->maternal_surnameT = $student->tutor->maternal_surname;
@@ -176,7 +175,7 @@ class EditarAlumno extends Component
             $pdf = $this->file_new->store('public/fileStudents');
             //Cortamos la ruta del pdf para almacenar unicamente el nombre del pdf
             $datos['file'] = str_replace('public/fileStudents/','',$pdf);
-            //Eliminamos la ced. profesional vieja
+            //Eliminamos archivo
             Storage::delete('public/fileStudents/'.$document->file);
         }
 
