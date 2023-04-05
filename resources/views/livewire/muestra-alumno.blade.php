@@ -46,7 +46,8 @@
                     <span class="font-normal normal-case text-gray-600">{{ $student->phone }}</span>
                 </p>
                 <p class="text-base font-semibold">Estado:
-                    <span class="font-normal normal-case text-gray-600">@switch($student->status)
+                    <span class="font-normal normal-case text-gray-600">
+                        @switch($student->status)
                         @case('0')
                             {{'Inactivo'}}
                             @break
@@ -89,18 +90,51 @@
         </div>
     </section>
 
-    {{-- Documentacion --}}
+
+    {{-- Datos Tutor--}}
     <section class="bg-white w-auto sm:bg-white w-full h-auto shadow-xl rounded-xl mb-10 border">
         <h2 class="pb-5 pt-5 flex justify-center text-xl font-bold text-indigo-600">Documentos</h2>
         <div class="p-4 grid grid-cols-2 space-y-3">
-            <p class="text-base font-semibold">Nombre del Documento:
-                <span class="font-normal normal-case text-gray-600">{{ $student->document->document_name }}</span>
+            <p class="text-base font-semibold">Nombre del Tutor:
+                <span class="font-normal normal-case text-gray-600">{{ $student->tutor->tutor_name }}</span>
             </p>
-            <p class="text-base font-semibold">Estado del Documento:
-                <span class="font-normal normal-case text-gray-600">{{ $student->document->document_status }}</span>
+            <p class="text-base font-semibold">Apellido Paterno:
+                <span class="font-normal normal-case text-gray-600">{{ $student->tutor->paternal_surname }}</span>
             </p>
-            <p class="text-base font-semibold">Archivo:
-                <span class="font-normal normal-case text-gray-600">{{ $student->document->file }}</span>
+            <p class="text-base font-semibold">Apellido Materno:
+                <span class="font-normal normal-case text-gray-600">{{ $student->tutor->maternal_surname }}</span>
+            </p>
+            <p class="text-base font-semibold">Genero:
+                <span class="font-normal normal-case text-gray-600">{{ $student->tutor->gender }}</span>
+            </p>
+            <p class="text-base font-semibold">Email:
+                <span class="font-normal normal-case text-gray-600">{{ $student->tutor->email }}</span>
+            </p>
+            <p class="text-base font-semibold">Telefono:
+                <span class="font-normal normal-case text-gray-600">{{ $student->tutor->phone }}</span>
+            </p>
+        </div>
+        <div class="p-4 grid grid-cols-2 space-y-3">
+        <p class="text-base font-semibold">Calle:
+                <span class="font-normal normal-case text-gray-600">{{ $student->tutor->address->street }}</span>
+            </p>
+            <p class="text-base font-semibold">No Interior:
+                <span class="font-normal normal-case text-gray-600">{{ $student->tutor->address->num_int }}</span>
+            </p>
+            <p class="text-base font-semibold">No Exterior:
+                <span class="font-normal normal-case text-gray-600">{{ $student->tutor->address->num_ext }}</span>
+            </p>
+            <p class="text-base font-semibold">Colonia/Fraccionamineto:
+                <span class="font-normal normal-case text-gray-600">{{ $student->tutor->address->neighborhood }}</span>
+            </p>
+            <p class="text-base font-semibold">Municipio:
+                <span class="font-normal normal-case text-gray-600">{{ $student->tutor->address->city }}</span>
+            </p>
+            <p class="text-base font-semibold">Estado:
+                <span class="font-normal normal-case text-gray-600">{{ $student->tutor->address->state }}</span>
+            </p>
+            <p class="text-base font-semibold">Pais:
+                <span class="font-normal normal-case text-gray-600">{{ $student->tutor->address->country }}</span>
             </p>
         </div>
     </section>

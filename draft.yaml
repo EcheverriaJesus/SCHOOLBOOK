@@ -22,6 +22,7 @@ models:
         document_name: string:50
         status: boolean
         file: string:255
+        student_id: foreignIdFor
         relationships:
             belongsTo: Student
     Student:
