@@ -21,7 +21,7 @@ class Contribution extends Model
         'description',
         'contribution_date',
         'deadline_date',
-        'id_student',
+        'student_id',
     ];
 
     /**
@@ -31,7 +31,6 @@ class Contribution extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'id_contribution' => 'integer',
         'status' => 'boolean',
         'contribution_date' => 'date',
         'deadline_date' => 'date',
@@ -40,10 +39,5 @@ class Contribution extends Model
     public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);
-    }
-
-    public function idContribution(): BelongsTo
-    {
-        return $this->belongsTo(IdContribution::class);
     }
 }

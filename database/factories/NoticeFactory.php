@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\IdNotice;
 use App\Models\Notice;
 
 class NoticeFactory extends Factory
@@ -22,7 +21,6 @@ class NoticeFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_notice' => IdNotice::factory(),
             'title' => $this->faker->sentence(4),
             'description' => $this->faker->text,
             'start_date' => $this->faker->date(),

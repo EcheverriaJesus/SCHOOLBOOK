@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\IdStudent;
 use App\Models\Student;
 
 class StudentFactory extends Factory
@@ -22,7 +21,6 @@ class StudentFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_student' => IdStudent::factory(),
             'student_name' => $this->faker->regexify('[A-Za-z0-9]{50}'),
             'paternal_surname' => $this->faker->regexify('[A-Za-z0-9]{50}'),
             'maternal_surname' => $this->faker->regexify('[A-Za-z0-9]{50}'),
@@ -35,10 +33,9 @@ class StudentFactory extends Factory
             'status' => $this->faker->boolean,
             'study_plan' => $this->faker->regexify('[A-Za-z0-9]{100}'),
             'photo' => $this->faker->regexify('[A-Za-z0-9]{255}'),
-            'id_address' => $this->faker->word,
-            'id_tutor' => $this->faker->word,
-            'id_document' => $this->faker->word,
-            'id_history' => $this->faker->word,
+            'address_id' => $this->faker->word,
+            'tutor_id' => $this->faker->word,
+            'document_id' => $this->faker->word,
         ];
     }
 }

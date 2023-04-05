@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Group extends Model
@@ -28,16 +27,10 @@ class Group extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'id_group' => 'integer',
     ];
 
     public function groupClasses(): HasMany
     {
         return $this->hasMany(GroupClass::class);
-    }
-
-    public function idGroup(): BelongsTo
-    {
-        return $this->belongsTo(IdGroup::class);
     }
 }

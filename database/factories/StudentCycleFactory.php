@@ -21,8 +21,8 @@ class StudentCycleFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_student' => $this->faker->word,
-            'id_cycle' => $this->faker->word,
+            'student_id' => $this->faker->word,
+            'cycle_id' => $this->faker->word,
         ];
     }
 }

@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('class_schedules', function (Blueprint $table) {
+        Schema::create('documents', function (Blueprint $table) {
             $table->id();
-            $table->string('id_class');
-            $table->string('id_schedule');
+            $table->string('document_name', 50);
+            $table->boolean('status');
+            $table->string('file', 255);
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('class_schedules');
+        Schema::dropIfExists('documents');
     }
 };

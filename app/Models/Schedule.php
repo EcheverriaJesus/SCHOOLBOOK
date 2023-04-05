@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Schedule extends Model
@@ -20,7 +19,7 @@ class Schedule extends Model
         'start_time',
         'end_time',
         'day',
-        'id_class',
+        'class_id',
     ];
 
     /**
@@ -30,17 +29,11 @@ class Schedule extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'id_schedule' => 'integer',
         'day' => 'date',
     ];
 
     public function classSchedules(): HasMany
     {
         return $this->hasMany(ClassSchedule::class);
-    }
-
-    public function idSchedule(): BelongsTo
-    {
-        return $this->belongsTo(IdSchedule::class);
     }
 }

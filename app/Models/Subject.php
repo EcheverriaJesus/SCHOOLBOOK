@@ -20,7 +20,7 @@ class Subject extends Model
         'subject_name',
         'description',
         'grade',
-        'id_qualification',
+        'qualification_id',
     ];
 
     /**
@@ -30,17 +30,11 @@ class Subject extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'id_subject' => 'integer',
     ];
 
     public function class(): BelongsTo
     {
         return $this->belongsTo(Class::class);
-    }
-
-    public function idSubject(): BelongsTo
-    {
-        return $this->belongsTo(IdSubject::class);
     }
 
     public function qualifications(): HasMany

@@ -3,7 +3,6 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Address;
-use App\Models\IdAddress;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use JMac\Testing\Traits\AdditionalAssertions;
@@ -60,7 +59,6 @@ class AddressControllerTest extends TestCase
      */
     public function store_saves_and_redirects(): void
     {
-        $id_address = IdAddress::factory()->create();
         $street = $this->faker->streetName;
         $num_ext = $this->faker->word;
         $num_int = $this->faker->word;
@@ -70,7 +68,6 @@ class AddressControllerTest extends TestCase
         $country = $this->faker->country;
 
         $response = $this->post(route('address.store'), [
-            'id_address' => $id_address->id,
             'street' => $street,
             'num_ext' => $num_ext,
             'num_int' => $num_int,
@@ -81,7 +78,6 @@ class AddressControllerTest extends TestCase
         ]);
 
         $addresses = Address::query()
-            ->where('id_address', $id_address->id)
             ->where('street', $street)
             ->where('num_ext', $num_ext)
             ->where('num_int', $num_int)
@@ -146,7 +142,6 @@ class AddressControllerTest extends TestCase
     public function update_redirects(): void
     {
         $address = Address::factory()->create();
-        $id_address = IdAddress::factory()->create();
         $street = $this->faker->streetName;
         $num_ext = $this->faker->word;
         $num_int = $this->faker->word;
@@ -156,7 +151,6 @@ class AddressControllerTest extends TestCase
         $country = $this->faker->country;
 
         $response = $this->put(route('address.update', $address), [
-            'id_address' => $id_address->id,
             'street' => $street,
             'num_ext' => $num_ext,
             'num_int' => $num_int,
@@ -171,7 +165,6 @@ class AddressControllerTest extends TestCase
         $response->assertRedirect(route('address.index'));
         $response->assertSessionHas('address.id', $address->id);
 
-        $this->assertEquals($id_address->id, $address->id_address);
         $this->assertEquals($street, $address->street);
         $this->assertEquals($num_ext, $address->num_ext);
         $this->assertEquals($num_int, $address->num_int);

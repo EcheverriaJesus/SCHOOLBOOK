@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\IdQualification;
 use App\Models\Qualification;
 
 class QualificationFactory extends Factory
@@ -22,7 +21,6 @@ class QualificationFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_qualification' => IdQualification::factory(),
             'bim1' => $this->faker->randomFloat(0, 0, 9999999999.),
             'bim2' => $this->faker->randomFloat(0, 0, 9999999999.),
             'bim3' => $this->faker->randomFloat(0, 0, 9999999999.),

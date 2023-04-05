@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Http\Controllers;
 
-use App\Models\IdSchedule;
 use App\Models\Schedule;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -61,26 +60,23 @@ class ScheduleControllerTest extends TestCase
      */
     public function store_saves_and_redirects(): void
     {
-        $id_schedule = IdSchedule::factory()->create();
         $start_time = $this->faker->time();
         $end_time = $this->faker->time();
         $day = $this->faker->date();
-        $id_class = $this->faker->word;
+        $class_id = $this->faker->word;
 
         $response = $this->post(route('schedule.store'), [
-            'id_schedule' => $id_schedule->id,
             'start_time' => $start_time,
             'end_time' => $end_time,
             'day' => $day,
-            'id_class' => $id_class,
+            'class_id' => $class_id,
         ]);
 
         $schedules = Schedule::query()
-            ->where('id_schedule', $id_schedule->id)
             ->where('start_time', $start_time)
             ->where('end_time', $end_time)
             ->where('day', $day)
-            ->where('id_class', $id_class)
+            ->where('class_id', $class_id)
             ->get();
         $this->assertCount(1, $schedules);
         $schedule = $schedules->first();
@@ -138,18 +134,16 @@ class ScheduleControllerTest extends TestCase
     public function update_redirects(): void
     {
         $schedule = Schedule::factory()->create();
-        $id_schedule = IdSchedule::factory()->create();
         $start_time = $this->faker->time();
         $end_time = $this->faker->time();
         $day = $this->faker->date();
-        $id_class = $this->faker->word;
+        $class_id = $this->faker->word;
 
         $response = $this->put(route('schedule.update', $schedule), [
-            'id_schedule' => $id_schedule->id,
             'start_time' => $start_time,
             'end_time' => $end_time,
             'day' => $day,
-            'id_class' => $id_class,
+            'class_id' => $class_id,
         ]);
 
         $schedule->refresh();
@@ -157,11 +151,10 @@ class ScheduleControllerTest extends TestCase
         $response->assertRedirect(route('schedule.index'));
         $response->assertSessionHas('schedule.id', $schedule->id);
 
-        $this->assertEquals($id_schedule->id, $schedule->id_schedule);
         $this->assertEquals($start_time, $schedule->start_time);
         $this->assertEquals($end_time, $schedule->end_time);
         $this->assertEquals(Carbon::parse($day), $schedule->day);
-        $this->assertEquals($id_class, $schedule->id_class);
+        $this->assertEquals($class_id, $schedule->class_id);
     }
 
 

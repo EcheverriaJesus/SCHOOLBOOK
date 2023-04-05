@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Http\Controllers;
 
-use App\Models\IdTeacher;
 use App\Models\Teacher;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -60,10 +59,9 @@ class TeacherControllerTest extends TestCase
      */
     public function store_saves_and_redirects(): void
     {
-        $id_teacher = IdTeacher::factory()->create();
         $first_name = $this->faker->firstName;
         $father_surname = $this->faker->word;
-        $father's_last_name = $this->faker->word;
+        $fathers_last_name = $this->faker->word;
         $phone = $this->faker->phoneNumber;
         $email = $this->faker->safeEmail;
         $curp = $this->faker->word;
@@ -72,13 +70,12 @@ class TeacherControllerTest extends TestCase
         $major = $this->faker->word;
         $photo = $this->faker->word;
         $professional_license = $this->faker->word;
-        $id_address = $this->faker->word;
+        $address_id = $this->faker->word;
 
         $response = $this->post(route('teacher.store'), [
-            'id_teacher' => $id_teacher->id,
             'first_name' => $first_name,
             'father_surname' => $father_surname,
-            'father's_last_name' => $father's_last_name,
+            'fathers_last_name' => $fathers_last_name,
             'phone' => $phone,
             'email' => $email,
             'curp' => $curp,
@@ -87,14 +84,13 @@ class TeacherControllerTest extends TestCase
             'major' => $major,
             'photo' => $photo,
             'professional_license' => $professional_license,
-            'id_address' => $id_address,
+            'address_id' => $address_id,
         ]);
 
         $teachers = Teacher::query()
-            ->where('id_teacher', $id_teacher->id)
             ->where('first_name', $first_name)
             ->where('father_surname', $father_surname)
-            ->where('father's_last_name', $father's_last_name)
+            ->where('fathers_last_name', $fathers_last_name)
             ->where('phone', $phone)
             ->where('email', $email)
             ->where('curp', $curp)
@@ -103,7 +99,7 @@ class TeacherControllerTest extends TestCase
             ->where('major', $major)
             ->where('photo', $photo)
             ->where('professional_license', $professional_license)
-            ->where('id_address', $id_address)
+            ->where('address_id', $address_id)
             ->get();
         $this->assertCount(1, $teachers);
         $teacher = $teachers->first();
@@ -161,10 +157,9 @@ class TeacherControllerTest extends TestCase
     public function update_redirects(): void
     {
         $teacher = Teacher::factory()->create();
-        $id_teacher = IdTeacher::factory()->create();
         $first_name = $this->faker->firstName;
         $father_surname = $this->faker->word;
-        $father's_last_name = $this->faker->word;
+        $fathers_last_name = $this->faker->word;
         $phone = $this->faker->phoneNumber;
         $email = $this->faker->safeEmail;
         $curp = $this->faker->word;
@@ -173,13 +168,12 @@ class TeacherControllerTest extends TestCase
         $major = $this->faker->word;
         $photo = $this->faker->word;
         $professional_license = $this->faker->word;
-        $id_address = $this->faker->word;
+        $address_id = $this->faker->word;
 
         $response = $this->put(route('teacher.update', $teacher), [
-            'id_teacher' => $id_teacher->id,
             'first_name' => $first_name,
             'father_surname' => $father_surname,
-            'father's_last_name' => $father's_last_name,
+            'fathers_last_name' => $fathers_last_name,
             'phone' => $phone,
             'email' => $email,
             'curp' => $curp,
@@ -188,7 +182,7 @@ class TeacherControllerTest extends TestCase
             'major' => $major,
             'photo' => $photo,
             'professional_license' => $professional_license,
-            'id_address' => $id_address,
+            'address_id' => $address_id,
         ]);
 
         $teacher->refresh();
@@ -196,10 +190,9 @@ class TeacherControllerTest extends TestCase
         $response->assertRedirect(route('teacher.index'));
         $response->assertSessionHas('teacher.id', $teacher->id);
 
-        $this->assertEquals($id_teacher->id, $teacher->id_teacher);
         $this->assertEquals($first_name, $teacher->first_name);
         $this->assertEquals($father_surname, $teacher->father_surname);
-        $this->assertEquals($father's_last_name, $teacher->father's_last_name);
+        $this->assertEquals($fathers_last_name, $teacher->fathers_last_name);
         $this->assertEquals($phone, $teacher->phone);
         $this->assertEquals($email, $teacher->email);
         $this->assertEquals($curp, $teacher->curp);
@@ -208,7 +201,7 @@ class TeacherControllerTest extends TestCase
         $this->assertEquals($major, $teacher->major);
         $this->assertEquals($photo, $teacher->photo);
         $this->assertEquals($professional_license, $teacher->professional_license);
-        $this->assertEquals($id_address, $teacher->id_address);
+        $this->assertEquals($address_id, $teacher->address_id);
     }
 
 

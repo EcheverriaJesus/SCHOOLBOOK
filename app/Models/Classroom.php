@@ -27,16 +27,10 @@ class Classroom extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'id_classroom' => 'integer',
     ];
 
     public function class(): BelongsTo
     {
         return $this->belongsTo(Class::class);
-    }
-
-    public function idClassroom(): BelongsTo
-    {
-        return $this->belongsTo(IdClassroom::class);
     }
 }

@@ -16,8 +16,8 @@ class TeacherSubject extends Model
      * @var array
      */
     protected $fillable = [
-        'id_subject',
-        'id_teacher',
+        'subject_id',
+        'teacher_id',
     ];
 
     /**

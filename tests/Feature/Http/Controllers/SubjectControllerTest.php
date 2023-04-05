@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Http\Controllers;
 
-use App\Models\IdSubject;
 use App\Models\Subject;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -60,26 +59,23 @@ class SubjectControllerTest extends TestCase
      */
     public function store_saves_and_redirects(): void
     {
-        $id_subject = IdSubject::factory()->create();
         $subject_name = $this->faker->word;
         $description = $this->faker->text;
         $grade = $this->faker->numberBetween(-10000, 10000);
-        $id_qualification = $this->faker->word;
+        $qualification_id = $this->faker->word;
 
         $response = $this->post(route('subject.store'), [
-            'id_subject' => $id_subject->id,
             'subject_name' => $subject_name,
             'description' => $description,
             'grade' => $grade,
-            'id_qualification' => $id_qualification,
+            'qualification_id' => $qualification_id,
         ]);
 
         $subjects = Subject::query()
-            ->where('id_subject', $id_subject->id)
             ->where('subject_name', $subject_name)
             ->where('description', $description)
             ->where('grade', $grade)
-            ->where('id_qualification', $id_qualification)
+            ->where('qualification_id', $qualification_id)
             ->get();
         $this->assertCount(1, $subjects);
         $subject = $subjects->first();
@@ -137,18 +133,16 @@ class SubjectControllerTest extends TestCase
     public function update_redirects(): void
     {
         $subject = Subject::factory()->create();
-        $id_subject = IdSubject::factory()->create();
         $subject_name = $this->faker->word;
         $description = $this->faker->text;
         $grade = $this->faker->numberBetween(-10000, 10000);
-        $id_qualification = $this->faker->word;
+        $qualification_id = $this->faker->word;
 
         $response = $this->put(route('subject.update', $subject), [
-            'id_subject' => $id_subject->id,
             'subject_name' => $subject_name,
             'description' => $description,
             'grade' => $grade,
-            'id_qualification' => $id_qualification,
+            'qualification_id' => $qualification_id,
         ]);
 
         $subject->refresh();
@@ -156,11 +150,10 @@ class SubjectControllerTest extends TestCase
         $response->assertRedirect(route('subject.index'));
         $response->assertSessionHas('subject.id', $subject->id);
 
-        $this->assertEquals($id_subject->id, $subject->id_subject);
         $this->assertEquals($subject_name, $subject->subject_name);
         $this->assertEquals($description, $subject->description);
         $this->assertEquals($grade, $subject->grade);
-        $this->assertEquals($id_qualification, $subject->id_qualification);
+        $this->assertEquals($qualification_id, $subject->qualification_id);
     }
 
 
