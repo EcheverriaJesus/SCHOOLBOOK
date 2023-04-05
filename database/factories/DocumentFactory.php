@@ -23,8 +23,7 @@ class DocumentFactory extends Factory
         return [
             'document_name' => $this->faker->regexify('[A-Za-z0-9]{50}'),
             'status' => $this->faker->boolean,
-            'file' => $this->faker->regexify('[A-Za-z0-9]{5}'),
-            'student_id' => $this->faker->word,
+            'file' => $this->faker->regexify('[A-Za-z0-9]{255}'),
         ];
     }
 }

@@ -62,20 +62,17 @@ class DocumentControllerTest extends TestCase
         $document_name = $this->faker->word;
         $status = $this->faker->boolean;
         $file = $this->faker->word;
-        $student_id = $this->faker->word;
 
         $response = $this->post(route('document.store'), [
             'document_name' => $document_name,
             'status' => $status,
             'file' => $file,
-            'student_id' => $student_id,
         ]);
 
         $documents = Document::query()
             ->where('document_name', $document_name)
             ->where('status', $status)
             ->where('file', $file)
-            ->where('student_id', $student_id)
             ->get();
         $this->assertCount(1, $documents);
         $document = $documents->first();
@@ -136,13 +133,11 @@ class DocumentControllerTest extends TestCase
         $document_name = $this->faker->word;
         $status = $this->faker->boolean;
         $file = $this->faker->word;
-        $student_id = $this->faker->word;
 
         $response = $this->put(route('document.update', $document), [
             'document_name' => $document_name,
             'status' => $status,
             'file' => $file,
-            'student_id' => $student_id,
         ]);
 
         $document->refresh();
@@ -153,7 +148,6 @@ class DocumentControllerTest extends TestCase
         $this->assertEquals($document_name, $document->document_name);
         $this->assertEquals($status, $document->status);
         $this->assertEquals($file, $document->file);
-        $this->assertEquals($student_id, $document->student_id);
     }
 
 
