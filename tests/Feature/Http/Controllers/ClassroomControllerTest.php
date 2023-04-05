@@ -3,7 +3,6 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Classroom;
-use App\Models\IdClassroom;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use JMac\Testing\Traits\AdditionalAssertions;
@@ -60,18 +59,15 @@ class ClassroomControllerTest extends TestCase
      */
     public function store_saves_and_redirects(): void
     {
-        $id_classroom = IdClassroom::factory()->create();
         $classroom_name = $this->faker->word;
         $building = $this->faker->word;
 
         $response = $this->post(route('classroom.store'), [
-            'id_classroom' => $id_classroom->id,
             'classroom_name' => $classroom_name,
             'building' => $building,
         ]);
 
         $classrooms = Classroom::query()
-            ->where('id_classroom', $id_classroom->id)
             ->where('classroom_name', $classroom_name)
             ->where('building', $building)
             ->get();
@@ -131,12 +127,10 @@ class ClassroomControllerTest extends TestCase
     public function update_redirects(): void
     {
         $classroom = Classroom::factory()->create();
-        $id_classroom = IdClassroom::factory()->create();
         $classroom_name = $this->faker->word;
         $building = $this->faker->word;
 
         $response = $this->put(route('classroom.update', $classroom), [
-            'id_classroom' => $id_classroom->id,
             'classroom_name' => $classroom_name,
             'building' => $building,
         ]);
@@ -146,7 +140,6 @@ class ClassroomControllerTest extends TestCase
         $response->assertRedirect(route('classroom.index'));
         $response->assertSessionHas('classroom.id', $classroom->id);
 
-        $this->assertEquals($id_classroom->id, $classroom->id_classroom);
         $this->assertEquals($classroom_name, $classroom->classroom_name);
         $this->assertEquals($building, $classroom->building);
     }

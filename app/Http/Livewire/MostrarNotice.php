@@ -10,9 +10,6 @@ class MostrarNotice extends Component
     {
         return view('livewire.mostrar-notice');
     }
-
-
-
     protected $listeners = [
         'deleteNotice' => 'destroyNotice',
     ];

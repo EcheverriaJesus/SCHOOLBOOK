@@ -25,10 +25,9 @@ return new class extends Migration
             $table->boolean('status');
             $table->string('study_plan', 100);
             $table->string('photo', 255);
-            $table->string('id_address');
-            $table->string('id_tutor');
-            $table->string('id_document');
-            $table->string('id_history');
+            $table->string('address_id');
+            $table->string('tutor_id');
+            $table->string('document_id');
             $table->timestamps();
         });
     }

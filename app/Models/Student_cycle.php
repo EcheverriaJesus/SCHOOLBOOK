@@ -16,8 +16,8 @@ class StudentCycle extends Model
      * @var array
      */
     protected $fillable = [
-        'id_student',
-        'id_cycle',
+        'student_id',
+        'cycle_id',
     ];
 
     /**

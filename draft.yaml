@@ -5,7 +5,7 @@ models:
         description: string:100
         contribution_date: date
         deadline_date: date
-        id_student: foreignIdFor
+        student_id: foreignIdFor
         relationships:
             belongsTo: Student
     Tutor:
@@ -15,14 +15,13 @@ models:
         gender: string:10
         email: string
         phone: string
-        id_address: foreignIdFor
+        address_id: foreignIdFor
         relationships:
             belongsTo: Address, Student
     Document:
         document_name: string:50
         status: boolean
-        file: string:5
-        id_student: foreignIdFor
+        file: string:255
         relationships:
             belongsTo: Student
     Student:
@@ -38,16 +37,15 @@ models:
         status: boolean
         study_plan: string:100
         photo: string:255
-        id_address: foreignIdFor
-        id_tutor: foreignIdFor
-        id_document: foreignIdFor
-        id_history: foreignIdFor
+        address_id: foreignIdFor
+        tutor_id: foreignIdFor
+        document_id: foreignIdFor
         relationships:
             belongsTo: Address, Tutor
             hasMany: Student_cycle, Contribution, Document
     Student_cycle:
-        id_student: foreignIdFor 
-        id_cycle: foreignIdFor 
+        student_id: foreignIdFor 
+        cycle_id: foreignIdFor 
         relationships:
             belongsTo: School_cycle, Student
     Address:
@@ -61,8 +59,8 @@ models:
         relationships:
             hasMany: Student, Tutor, Teacher
     Student_class:
-        id_student: foreignIdFor 
-        id_class: foreignIdFor 
+        student_id: foreignIdFor 
+        class_id: foreignIdFor 
         relationships:
             belongsTo: Student, Class
     Classroom:
@@ -73,7 +71,7 @@ models:
     School_cycle:
         cycle_name: string:100 
         start_date: date 
-        end_date: date 
+        end_date: date
         status: boolean 
         relationships:
             hasMany: Cycle_student, Class
@@ -97,8 +95,8 @@ models:
         image: string:255 
         
     group_class:
-        id_class: foreignIdFor 
-        id_group: foreignIdFor 
+        class_id: foreignIdFor 
+        group_id: foreignIdFor 
         relationships:
             belongsTo: Class, Group
     Teacher:
@@ -123,36 +121,36 @@ models:
         relationships:
             hasMany: Group_class
     Class: 
-        id_subject: foreignIdFor
-        id_classroom: foreignIdFor
-        id_history: foreignIdFor 
-        id_cycle: foreignIdFor 
+        subject_id: foreignIdFor
+        classroom_id: foreignIdFor
+        history_id: foreignIdFor 
+        cycle_id: foreignIdFor 
         relationships:
             belongsTo: Subject, Classroom
             hasMany: Class_group, Class_student, Class_schedule, School_cycle
     Class_schedule:
-        id_class: foreignIdFor 
-        id_schedule: foreignIdFor 
+        class_id: foreignIdFor 
+        schedule_id: foreignIdFor 
         relationships:
             belongsTo: Class, Schedule
     Schedule: 
         start_time: time 
         end_time: time 
         day: date 
-        id_class: foreignIdFor 
+        class_id: foreignIdFor 
         relationships:
             hasMany: Class_schedule
     Subject: 
         subject_name: string:50 
         description: string:50 
         grade: integer 
-        id_qualification: foreignIdFor 
+        qualification_id: foreignIdFor 
         relationships:
             belongsTo: Class
             hasMany: Qualification, Teacher_subject
     Teacher_subject:
-        id_subject: foreignIdFor 
-        id_teacher: foreignIdFor 
+        subject_id: foreignIdFor 
+        teacher_id: foreignIdFor 
         relationships:
             belongsTo: Subject, Teacher
 seeders: Contribution, Tutor, Document, Student, Student_cycle, Address, Student_class, Classroom, School_cycle, Grade, User, Notice, Class_group, Teacher, Group, Class, Class_schedule, Schedule, Subject, Subject_teacher
@@ -183,5 +181,5 @@ controllers:
         resource: web
     Schedule:
         resource: web
-    Subject: 
+    Subject:
         resource: web

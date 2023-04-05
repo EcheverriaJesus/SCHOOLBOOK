@@ -17,10 +17,10 @@ class Class extends Model
      * @var array
      */
     protected $fillable = [
-        'id_subject',
-        'id_classroom',
-        'id_history',
-        'id_cycle',
+        'subject_id',
+        'classroom_id',
+        'history_id',
+        'cycle_id',
     ];
 
     /**
@@ -30,7 +30,6 @@ class Class extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'id_class' => 'integer',
     ];
 
     public function subject(): BelongsTo
@@ -41,11 +40,6 @@ class Class extends Model
     public function classroom(): BelongsTo
     {
         return $this->belongsTo(Classroom::class);
-    }
-
-    public function idClass(): BelongsTo
-    {
-        return $this->belongsTo(IdClass::class);
     }
 
     public function classGroups(): HasMany

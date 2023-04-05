@@ -21,8 +21,8 @@ class TeacherSubjectFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_subject' => $this->faker->word,
-            'id_teacher' => $this->faker->word,
+            'subject_id' => $this->faker->word,
+            'teacher_id' => $this->faker->word,
         ];
     }
 }

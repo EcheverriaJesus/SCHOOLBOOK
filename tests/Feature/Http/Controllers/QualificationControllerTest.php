@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Http\Controllers;
 
-use App\Models\IdQualification;
 use App\Models\Qualification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -60,7 +59,6 @@ class QualificationControllerTest extends TestCase
      */
     public function store_saves_and_redirects(): void
     {
-        $id_qualification = IdQualification::factory()->create();
         $bim1 = $this->faker->randomFloat(/** float_attributes **/);
         $bim2 = $this->faker->randomFloat(/** float_attributes **/);
         $bim3 = $this->faker->randomFloat(/** float_attributes **/);
@@ -69,7 +67,6 @@ class QualificationControllerTest extends TestCase
         $promedio_final = $this->faker->randomFloat(/** float_attributes **/);
 
         $response = $this->post(route('qualification.store'), [
-            'id_qualification' => $id_qualification->id,
             'bim1' => $bim1,
             'bim2' => $bim2,
             'bim3' => $bim3,
@@ -79,7 +76,6 @@ class QualificationControllerTest extends TestCase
         ]);
 
         $qualifications = Qualification::query()
-            ->where('id_qualification', $id_qualification->id)
             ->where('bim1', $bim1)
             ->where('bim2', $bim2)
             ->where('bim3', $bim3)
@@ -143,7 +139,6 @@ class QualificationControllerTest extends TestCase
     public function update_redirects(): void
     {
         $qualification = Qualification::factory()->create();
-        $id_qualification = IdQualification::factory()->create();
         $bim1 = $this->faker->randomFloat(/** float_attributes **/);
         $bim2 = $this->faker->randomFloat(/** float_attributes **/);
         $bim3 = $this->faker->randomFloat(/** float_attributes **/);
@@ -152,7 +147,6 @@ class QualificationControllerTest extends TestCase
         $promedio_final = $this->faker->randomFloat(/** float_attributes **/);
 
         $response = $this->put(route('qualification.update', $qualification), [
-            'id_qualification' => $id_qualification->id,
             'bim1' => $bim1,
             'bim2' => $bim2,
             'bim3' => $bim3,
@@ -166,7 +160,6 @@ class QualificationControllerTest extends TestCase
         $response->assertRedirect(route('qualification.index'));
         $response->assertSessionHas('qualification.id', $qualification->id);
 
-        $this->assertEquals($id_qualification->id, $qualification->id_qualification);
         $this->assertEquals($bim1, $qualification->bim1);
         $this->assertEquals($bim2, $qualification->bim2);
         $this->assertEquals($bim3, $qualification->bim3);

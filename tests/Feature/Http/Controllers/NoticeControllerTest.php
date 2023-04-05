@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Http\Controllers;
 
-use App\Models\IdNotice;
 use App\Models\Notice;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -61,7 +60,6 @@ class NoticeControllerTest extends TestCase
      */
     public function store_saves_and_redirects(): void
     {
-        $id_notice = IdNotice::factory()->create();
         $title = $this->faker->sentence(4);
         $description = $this->faker->text;
         $start_date = $this->faker->date();
@@ -71,7 +69,6 @@ class NoticeControllerTest extends TestCase
         $image = $this->faker->word;
 
         $response = $this->post(route('notice.store'), [
-            'id_notice' => $id_notice->id,
             'title' => $title,
             'description' => $description,
             'start_date' => $start_date,
@@ -82,7 +79,6 @@ class NoticeControllerTest extends TestCase
         ]);
 
         $notices = Notice::query()
-            ->where('id_notice', $id_notice->id)
             ->where('title', $title)
             ->where('description', $description)
             ->where('start_date', $start_date)
@@ -147,7 +143,6 @@ class NoticeControllerTest extends TestCase
     public function update_redirects(): void
     {
         $notice = Notice::factory()->create();
-        $id_notice = IdNotice::factory()->create();
         $title = $this->faker->sentence(4);
         $description = $this->faker->text;
         $start_date = $this->faker->date();
@@ -157,7 +152,6 @@ class NoticeControllerTest extends TestCase
         $image = $this->faker->word;
 
         $response = $this->put(route('notice.update', $notice), [
-            'id_notice' => $id_notice->id,
             'title' => $title,
             'description' => $description,
             'start_date' => $start_date,
@@ -172,7 +166,6 @@ class NoticeControllerTest extends TestCase
         $response->assertRedirect(route('notice.index'));
         $response->assertSessionHas('notice.id', $notice->id);
 
-        $this->assertEquals($id_notice->id, $notice->id_notice);
         $this->assertEquals($title, $notice->title);
         $this->assertEquals($description, $notice->description);
         $this->assertEquals(Carbon::parse($start_date), $notice->start_date);

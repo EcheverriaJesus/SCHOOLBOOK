@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\IdSubject;
 use App\Models\Subject;
 
 class SubjectFactory extends Factory
@@ -22,11 +21,10 @@ class SubjectFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_subject' => IdSubject::factory(),
             'subject_name' => $this->faker->regexify('[A-Za-z0-9]{50}'),
             'description' => $this->faker->text,
             'grade' => $this->faker->numberBetween(-10000, 10000),
-            'id_qualification' => $this->faker->word,
+            'qualification_id' => $this->faker->word,
         ];
     }
 }

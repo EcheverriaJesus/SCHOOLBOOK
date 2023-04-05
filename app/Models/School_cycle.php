@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class SchoolCycle extends Model
@@ -30,7 +29,6 @@ class SchoolCycle extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'id_cycle' => 'integer',
         'start_date' => 'date',
         'end_date' => 'date',
         'status' => 'boolean',
@@ -44,10 +42,5 @@ class SchoolCycle extends Model
     public function classes(): HasMany
     {
         return $this->hasMany(Class::class);
-    }
-
-    public function idCycle(): BelongsTo
-    {
-        return $this->belongsTo(IdCycle::class);
     }
 }
