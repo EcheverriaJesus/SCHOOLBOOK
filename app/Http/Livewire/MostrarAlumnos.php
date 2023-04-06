@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire;
 
+
 use App\Models\Address;
+use App\Models\Tutor;
 use App\Models\Document;
 use App\Models\Student;
 use Livewire\Component;
@@ -11,16 +13,23 @@ use Illuminate\Support\Facades\Storage;
 
 class MostrarAlumnos extends Component
 {
+    public $searchTerm;
+    
     protected $listeners = [
-        'deleteStudent'
+        'deleteStudent',
+        'search' => 'setData'
     ];
 
+    public function setData($searchTerm)
+    {
+        $this->searchTerm = $searchTerm;
+    }
     public function deleteStudent(Student $student)
     {   
         //Obtenemos la direccion del alumno
         $address = Address::find($student->address_id);
         $document = Document::find($student->document_id);
-        $tutor = Document::find($student->tutor_id);
+        $tutor = Tutor::find($student->tutor_id);
         //Eliminamos photo Alumno
         if( $student->photo) {
             Storage::delete('public/imageStudents/' . $student->photo);
@@ -39,9 +48,18 @@ class MostrarAlumnos extends Component
 
     public function render()
     {
-        $students = Student::all();
+        $searchTerm = $this->searchTerm;
+        $data = Student::all();
+        $students = Student::when($this->searchTerm,function($query){
+            $query->where('student_name','LIKE',"%" .$this->searchTerm ."%")
+            ->orWhere('paternal_surname','LIKE',"%" .$this->searchTerm ."%")
+            ->orWhere('maternal_surname','LIKE',"%" .$this->searchTerm ."%");
+        })
+        ->paginate(8);
         return view('livewire.mostrar-alumnos',[
-        'students' => $students, 
-    ]);
+            'students' => $students,
+            'searchTerm' => $searchTerm,
+            'data' => $data,
+        ]);
     }
 }

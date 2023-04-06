@@ -3,13 +3,19 @@
         <h1 class="text-2xl font-extrabold text-indigo-600">Alumnos</h1>
         <p class="my-2">Visualizar y editar datos de un Alumno</p>
     </div>
-    <div class="flex justify-end my-5 mr-5">
-        <a href="{{route('students.create')}}" class="flex items-center px-4 py-2 font-semibold tracking-widest text-white transition duration-150 ease-in-out bg-blue-700 border rounded-md tet-sm border-transparet hover:bg-blue-600">
-            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            <label class="ml-1 text-sm">Añadir</label>
-        </a>
+    <div class="block w-full md:justify-between md:flex ">
+        <livewire:buscar-alumno />
+        <div class="flex justify-end my-5">
+            <a href="{{route('students.create')}}"
+                class="flex items-center px-4 py-2 font-semibold tracking-widest text-white transition duration-150 ease-in-out bg-blue-700 border rounded-md tet-sm border-transparet hover:bg-blue-600">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <label class="ml-1 text-sm">Añadir</label>
+            </a>
+        </div>
     </div>
 
     <div class="bg-white w-auto sm:bg-white w-full h-auto shadow-2xl rounded-xl mb-10 p-6 space-y-6 border">
@@ -58,10 +64,17 @@
                 </button>
         </div>
     </div>
-    @empty
-        <p class="p-3 text-sm text-center text-gray-600"> No hay Alumnos por mostrar</p>
-        @endforelse
-   </div>
+    @endforeach
+        @if (!empty($searchTerm) && $students->count() == 0)
+            <p class="p-3 text-sm text-center text-gray-600"> No hay coincidencias para su búsqueda</p>
+        @endif
+        @if ($data->count() == 0)
+            <p class="p-3 text-sm text-center text-gray-600"> No hay Alumnos por mostrar</p>
+        @endif
+    </div>
+    <div class="mt-10">
+        {{$students->links()}}
+    </div>
 </div>
 @push('scripts')
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
