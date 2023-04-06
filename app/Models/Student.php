@@ -55,6 +55,11 @@ class Student extends Model
         return $this->belongsTo(Tutor::class);
     }
 
+    public function document(): BelongsTo
+    {
+        return $this->belongsTo(Document::class);
+    }
+
     public function studentCycles(): HasMany
     {
         return $this->hasMany(StudentCycle::class);
@@ -63,10 +68,5 @@ class Student extends Model
     public function contributions(): HasMany
     {
         return $this->hasMany(Contribution::class);
-    }
-
-    public function documents(): HasMany
-    {
-        return $this->hasMany(Document::class);
     }
 }

@@ -35,8 +35,4 @@ class Notice extends Model
         'end_date' => 'date',
         'status' => 'boolean',
     ];
-    public function idNotice(): BelongsTo
-    {
-        return $this->belongsTo(IdNotice::class);
-    }
 }
