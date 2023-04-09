@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
             $table->string('subject_name', 50);
-            $table->string('description', 50);
+            $table->text('description');
             $table->integer('grade');
-            $table->string('qualification_id');
+            $table->string('syllabus',255);
             $table->timestamps();
         });
     }

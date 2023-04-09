@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\NoticeController;
+use App\Http\Controllers\SubjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 /* Route::get('/', function () {
     return view('welcome');
 }); */
+
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -39,6 +41,15 @@ Route::resource('teachers', TeacherController::class)
         'create' => 'teachers.create',
         'show' => 'teachers.show',
         'edit' => 'teachers.edit',
+    ]);
+
+Route::resource('subjects', SubjectController::class)
+    ->middleware('auth:sanctum')
+    ->names([
+        'index' => 'subjects.index',
+        'create' => 'subjects.create',
+        'show' => 'subjects.show',
+        'edit' => 'subjects.edit',
     ]);
 
 /* La ruta del index.notices no se usa, en su lugar se usa la de dashboard para el modulo inicio */
