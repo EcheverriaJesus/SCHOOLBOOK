@@ -12,7 +12,7 @@
                 <x-application-mark> </x-application-mark>
             </a>
         </div>
-        <h1 class="hidden sm:flex flotar justify-start font-semibold text-2xl text-black">Bienvenido a SCHOOLBOOK</h1>
+        <h1 class="justify-start hidden text-2xl font-semibold text-black sm:flex flotar">Bienvenido a SCHOOLBOOK</h1>
         {{-- Perfil y cerrar sesion  --}}
         <div class="flex items-center">
             
@@ -87,9 +87,9 @@
               </a>
            </li>
            <li>
-              <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+              <a href="{{route('subjects.index')}}" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                <svg fill="#284CDA" width="32" height="32" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M22 24h-17c-1.657 0-3-1.343-3-3v-18c0-1.657 1.343-3 3-3h17v24zm-2-4h-14.505c-1.375 0-1.375 2 0 2h14.505v-2zm0-18h-15v16h15v-16zm-3 3v3h-9v-3h9z"/></svg>
-                 <span class="flex-1 ml-3 whitespace-nowrap">Mis materias</span>
+                 <span class="flex-1 ml-3 whitespace-nowrap">Materias</span>
               </a>
            </li>
            <li>
