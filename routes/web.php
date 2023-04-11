@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\NoticeController;
+use App\Http\Controllers\School_cycleController;
 use App\Http\Controllers\SubjectController;
 use Illuminate\Support\Facades\Route;
 
@@ -50,6 +51,12 @@ Route::resource('subjects', SubjectController::class)
         'create' => 'subjects.create',
         'show' => 'subjects.show',
         'edit' => 'subjects.edit',
+    ]);
+
+Route::resource('schoolCycles', School_cycleController::class)
+    ->middleware('auth:sanctum')
+    ->names([
+        'index' => 'schoolCycles.index',
     ]);
 
 /* La ruta del index.notices no se usa, en su lugar se usa la de dashboard para el modulo inicio */

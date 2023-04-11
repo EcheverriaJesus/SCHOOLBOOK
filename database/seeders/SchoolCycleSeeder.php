@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\SchoolCycle;
+use App\Models\School_cycle;
 use Illuminate\Database\Seeder;
 
 class SchoolCycleSeeder extends Seeder
@@ -12,6 +12,6 @@ class SchoolCycleSeeder extends Seeder
      */
     public function run(): void
     {
-        SchoolCycle::factory()->count(5)->create();
+        School_cycle::factory()->count(27)->create();
     }
 }

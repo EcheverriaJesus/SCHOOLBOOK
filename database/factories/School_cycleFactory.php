@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\School_cycle;
 
-class SchoolCycleFactory extends Factory
+class School_cycleFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = SchoolCycle::class;
+    protected $model = School_cycle::class;
 
     /**
      * Define the model's default state.
@@ -21,7 +21,7 @@ class SchoolCycleFactory extends Factory
     public function definition(): array
     {
         return [
-            'cycle_name' => $this->faker->regexify('[A-Za-z0-9]{100}'),
+            'cycle_name' => $this->faker->name(),
             'start_date' => $this->faker->date(),
             'end_date' => $this->faker->date(),
             'status' => $this->faker->boolean,
