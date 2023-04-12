@@ -39,8 +39,8 @@ class School_cycle extends Model
         return $this->hasMany(CycleStudent::class);
     }
 
-    // public function classes(): HasMany
-    // {
-    //     return $this->hasMany(Class::class);
-    // }
+    public function clases(): HasMany
+    {
+        return $this->hasMany(Clase::class);
+    }
 }

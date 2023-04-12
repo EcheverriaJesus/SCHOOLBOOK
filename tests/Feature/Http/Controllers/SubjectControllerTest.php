@@ -62,20 +62,20 @@ class SubjectControllerTest extends TestCase
         $subject_name = $this->faker->word;
         $description = $this->faker->text;
         $grade = $this->faker->numberBetween(-10000, 10000);
-        $qualification_id = $this->faker->word;
+        $syllabus = $this->faker->word;
 
         $response = $this->post(route('subject.store'), [
             'subject_name' => $subject_name,
             'description' => $description,
             'grade' => $grade,
-            'qualification_id' => $qualification_id,
+            'syllabus' => $syllabus,
         ]);
 
         $subjects = Subject::query()
             ->where('subject_name', $subject_name)
             ->where('description', $description)
             ->where('grade', $grade)
-            ->where('qualification_id', $qualification_id)
+            ->where('syllabus', $syllabus)
             ->get();
         $this->assertCount(1, $subjects);
         $subject = $subjects->first();
@@ -136,13 +136,13 @@ class SubjectControllerTest extends TestCase
         $subject_name = $this->faker->word;
         $description = $this->faker->text;
         $grade = $this->faker->numberBetween(-10000, 10000);
-        $qualification_id = $this->faker->word;
+        $syllabus = $this->faker->word;
 
         $response = $this->put(route('subject.update', $subject), [
             'subject_name' => $subject_name,
             'description' => $description,
             'grade' => $grade,
-            'qualification_id' => $qualification_id,
+            'syllabus' => $syllabus,
         ]);
 
         $subject->refresh();
@@ -153,7 +153,7 @@ class SubjectControllerTest extends TestCase
         $this->assertEquals($subject_name, $subject->subject_name);
         $this->assertEquals($description, $subject->description);
         $this->assertEquals($grade, $subject->grade);
-        $this->assertEquals($qualification_id, $subject->qualification_id);
+        $this->assertEquals($syllabus, $subject->syllabus);
     }
 
 

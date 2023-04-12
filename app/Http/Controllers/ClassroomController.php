@@ -18,7 +18,7 @@ class ClassroomController extends Controller
         return view('classroom.index', compact('classrooms'));
     }
 
-    public function create(Request $request): View
+    public function create(Request $request): Response
     {
         return view('classroom.create');
     }
@@ -32,12 +32,12 @@ class ClassroomController extends Controller
         return redirect()->route('classroom.index');
     }
 
-    public function show(Request $request, Classroom $classroom): View
+    public function show(Request $request, Classroom $classroom): Response
     {
         return view('classroom.show', compact('classroom'));
     }
 
-    public function edit(Request $request, Classroom $classroom): View
+    public function edit(Request $request, Classroom $classroom): Response
     {
         return view('classroom.edit', compact('classroom'));
     }
