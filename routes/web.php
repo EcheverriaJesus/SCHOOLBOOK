@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\School_cycleController;
@@ -42,6 +43,15 @@ Route::resource('teachers', TeacherController::class)
         'create' => 'teachers.create',
         'show' => 'teachers.show',
         'edit' => 'teachers.edit',
+    ]);
+
+Route::resource('classroom', ClassroomController::class)
+    ->middleware('auth:sanctum')
+    ->names([
+        'index' => 'classroom.index',
+        'create' => 'classroom.create',
+        'show' => 'classroom.show',
+        'edit' => 'classroom.edit',
     ]);
 
 Route::resource('subjects', SubjectController::class)

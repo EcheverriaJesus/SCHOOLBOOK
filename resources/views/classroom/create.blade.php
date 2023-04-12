@@ -1,7 +1,3 @@
-{{--
-    @extends('layouts.app')
-
-    @section('content')
-        classroom.create template
-    @endsection
---}}
+<x-app-layout>
+    <livewire:aulas.crear-aula />
+</x-app-layout>

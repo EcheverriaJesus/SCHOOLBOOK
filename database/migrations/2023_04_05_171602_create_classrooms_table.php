@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('classrooms', function (Blueprint $table) {
             $table->id();
-            $table->string('classroom_name', 5);
-            $table->string('building', 5);
+            $table->string('classroom_name', 50);
+            $table->string('building', 50);
+            $table->smallInteger('capacity');
             $table->timestamps();
         });
     }

@@ -18,6 +18,7 @@ class Classroom extends Model
     protected $fillable = [
         'classroom_name',
         'building',
+        'capacity'
     ];
 
     /**
@@ -29,8 +30,8 @@ class Classroom extends Model
         'id' => 'integer',
     ];
 
-    public function class(): BelongsTo
-    {
-        return $this->belongsTo(Class::class);
-    }
+    // public function class(): BelongsTo
+    // {
+    //     return $this->belongsTo(Class::class);
+    // }
 }

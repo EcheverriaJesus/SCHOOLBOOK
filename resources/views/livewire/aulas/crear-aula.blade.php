@@ -30,54 +30,41 @@
                     <span class="sr-only">Close modal</span>
                 </button>
                 <div class="px-6 py-6 lg:px-8">
-                    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Registro de ciclo
-                        escolar</h3>
-                    <form class="space-y-6" wire:submit.prevent='crearCiclo' novalidate>
+                    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Registro de Aula
+                    </h3>
+                    <form class="space-y-6" wire:submit.prevent='crearAula' novalidate>
                         <div>
                             <label for="nombre"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre
-                                del ciclo escolar</label>
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre del aula
+                            </label>
                             <input wire:model.defer="nombre" type="text" name="nombre" id="nombre"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                placeholder="Escribe el nombre del ciclo escolar">
+                                placeholder="Escribe el nombre del aula">
                             <div class="block mt-2">
                                 <x-alert-danger :messages="$errors->get('nombre')" />
                             </div>
                         </div>
                         <div>
-                            <label for="fecha_inicio"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha
-                                de inicio</label>
-                            <input wire:model.defer="fecha_inicio" type="date" name="fecha_inicio" id="fecha_inicio"
+                            <label for="edificio"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Edificio
+                            </label>
+                            <input wire:model.defer="edificio" type="text" name="edificio" id="edificio"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                placeholder="Escribe la fecha de inicio del ciclo" required>
+                                placeholder="Escribe el nombre del edificio" required>
                             <div class="block mt-2">
-                                <x-alert-danger :messages="$errors->get('fecha_inicio')" />
+                                <x-alert-danger :messages="$errors->get('edificio')" />
                             </div>
                         </div>
                         <div>
-                            <label for="fecha_fin"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha
-                                de fin
+                            <label for="capacidad"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Capacidad de
+                                alumnos
                             </label>
-                            <input wire:model.defer="fecha_fin" type="date" name="fecha_fin" id="fecha_fin"
+                            <input wire:model.defer="capacidad" type="number" name="capacidad" id="capacidad" min="1"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                placeholder="Escribe la fecha de fin del ciclo" required>
+                                placeholder="Escribe el no. de alumnos que puede alojar el aula" required>
                             <div class="block mt-2">
-                                <x-alert-danger :messages="$errors->get('fecha_fin')" />
-                            </div>
-                        </div>
-                        <div class="block">
-                            <label for="checkbox" class="block mb-2 text-sm">Estatus del ciclo escolar:</label>
-                            <div class="flex items-center mb-4">
-                                <input wire:model.defer="estatus" id="checkbox" type="checkbox" value="1"
-                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <label for="default-checkbox"
-                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Activo
-                                </label>
-                                <div class="block mt-2">
-                                    <x-alert-danger :messages="$errors->get('checkbox')" />
-                                </div>
+                                <x-alert-danger :messages="$errors->get('capacidad')" />
                             </div>
                         </div>
                         <button type="submit"
@@ -88,7 +75,6 @@
             </div>
         </div>
     </div>
-
 </div>
 
 @push('scripts')

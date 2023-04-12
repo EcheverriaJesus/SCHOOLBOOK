@@ -12,6 +12,6 @@ class ClassroomSeeder extends Seeder
      */
     public function run(): void
     {
-        Classroom::factory()->count(5)->create();
+        Classroom::factory()->count(28)->create();
     }
 }
