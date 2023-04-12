@@ -12,12 +12,20 @@ class CrearCiclo extends Component
     public $fecha_fin;
     public $estatus;
 
+    protected $listeners = ['resetForm'];
+
     protected $rules = [
         'nombre' => 'required|string|max:100',
         'fecha_inicio' => 'required|date',
         'fecha_fin' => 'required|date',
         'estatus' => 'nullable|in:1,0'
     ];
+
+    public function resetForm()
+    {
+        $this->reset();
+        $this->resetValidation();
+    }
 
 
     public function crearCiclo()

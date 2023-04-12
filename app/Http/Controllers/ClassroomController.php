@@ -11,14 +11,14 @@ use Illuminate\View\View;
 
 class ClassroomController extends Controller
 {
-    public function index(Request $request): Response
+    public function index(Request $request): View
     {
         $classrooms = Classroom::all();
 
         return view('classroom.index', compact('classrooms'));
     }
 
-    public function create(Request $request): Response
+    public function create(Request $request): View
     {
         return view('classroom.create');
     }
@@ -32,12 +32,12 @@ class ClassroomController extends Controller
         return redirect()->route('classroom.index');
     }
 
-    public function show(Request $request, Classroom $classroom): Response
+    public function show(Request $request, Classroom $classroom): View
     {
         return view('classroom.show', compact('classroom'));
     }
 
-    public function edit(Request $request, Classroom $classroom): Response
+    public function edit(Request $request, Classroom $classroom): View
     {
         return view('classroom.edit', compact('classroom'));
     }
