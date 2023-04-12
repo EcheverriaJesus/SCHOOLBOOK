@@ -4,16 +4,16 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\Classroom;
+use App\Models\School_cycle;
 
-class ClassroomFactory extends Factory
+class SchoolCycleFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Classroom::class;
+    protected $model = SchoolCycle::class;
 
     /**
      * Define the model's default state.
@@ -21,9 +21,10 @@ class ClassroomFactory extends Factory
     public function definition(): array
     {
         return [
-            'classroom_name' => $this->faker->regexify('[A-Za-z0-9]{50}'),
-            'building' => $this->faker->regexify('[A-Za-z0-9]{50}'),
-            'capacity' => $this->faker->numberBetween(-1000, 1000),
+            'cycle_name' => $this->faker->regexify('[A-Za-z0-9]{100}'),
+            'start_date' => $this->faker->date(),
+            'end_date' => $this->faker->date(),
+            'status' => $this->faker->boolean,
         ];
     }
 }

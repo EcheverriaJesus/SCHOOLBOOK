@@ -9,18 +9,16 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-
 class NoticeController extends Controller
 {
-    public function index(Request $request): View
+    public function index(Request $request): Response
     {
         $notices = Notice::all();
 
         return view('notice.index', compact('notices'));
-        /* return view('notice.index'); */
     }
 
-    public function create(Request $request): View
+    public function create(Request $request): Response
     {
         return view('notice.create');
     }
@@ -39,14 +37,11 @@ class NoticeController extends Controller
         return view('notice.show', compact('notice'));
     }
 
-    public function edit(Request $request, Notice $notice): View
+    public function edit(Request $request, Notice $notice): Response
     {
         return view('notice.edit', compact('notice'));
     }
-    /* public function edit(Request $request, Teacher $teacher): View
-    {
-        return view('teacher.edit', compact('teacher'));
-    } */
+
     public function update(NoticeUpdateRequest $request, Notice $notice): Response
     {
         $notice->update($request->validated());
@@ -59,7 +54,7 @@ class NoticeController extends Controller
     public function destroy(Request $request, Notice $notice): Response
     {
         $notice->delete();
-        
+
         return redirect()->route('notice.index');
     }
 }
