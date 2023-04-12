@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\School_cycleStoreRequest;
 use App\Http\Requests\School_cycleUpdateRequest;
 use App\SchoolCycle;
-use App\schoolCycle;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;

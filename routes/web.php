@@ -31,8 +31,9 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+Route::resource('teachers', TeacherController::class)->middleware('auth:sanctum');
 
-Route::resource('teachers', TeacherController::class)
+/* Route::resource('teachers', TeacherController::class)
     ->middleware('auth:sanctum')
     ->names([
         'index' => 'teachers.index',
@@ -40,17 +41,20 @@ Route::resource('teachers', TeacherController::class)
         'show' => 'teachers.show',
         'edit' => 'teachers.edit',
     ]);
-
+ */
 /* La ruta del index.notices no se usa, en su lugar se usa la de dashboard para el modulo inicio */
+Route::resource('notices', NoticeController::class)->middleware('auth:sanctum');
 
-Route::resource('notices', NoticeController::class, ['except' => ['index']])
-    ->middleware('auth:sanctum')
+/* Route::resource('notices', NoticeController::class, ['except' => ['index']])
     ->names([
         'create' => 'notices.create',
         'show' => 'notices.show',
         'edit' => 'notices.edit',
-    ]);
-
+        'update' => 'notices.update',
+        'destroy' => 'notices.destroy'
+        
+    ])->middleware('auth:sanctum');
+ */
 Route::resource('contribution', App\Http\Controllers\ContributionController::class);
 
 Route::resource('tutor', App\Http\Controllers\TutorController::class);
