@@ -24,7 +24,7 @@ class SubjectFactory extends Factory
             'subject_name' => $this->faker->regexify('[A-Za-z0-9]{50}'),
             'description' => $this->faker->text,
             'grade' => $this->faker->numberBetween(-10000, 10000),
-            'qualification_id' => $this->faker->word,
+            'syllabus' => $this->faker->regexify('[A-Za-z0-9]{255}'),
         ];
     }
 }

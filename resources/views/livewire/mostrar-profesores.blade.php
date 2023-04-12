@@ -71,12 +71,11 @@
             </div>
         </div>
         @endforeach
-        @if (!empty($searchTerm) && $teachers->count() == 0)
-            <p class="p-3 text-sm text-center text-gray-600"> No hay coincidencias para su búsqueda</p>
-        @endif
         @if ($data->count() == 0)
-            <p class="p-3 text-sm text-center text-gray-600"> No hay Profesores por mostrar</p>
-        @endif
+        <p class="p-3 text-sm text-center text-gray-600"> No hay Profesores por mostrar</p>
+        @elseif (!empty($searchTerm) && $teachers->count() == 0)
+        <p class="p-3 text-sm text-center text-gray-600"> No hay coincidencias para su búsqueda</p>
+        @endif   
     </div>
     <div class="mt-10">
         {{$teachers->links()}}

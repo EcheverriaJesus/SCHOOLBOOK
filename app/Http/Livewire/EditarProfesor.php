@@ -133,6 +133,7 @@ class EditarProfesor extends Component
         $address->state = $datos['state'];
         $address->country = $datos['country'];
         $address->save();
+        $this->emitTo('MuestraProfesor','updateTeacher');
         //redireccionar with message
         session()->flash('mensaje','Los datos del profesor se actualizarón correctamente');
         return redirect()->route('teachers.index');

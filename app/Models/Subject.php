@@ -20,7 +20,7 @@ class Subject extends Model
         'subject_name',
         'description',
         'grade',
-        'qualification_id',
+        'syllabus',
     ];
 
     /**
@@ -32,9 +32,9 @@ class Subject extends Model
         'id' => 'integer',
     ];
 
-    public function class(): BelongsTo
+    public function clase(): BelongsTo
     {
-        return $this->belongsTo(Class::class);
+        return $this->belongsTo(Clase::class);
     }
 
     public function qualifications(): HasMany

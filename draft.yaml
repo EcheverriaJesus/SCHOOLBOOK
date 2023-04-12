@@ -62,19 +62,20 @@ models:
         student_id: foreignIdFor 
         class_id: foreignIdFor 
         relationships:
-            belongsTo: Student, Class
+            belongsTo: Student, Clase
     Classroom:
-        classroom_name: string:5 
-        building: string:5 
+        classroom_name: string:50 
+        building: string:50 
+        capacity: smallInteger
         relationships:
-            belongsTo: Class
+            belongsTo: Clase
     School_cycle:
         cycle_name: string:100 
         start_date: date 
         end_date: date
         status: boolean 
         relationships:
-            hasMany: Cycle_student, Class
+            hasMany: Cycle_student, Clase
     Qualification: 
         bim1: float 
         bim2: float 
@@ -98,7 +99,7 @@ models:
         class_id: foreignIdFor 
         group_id: foreignIdFor 
         relationships:
-            belongsTo: Class, Group
+            belongsTo: Clase, Group
     Teacher:
         first_name: string:50 
         father_surname: string:50 
@@ -120,7 +121,7 @@ models:
         num_max_students: integer 
         relationships:
             hasMany: Group_class
-    Class: 
+    Clase: 
         subject_id: foreignIdFor
         classroom_id: foreignIdFor
         history_id: foreignIdFor 
@@ -132,7 +133,7 @@ models:
         class_id: foreignIdFor 
         schedule_id: foreignIdFor 
         relationships:
-            belongsTo: Class, Schedule
+            belongsTo: Clase, Schedule
     Schedule: 
         start_time: time 
         end_time: time 
@@ -142,11 +143,11 @@ models:
             hasMany: Class_schedule
     Subject: 
         subject_name: string:50 
-        description: string:50 
+        description: text 
         grade: integer 
-        qualification_id: foreignIdFor 
+        syllabus: string:255
         relationships:
-            belongsTo: Class
+            belongsTo: Clase
             hasMany: Qualification, Teacher_subject
     Teacher_subject:
         subject_id: foreignIdFor 
@@ -177,7 +178,7 @@ controllers:
         resource: web
     Group:
         resource: web
-    Class:
+    Clase:
         resource: web
     Schedule:
         resource: web
