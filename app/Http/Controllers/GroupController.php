@@ -11,14 +11,14 @@ use Illuminate\View\View;
 
 class GroupController extends Controller
 {
-    public function index(Request $request): Response
+    public function index(Request $request): View
     {
         $groups = Group::all();
 
         return view('group.index', compact('groups'));
     }
 
-    public function create(Request $request): Response
+    public function create(Request $request): View
     {
         return view('group.create');
     }
@@ -32,12 +32,12 @@ class GroupController extends Controller
         return redirect()->route('group.index');
     }
 
-    public function show(Request $request, Group $group): Response
+    public function show(Request $request, Group $group): View
     {
         return view('group.show', compact('group'));
     }
 
-    public function edit(Request $request, Group $group): Response
+    public function edit(Request $request, Group $group): View
     {
         return view('group.edit', compact('group'));
     }

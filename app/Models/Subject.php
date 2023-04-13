@@ -32,9 +32,9 @@ class Subject extends Model
         'id' => 'integer',
     ];
 
-    public function clase(): BelongsTo
+    public function group(): BelongsTo
     {
-        return $this->belongsTo(Clase::class);
+        return $this->belongsTo(Group::class);
     }
 
     public function qualifications(): HasMany
