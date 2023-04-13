@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Classroom extends Model
+class GroupSchedule extends Model
 {
     use HasFactory;
 
@@ -16,9 +16,8 @@ class Classroom extends Model
      * @var array
      */
     protected $fillable = [
-        'classroom_name',
-        'building',
-        'capacity',
+        'group_id',
+        'schedule_id',
     ];
 
     /**
@@ -28,11 +27,15 @@ class Classroom extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'capacity' => 'integer',
     ];
 
     public function group(): BelongsTo
     {
         return $this->belongsTo(Group::class);
+    }
+
+    public function schedule(): BelongsTo
+    {
+        return $this->belongsTo(Schedule::class);
     }
 }

@@ -4,16 +4,16 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\Group;
+use App\Models\Student_group;
 
-class GroupFactory extends Factory
+class StudentGroupFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Group::class;
+    protected $model = StudentGroup::class;
 
     /**
      * Define the model's default state.
@@ -21,9 +21,8 @@ class GroupFactory extends Factory
     public function definition(): array
     {
         return [
-            'subject_id' => $this->faker->word,
-            'classroom_id' => $this->faker->word,
-            'cycle_id' => $this->faker->word,
+            'student_id' => $this->faker->word,
+            'class_id' => $this->faker->word,
         ];
     }
 }

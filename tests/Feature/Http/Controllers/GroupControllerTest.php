@@ -59,17 +59,20 @@ class GroupControllerTest extends TestCase
      */
     public function store_saves_and_redirects(): void
     {
-        $group_name = $this->faker->randomLetter;
-        $num_max_students = $this->faker->numberBetween(-10000, 10000);
+        $subject_id = $this->faker->word;
+        $classroom_id = $this->faker->word;
+        $cycle_id = $this->faker->word;
 
         $response = $this->post(route('group.store'), [
-            'group_name' => $group_name,
-            'num_max_students' => $num_max_students,
+            'subject_id' => $subject_id,
+            'classroom_id' => $classroom_id,
+            'cycle_id' => $cycle_id,
         ]);
 
         $groups = Group::query()
-            ->where('group_name', $group_name)
-            ->where('num_max_students', $num_max_students)
+            ->where('subject_id', $subject_id)
+            ->where('classroom_id', $classroom_id)
+            ->where('cycle_id', $cycle_id)
             ->get();
         $this->assertCount(1, $groups);
         $group = $groups->first();
@@ -127,12 +130,14 @@ class GroupControllerTest extends TestCase
     public function update_redirects(): void
     {
         $group = Group::factory()->create();
-        $group_name = $this->faker->randomLetter;
-        $num_max_students = $this->faker->numberBetween(-10000, 10000);
+        $subject_id = $this->faker->word;
+        $classroom_id = $this->faker->word;
+        $cycle_id = $this->faker->word;
 
         $response = $this->put(route('group.update', $group), [
-            'group_name' => $group_name,
-            'num_max_students' => $num_max_students,
+            'subject_id' => $subject_id,
+            'classroom_id' => $classroom_id,
+            'cycle_id' => $cycle_id,
         ]);
 
         $group->refresh();
@@ -140,8 +145,9 @@ class GroupControllerTest extends TestCase
         $response->assertRedirect(route('group.index'));
         $response->assertSessionHas('group.id', $group->id);
 
-        $this->assertEquals($group_name, $group->group_name);
-        $this->assertEquals($num_max_students, $group->num_max_students);
+        $this->assertEquals($subject_id, $group->subject_id);
+        $this->assertEquals($classroom_id, $group->classroom_id);
+        $this->assertEquals($cycle_id, $group->cycle_id);
     }
 
 

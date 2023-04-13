@@ -10,7 +10,6 @@ created:
     - app/Http/Controllers/NoticeController.php
     - app/Http/Controllers/TeacherController.php
     - app/Http/Controllers/GroupController.php
-    - app/Http/Controllers/ClaseController.php
     - app/Http/Controllers/ScheduleController.php
     - app/Http/Controllers/SubjectController.php
     - database/factories/ContributionFactory.php
@@ -19,35 +18,33 @@ created:
     - database/factories/StudentFactory.php
     - database/factories/StudentCycleFactory.php
     - database/factories/AddressFactory.php
-    - database/factories/StudentClassFactory.php
+    - database/factories/StudentGroupFactory.php
     - database/factories/ClassroomFactory.php
     - database/factories/SchoolCycleFactory.php
     - database/factories/QualificationFactory.php
     - database/factories/NoticeFactory.php
-    - database/factories/GroupClassFactory.php
     - database/factories/TeacherFactory.php
     - database/factories/GroupFactory.php
-    - database/factories/ClaseFactory.php
-    - database/factories/ClassScheduleFactory.php
+    - database/factories/GroupScheduleFactory.php
     - database/factories/ScheduleFactory.php
     - database/factories/SubjectFactory.php
     - database/factories/TeacherSubjectFactory.php
+    - database/migrations/2023_04_12_222243_create_student_groups_table.php
+    - database/migrations/2023_04_12_222250_create_group_schedules_table.php
     - app/Models/Contribution.php
     - app/Models/Tutor.php
     - app/Models/Document.php
     - app/Models/Student.php
     - app/Models/Student_cycle.php
     - app/Models/Address.php
-    - app/Models/Student_class.php
+    - app/Models/Student_group.php
     - app/Models/Classroom.php
     - app/Models/School_cycle.php
     - app/Models/Qualification.php
     - app/Models/Notice.php
-    - app/Models/group_class.php
     - app/Models/Teacher.php
     - app/Models/Group.php
-    - app/Models/Clase.php
-    - app/Models/Class_schedule.php
+    - app/Models/Group_schedule.php
     - app/Models/Schedule.php
     - app/Models/Subject.php
     - app/Models/Teacher_subject.php
@@ -57,17 +54,15 @@ created:
     - database/seeders/StudentSeeder.php
     - database/seeders/StudentCycleSeeder.php
     - database/seeders/AddressSeeder.php
-    - database/seeders/StudentClassSeeder.php
+    - database/seeders/StudentGroupSeeder.php
     - database/seeders/ClassroomSeeder.php
     - database/seeders/SchoolCycleSeeder.php
     - database/seeders/GradeSeeder.php
     - database/seeders/UserSeeder.php
     - database/seeders/NoticeSeeder.php
-    - database/seeders/ClassGroupSeeder.php
     - database/seeders/TeacherSeeder.php
     - database/seeders/GroupSeeder.php
-    - database/seeders/ClassSeeder.php
-    - database/seeders/ClassScheduleSeeder.php
+    - database/seeders/GroupScheduleSeeder.php
     - database/seeders/ScheduleSeeder.php
     - database/seeders/SubjectSeeder.php
     - database/seeders/SubjectTeacherSeeder.php
@@ -82,7 +77,6 @@ created:
     - tests/Feature/Http/Controllers/NoticeControllerTest.php
     - tests/Feature/Http/Controllers/TeacherControllerTest.php
     - tests/Feature/Http/Controllers/GroupControllerTest.php
-    - tests/Feature/Http/Controllers/ClaseControllerTest.php
     - tests/Feature/Http/Controllers/ScheduleControllerTest.php
     - tests/Feature/Http/Controllers/SubjectControllerTest.php
 updated:
@@ -92,16 +86,12 @@ updated:
     - database/migrations\2023_04_05_171558_create_students_table.php
     - database/migrations\2023_04_05_171559_create_student_cycles_table.php
     - database/migrations\2023_04_05_171600_create_addresses_table.php
-    - database/migrations\2023_04_05_171601_create_student_classes_table.php
     - database/migrations\2023_04_05_171602_create_classrooms_table.php
     - database/migrations\2023_04_05_171603_create_school_cycles_table.php
     - database/migrations\2023_04_05_171604_create_qualifications_table.php
     - database/migrations\2023_04_05_171605_create_notices_table.php
-    - database/migrations\2023_04_05_171606_create_group_classes_table.php
     - database/migrations\2023_04_05_171607_create_teachers_table.php
     - database/migrations\2023_04_05_171608_create_groups_table.php
-    - database/migrations\2023_04_12_061008_create_clases_table.php
-    - database/migrations\2023_04_05_171610_create_class_schedules_table.php
     - database/migrations\2023_04_05_171611_create_schedules_table.php
     - database/migrations\2023_04_05_171612_create_subjects_table.php
     - database/migrations\2023_04_05_171613_create_teacher_subjects_table.php
@@ -151,10 +141,6 @@ skipped:
     - resources/views/group/create.blade.php
     - resources/views/group/show.blade.php
     - resources/views/group/edit.blade.php
-    - resources/views/clase/index.blade.php
-    - resources/views/clase/create.blade.php
-    - resources/views/clase/show.blade.php
-    - resources/views/clase/edit.blade.php
     - resources/views/schedule/index.blade.php
     - resources/views/schedule/create.blade.php
     - resources/views/schedule/show.blade.php
@@ -175,16 +161,18 @@ models:
     Student_cycle: { student_id: foreignIdFor, cycle_id: foreignIdFor, relationships: { belongsTo: 'School_cycle, Student' } }
     Address: { street: 'string:50', num_ext: 'string:10', num_int: 'string:10', neighborhood: 'string:50', city: 'string:50', state: 'string:50', country: 'string:50', relationships: { hasMany: 'Student, Tutor, Teacher' } }
     Student_class: { student_id: foreignIdFor, class_id: foreignIdFor, relationships: { belongsTo: 'Student, Clase' } }
-    Classroom: { classroom_name: 'string:50', building: 'string:50', capacity: smallInteger, relationships: { belongsTo: Clase } }
-    School_cycle: { cycle_name: 'string:100', start_date: date, end_date: date, status: boolean, relationships: { hasMany: 'Cycle_student, Clase' } }
-    Qualification: { bim1: float, bim2: float, bim3: float, bim4: float, bim5: float, promedio_final: float, relationships: { belongsTo: Subject } }
+    Classroom: { classroom_name: 'string:50', building: 'string:50', capacity: smallInteger, relationships: { belongsTo: Group } }
+    School_cycle: { cycle_name: 'string:100', start_date: date, end_date: date, status: boolean, relationships: { hasMany: 'Cycle_student, Group' } }
+    Qualification: { bim1: float, bim2: float, bim3: float, bim4: float, bim5: float, promedio_final: float, relationships: { belongsTo: 'Group, Student' } }
     Notice: { title: 'string:100', description: string, start_date: date, end_date: date, status: boolean, recipient: 'string:50', image: 'string:255' }
     group_class: { class_id: foreignIdFor, group_id: foreignIdFor, relationships: { belongsTo: 'Clase, Group' } }
     Teacher: { first_name: 'string:50', father_surname: 'string:50', fathers_last_name: 'string:50', phone: string, email: string, curp: string, rfc: 'string:50', education_level: 'string:50', major: 'string:50', photo: 'string:255', professional_license: 'string:255', address_id: foreignIdFor, relationships: { belongsTo: Address, hasMany: Teacher_subject } }
-    Group: { group_name: char, num_max_students: integer, relationships: { hasMany: Group_class } }
+    Group: { subject_id: foreignIdFor, classroom_id: foreignIdFor, cycle_id: foreignIdFor, relationships: { belongsTo: 'Subject, Classroom, School_cycle', hasMany: 'Group_student, Group_schedule' } }
     Class: { subject_id: foreignIdFor, classroom_id: foreignIdFor, history_id: foreignIdFor, cycle_id: foreignIdFor, relationships: { belongsTo: 'Subject, Classroom', hasMany: 'Class_group, Class_student, Class_schedule, School_cycle' } }
     Class_schedule: { class_id: foreignIdFor, schedule_id: foreignIdFor, relationships: { belongsTo: 'Clase, Schedule' } }
-    Schedule: { start_time: time, end_time: time, day: date, class_id: foreignIdFor, relationships: { hasMany: Class_schedule } }
-    Subject: { subject_name: 'string:50', description: text, grade: integer, syllabus: 'string:255', relationships: { belongsTo: Clase, hasMany: 'Qualification, Teacher_subject' } }
+    Schedule: { start_time: time, end_time: time, day: date, group_id: foreignIdFor, relationships: { hasMany: Group_schedule } }
+    Subject: { subject_name: 'string:50', description: text, grade: integer, syllabus: 'string:255', relationships: { belongsTo: Group, hasMany: 'Qualification, Teacher_subject' } }
     Teacher_subject: { subject_id: foreignIdFor, teacher_id: foreignIdFor, relationships: { belongsTo: 'Subject, Teacher' } }
     Clase: { subject_id: foreignIdFor, classroom_id: foreignIdFor, history_id: foreignIdFor, cycle_id: foreignIdFor, relationships: { belongsTo: 'Subject, Classroom', hasMany: 'Class_group, Class_student, Class_schedule, School_cycle' } }
+    Student_group: { student_id: foreignIdFor, class_id: foreignIdFor, relationships: { belongsTo: 'Student, Group' } }
+    Group_schedule: { group_id: foreignIdFor, schedule_id: foreignIdFor, relationships: { belongsTo: 'Group, Schedule' } }

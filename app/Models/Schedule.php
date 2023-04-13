@@ -19,7 +19,7 @@ class Schedule extends Model
         'start_time',
         'end_time',
         'day',
-        'class_id',
+        'group_id',
     ];
 
     /**
@@ -32,8 +32,8 @@ class Schedule extends Model
         'day' => 'date',
     ];
 
-    public function classSchedules(): HasMany
+    public function groupSchedules(): HasMany
     {
-        return $this->hasMany(ClassSchedule::class);
+        return $this->hasMany(GroupSchedule::class);
     }
 }

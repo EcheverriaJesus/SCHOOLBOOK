@@ -115,7 +115,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{route('classroom.create')}}"
+                <a href="{{route('groups.create')}}"
                     class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                     <svg fill="#284CDA" width="32" height="32" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
                         clip-rule="evenodd">
