@@ -65,9 +65,7 @@
                             {{$contribution->deadline_date->formatLocalized('%d/%B/%Y')}}
                         </td> 
                         <td class="px-6 py-4 text-center">
-                        @foreach($students as $student)
                             {{$contribution->student->student_name}}
-                        @endforeach 
                         </td>
                         <td class="px-6 py-4 text-center">
                             @if ($contribution->status ==  1)

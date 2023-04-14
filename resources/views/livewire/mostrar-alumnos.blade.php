@@ -27,11 +27,15 @@
                 <p class="text-gray-500 tetxt-sm">{{'Grado: '.$student->grade}}</p>
                 <p class="text-gray-500 tetxt-sm">
                     @switch($student->status)
-                    @case('0')
-                        {{'Estado: Inactivo'}}
+                        @case('0')
+                        <div class="flex items-center ">
+                                <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div> Inactivo'
+                            </div>
                         @break
-                    @case('1')
-                        {{'Estado: Activo'}}
+                        @case('1')
+                            <div class="flex items-center ">
+                                <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div> Activo
+                            </div>
                         @break
                     @default
                     @endswitch
