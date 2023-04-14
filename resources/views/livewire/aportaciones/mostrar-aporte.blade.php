@@ -64,11 +64,11 @@
                         <td class="px-6 py-4 text-center">
                             {{$contribution->deadline_date->formatLocalized('%d/%B/%Y')}}
                         </td> 
-                        <!-- @foreach($students as $student)
                         <td class="px-6 py-4 text-center">
+                        @foreach($students as $student)
                             {{$contribution->student->student_name}}
-                        </td> -->
-                        @endforeach
+                        @endforeach 
+                        </td>
                         <td class="px-6 py-4 text-center">
                             @if ($contribution->status ==  1)
                             <div class="flex items-center ">
@@ -103,7 +103,13 @@
                 </tbody>
             </table>
         </div>
-        </div>
+        @if (!empty($searchTerm) && $contributions->count() == 0)
+        <p class="p-3 text-sm text-center text-gray-600"> No hay coincidencias para su búsqueda</p>
+        @endif
+        @if ($data->count() == 0)
+        <p class="p-3 text-sm text-center text-gray-600"> No hay Aportaciones por mostrar</p>
+        @endif
+    </div>
          <!-- Modal Edit -->
     <div>
         <!-- Main modal -->
@@ -141,7 +147,7 @@
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripcion de la Aportacion</label>
                         <input wire:model.defer="description" type="text" name="description" id="description"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                placeholder="Escribe la cantidad de Aporte a realizar">
+                                placeholder="Descripcion de Pago realizado">
                           <div class="block mt-2">
                             <x-alert-danger :messages="$errors->get('description')" />
                             </div>
@@ -153,11 +159,11 @@
                             <label for="contribution_date_new"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha
                                 de inicio</label>
-                            <input wire:model.defer="contribution_date" type="date" name="contribution_date" id="contribution_date"
+                            <input wire:model.defer="contribution_date_new" type="date" name="contribution_date_new" id="contribution_date_new"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 placeholder="Escribe la fecha de inicio del Aporte" required>
                             <div class="block mt-2">
-                                <x-alert-danger :messages="$errors->get('contribution_date')" />
+                                <x-alert-danger :messages="$errors->get('contribution_date_new')" />
                             </div>
                         </div>
                         <div>
@@ -168,11 +174,11 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha
                                 de fin
                             </label>
-                            <input wire:model.defer="deadline_date" type="date" name="deadline_date" id="deadline_date"
+                            <input wire:model.defer="deadline_date_new" type="date" name="deadline_date_new" id="deadline_date_new"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 placeholder="Fecha limite" required>
                             <div class="block mt-2">
-                                <x-alert-danger :messages="$errors->get('deadline_date')" />
+                                <x-alert-danger :messages="$errors->get('deadline_date_new')" />
                             </div>
                         </div>
                         <div class="block">

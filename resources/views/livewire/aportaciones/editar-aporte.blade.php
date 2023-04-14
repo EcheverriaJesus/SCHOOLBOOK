@@ -19,7 +19,7 @@
                     </button>
                     <div class="px-6 py-6 lg:px-8">
                         <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Editar Aportaciones Escolares</h3>
-                        <form class="space-y-6" wire:submit.prevent='editarCiclo' novalidate>
+                        <form class="space-y-6" wire:submit.prevent='editarAporte' novalidate>
                         <div>       
                             <label for="amount"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Monto de Aportacion</label>
@@ -35,21 +35,18 @@
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripcion de la Aportacion</label>
                         <input wire:model.defer="description" type="text" name="description" id="description"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                placeholder="Escribe la cantidad de Aporte a realizar">
+                                placeholder="hola mundo">
                           <div class="block mt-2">
                             <x-alert-danger :messages="$errors->get('description')" />
                             </div>
                     </div> 
                         <div>
-                            <label for="" class="text-sm ">Fecha actual del inicio la Aportacion:
-                                <span class="block mb-4 font-bold">{{$contribution_date}}</span>
-                            </label>
-                            <label for="contribution_date_new"
+                            <label for="contribution_date"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha
                                 de inicio</label>
                             <input wire:model.defer="contribution_date" type="date" name="contribution_date" id="contribution_date"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                placeholder="Escribe la fecha de inicio del Aporte" required>
+                                placeholder="Escribe la fecha de inicio del ciclo" required>
                             <div class="block mt-2">
                                 <x-alert-danger :messages="$errors->get('contribution_date')" />
                             </div>
