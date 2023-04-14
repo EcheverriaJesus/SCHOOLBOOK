@@ -17,32 +17,19 @@ class EditarAlumno extends Component
         public $document_id;
         public $tutor_id;
         public $student_name;
-        public $paternal_surname;
         public $paternal_surnameS;
-        public $maternal_surname;
         public $maternal_surnameS;
         public $grade;
         public $birth_date;
         public $curp;
-        public $gender;
         public $genderS;
-        public $email;
         public $emailS;
-        public $phone;
         public $phoneS;
-        public $status;
         public $student_status;
         public $document_status;
         public $study_plan;
         public $photo;
         public $photo_new;
-        public $street;
-        public $num_int;
-        public $num_ext;
-        public $neighborhood;
-        public $city;
-        public $state;
-        public $country;
         public $streetS;
         public $num_intS;
         public $num_extS;
@@ -87,7 +74,7 @@ class EditarAlumno extends Component
             'student_status' => 'required|boolean',
             'document_status' => 'required|boolean',
             'study_plan' => 'required|string|max:100',
-            'photo' => 'required|image|max:1024',
+            'photo_new' => 'nullable|image|max:1024',
             'streetS' => ['required','regex:/^[A-Za-z0-9áéíóúüñÁÉÍÓÚÜÑ.,\-()#&\/\s]{1,50}$/'],
             'streetT' => ['required','regex:/^[A-Za-z0-9áéíóúüñÁÉÍÓÚÜÑ.,\-()#&\/\s]{1,50}$/'],
             'num_intS' => ['required','regex:/^[0-9]+[a-zA-Z]*$/'],
@@ -104,7 +91,7 @@ class EditarAlumno extends Component
             'countryT' => ['required','regex:/^[A-Za-zÁÉÍÓÚÑÜáéíóúñü\s-]+$/'],
             'tutor_name' => 'required|string|max:40',
             'document_name' => 'required|string|max:40',
-            'file' => 'required|mimes:pdf'
+            'file_new' => 'nullable|mimes:pdf'
     ];
 
     public function mount(Student $student){
@@ -181,15 +168,15 @@ class EditarAlumno extends Component
 
         //Asignar los valores student
         $student->student_name = $datos['student_name'];
-        $student->paternal_surnameS = $datos['paternal_surnameS'];
-        $student->maternal_surnameS = $datos['maternal_surnameS'];
+        $student->paternal_surname = $datos['paternal_surnameS'];
+        $student->maternal_surname = $datos['maternal_surnameS'];
         $student->grade = $datos['grade'];
         $student->birth_date = $datos['birth_date'];
         $student->curp = $datos['curp'];
-        $student->genderS = $datos['genderS'];
-        $student->emailS = $datos['emailS'];
-        $student->phoneS = $datos['phoneS'];
-        $student->student_status = $datos['student_status'];
+        $student->gender = $datos['genderS'];
+        $student->email = $datos['emailS'];
+        $student->phone = $datos['phoneS'];
+        $student->status = $datos['student_status'];
         $student->study_plan = $datos['study_plan'];
         // photo student
         $student->photo = $datos['photo'] ?? $student->photo;
@@ -197,28 +184,28 @@ class EditarAlumno extends Component
         $student->save();
 
         //Asignar los valores Address
-        $address->streetS = $datos['streetS'];
-        $address->num_intS = $datos['num_intS'];
-        $address->num_extS = $datos['num_extS'];
-        $address->neighborhoodS = $datos['neighborhoodS'];
-        $address->cityS = $datos['cityS'];
-        $address->stateS = $datos['stateS'];
-        $address->countryS = $datos['countryS'];
+        $address->street = $datos['streetS'];
+        $address->num_int = $datos['num_intS'];
+        $address->num_ext = $datos['num_extS'];
+        $address->neighborhood = $datos['neighborhoodS'];
+        $address->city = $datos['cityS'];
+        $address->state = $datos['stateS'];
+        $address->country = $datos['countryS'];
         $address->save();
 
         //Asignar los valores Address Tutor
-        $address->streetT = $datos['streetT'];
-        $address->num_intT = $datos['num_intT'];
-        $address->num_extT = $datos['num_extT'];
-        $address->neighborhoodT = $datos['neighborhoodT'];
-        $address->cityT = $datos['cityT'];
-        $address->stateT = $datos['stateT'];
-        $address->countryT = $datos['countryT'];
+        $address->street = $datos['streetT'];
+        $address->num_int = $datos['num_intT'];
+        $address->num_ext = $datos['num_extT'];
+        $address->neighborhood = $datos['neighborhoodT'];
+        $address->city = $datos['cityT'];
+        $address->state = $datos['stateT'];
+        $address->country = $datos['countryT'];
         $address->save();
 
         //Asignar los valores Document
         $document->document_name = $datos['document_name'];
-        $document->document_status = $datos['document_status'];
+        $document->status = $datos['document_status'];
         $document->file = $datos['file'] ?? $document->file;
         $document->save();
 
@@ -232,7 +219,7 @@ class EditarAlumno extends Component
         $document->save();
 
         //redireccionar with message
-        session()->flash('mensaje','Los datos del Alumno se actualizarón correctamente');
+        session()->flash('mensaje','Los datos del Alumno se actualizaron correctamente');
         return redirect()->route('students.index');
     }
     public function render()
