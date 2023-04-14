@@ -24,6 +24,8 @@ class MostrarAlumnos extends Component
     {
         $this->searchTerm = $searchTerm;
     }
+
+    //falta que se elimine la direccion del tutor ya que solo elimina la del estudiante
     public function deleteStudent(Student $student)
     {   
         //Obtenemos la direccion del alumno

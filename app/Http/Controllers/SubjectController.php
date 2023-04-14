@@ -11,14 +11,14 @@ use Illuminate\View\View;
 
 class SubjectController extends Controller
 {
-    public function index(Request $request): Response
+    public function index(Request $request): View
     {
         $subjects = Subject::all();
 
         return view('subject.index', compact('subjects'));
     }
 
-    public function create(Request $request): Response
+    public function create(Request $request): View
     {
         return view('subject.create');
     }
@@ -32,12 +32,12 @@ class SubjectController extends Controller
         return redirect()->route('subject.index');
     }
 
-    public function show(Request $request, Subject $subject): Response
+    public function show(Request $request, Subject $subject): View
     {
         return view('subject.show', compact('subject'));
     }
 
-    public function edit(Request $request, Subject $subject): Response
+    public function edit(Request $request, Subject $subject): View
     {
         return view('subject.edit', compact('subject'));
     }

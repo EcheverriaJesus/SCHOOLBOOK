@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class SchoolCycle extends Model
+class School_cycle extends Model
 {
     use HasFactory;
 
@@ -39,8 +39,8 @@ class SchoolCycle extends Model
         return $this->hasMany(CycleStudent::class);
     }
 
-    public function classes(): HasMany
-    {
-        return $this->hasMany(Class::class);
-    }
+    // public function classes(): HasMany
+    // {
+    //     return $this->hasMany(Class::class);
+    // }
 }

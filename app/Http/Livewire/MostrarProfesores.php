@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Storage;
 class MostrarProfesores extends Component
 {
     public $searchTerm;
-
     protected $listeners = [
         'deleteTeacher',
         'search' => 'setData'
