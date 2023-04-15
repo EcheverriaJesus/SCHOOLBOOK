@@ -66,11 +66,7 @@
 
 <body class="p-20 h-screen">
 
-<<<<<<< HEAD
     <header class="">
-=======
-     <header class="">
->>>>>>> 2855e60883dc3a1aa0999adc8b3eebb39761d355
                 @if (Route::has('login'))
                     <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
                         @auth
@@ -88,11 +84,7 @@
                         @endauth
                     </div>
                 @endif
-<<<<<<< HEAD
            </header>
-=======
-           </header> 
->>>>>>> 2855e60883dc3a1aa0999adc8b3eebb39761d355
 
     <div class="h-full md:flex">
         <section class="flotar rounded-2xl relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-blue-800 to-purple-700 i justify-around items-center hidden">

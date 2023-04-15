@@ -11,14 +11,14 @@ use Illuminate\View\View;
 
 class ContributionController extends Controller
 {
-    public function index(Request $request): Response
+    public function index(Request $request): View
     {
         $contributions = Contribution::all();
 
         return view('contribution.index', compact('contributions'));
     }
 
-    public function create(Request $request): Response
+    public function create(Request $request): View
     {
         return view('contribution.create');
     }
@@ -37,7 +37,7 @@ class ContributionController extends Controller
         return view('contribution.show', compact('contribution'));
     }
 
-    public function edit(Request $request, Contribution $contribution): Response
+    public function edit(Request $request, Contribution $contribution): View
     {
         return view('contribution.edit', compact('contribution'));
     }

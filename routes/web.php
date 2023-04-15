@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ClaseController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\ContributionController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\School_cycleController;
@@ -89,6 +90,14 @@ Route::resource('notices', NoticeController::class, ['except' => ['index']])
         'create' => 'notices.create',
         'show' => 'notices.show',
         'edit' => 'notices.edit',
+    ]);
+
+Route::resource('Contribution', ContributionController::class)
+    ->middleware('auth:sanctum')
+    ->names([
+        'index' => 'contributions.index',
+        'create' => 'contributions.create',
+        'edit' => 'contributions.edit'
     ]);
 
 Route::get('/students', [StudentController::class,'index']) -> middleware('auth:sanctum')->name('students.index');
