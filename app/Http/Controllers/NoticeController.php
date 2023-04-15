@@ -32,12 +32,12 @@ class NoticeController extends Controller
         return redirect()->route('notice.index');
     }
 
-    public function show(Request $request, Notice $notice): Response
+    public function show(Request $request, Notice $notice): View
     {
         return view('notice.show', compact('notice'));
     }
 
-    public function edit(Request $request, Notice $notice): Response
+    public function edit(Request $request, Notice $notice): View
     {
         return view('notice.edit', compact('notice'));
     }

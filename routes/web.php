@@ -51,6 +51,7 @@ Route::resource('notices', NoticeController::class)->middleware('auth:sanctum');
     ])->middleware('auth:sanctum');
  */
 
+
 Route::resource('contribution', App\Http\Controllers\ContributionController::class);
 
 Route::resource('tutor', App\Http\Controllers\TutorController::class);
