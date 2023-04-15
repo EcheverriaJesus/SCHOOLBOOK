@@ -32,7 +32,6 @@ protected $rules = [
     'end_date' => 'required|date',
     'status' => 'required|boolean',
     'recipient' => 'required|string|max:50',
-    /* 'photo' => 'required|image|max:1024', */
     'photo_new' => 'nullable|image|max:1024',
 ];
     public function mount(Notice $notice){
@@ -58,7 +57,7 @@ $notice = Notice::find($this->notice_id);
     //Cortamos la ruta de la imagen para almacenar unicamente el nombre de la imagen
     $datos['image'] = str_replace('public/imageNotice/','',$image);
     //Eliminamos imagen vieja
-    Storage::delete('public/imageNotice/'.$notice->photo);
+    Storage::delete('public/imageNotice/'.$notice->image);
 }
 //Asignar los valores a la noticia
 $notice->title = $datos['title'];
@@ -67,11 +66,11 @@ $notice->start_date = $datos['start_date'];
 $notice->end_date = $datos['end_date'];
 $notice->status = $datos['status'];
 $notice->recipient = $datos['recipient'];
-$notice->photo = $datos['image'] ?? $notice->photo;
+$notice->image = $datos['image'] ?? $notice->image;
 $notice->save();
 $this->emitTo('MostrarNotice','updateNotice');
 session()->flash('mensaje','Los datos del aviso se actualizarón correctamente');
-        return redirect()->route('notices.index');
+        return redirect()->route('dashboard');
     }
 
     public function render()

@@ -58,7 +58,6 @@
                 <div class="">
                     <x-label for="photo_new" :value="__('Seleccione la fotografia del Aviso')" />
                     <x-input wire:model="photo_new" id="photo_new" class="block w-full mt-1" type="file" accept="image/*" />
-                  
                 </div>
          <div>
             <x-button class="ml-4">

@@ -11,7 +11,7 @@ use Illuminate\View\View;
 
 class NoticeController extends Controller
 {
-    public function index(Request $request): Response
+    public function index(Request $request): View
     {
         $notices = Notice::all();
 
