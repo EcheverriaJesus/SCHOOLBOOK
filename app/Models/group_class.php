@@ -29,9 +29,9 @@ class GroupClass extends Model
         'id' => 'integer',
     ];
 
-    public function class(): BelongsTo
+    public function clase(): BelongsTo
     {
-        return $this->belongsTo(Class::class);
+        return $this->belongsTo(Clase::class);
     }
 
     public function group(): BelongsTo

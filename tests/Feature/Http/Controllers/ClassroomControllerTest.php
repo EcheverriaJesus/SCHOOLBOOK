@@ -61,15 +61,18 @@ class ClassroomControllerTest extends TestCase
     {
         $classroom_name = $this->faker->word;
         $building = $this->faker->word;
+        $capacity = $this->faker->numberBetween(-1000, 1000);
 
         $response = $this->post(route('classroom.store'), [
             'classroom_name' => $classroom_name,
             'building' => $building,
+            'capacity' => $capacity,
         ]);
 
         $classrooms = Classroom::query()
             ->where('classroom_name', $classroom_name)
             ->where('building', $building)
+            ->where('capacity', $capacity)
             ->get();
         $this->assertCount(1, $classrooms);
         $classroom = $classrooms->first();
@@ -129,10 +132,12 @@ class ClassroomControllerTest extends TestCase
         $classroom = Classroom::factory()->create();
         $classroom_name = $this->faker->word;
         $building = $this->faker->word;
+        $capacity = $this->faker->numberBetween(-1000, 1000);
 
         $response = $this->put(route('classroom.update', $classroom), [
             'classroom_name' => $classroom_name,
             'building' => $building,
+            'capacity' => $capacity,
         ]);
 
         $classroom->refresh();
@@ -142,6 +147,7 @@ class ClassroomControllerTest extends TestCase
 
         $this->assertEquals($classroom_name, $classroom->classroom_name);
         $this->assertEquals($building, $classroom->building);
+        $this->assertEquals($capacity, $classroom->capacity);
     }
 
 

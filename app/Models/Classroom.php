@@ -18,6 +18,7 @@ class Classroom extends Model
     protected $fillable = [
         'classroom_name',
         'building',
+        'capacity',
     ];
 
     /**
@@ -27,10 +28,11 @@ class Classroom extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'capacity' => 'integer',
     ];
 
-    public function class(): BelongsTo
+    public function group(): BelongsTo
     {
-        return $this->belongsTo(Class::class);
+        return $this->belongsTo(Group::class);
     }
 }

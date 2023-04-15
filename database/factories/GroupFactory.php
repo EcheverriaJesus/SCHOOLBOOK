@@ -21,8 +21,9 @@ class GroupFactory extends Factory
     public function definition(): array
     {
         return [
-            'group_name' => $this->faker->randomLetter,
-            'num_max_students' => $this->faker->numberBetween(-10000, 10000),
+            'subject_id' => $this->faker->word,
+            'classroom_id' => $this->faker->word,
+            'cycle_id' => $this->faker->word,
         ];
     }
 }

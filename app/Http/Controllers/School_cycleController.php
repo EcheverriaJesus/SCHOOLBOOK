@@ -4,17 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\School_cycleStoreRequest;
 use App\Http\Requests\School_cycleUpdateRequest;
-use App\SchoolCycle;
-use App\schoolCycle;
+use App\Models\School_cycle;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class School_cycleController extends Controller
 {
-    public function index(Request $request): Response
+    public function index(Request $request): View
     {
-        $schoolCycles = SchoolCycle::all();
+        $schoolCycles = School_cycle::all();
 
         return view('schoolCycle.index', compact('schoolCycles'));
     }

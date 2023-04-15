@@ -24,7 +24,7 @@ class ScheduleFactory extends Factory
             'start_time' => $this->faker->time(),
             'end_time' => $this->faker->time(),
             'day' => $this->faker->date(),
-            'class_id' => $this->faker->word,
+            'group_id' => $this->faker->word,
         ];
     }
 }
