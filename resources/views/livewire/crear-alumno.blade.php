@@ -44,7 +44,7 @@
                 <!-- Fecha de nacimiento-->
                 <div class="block w-1/2">
                     <x-label for="birth_date" value="{{ __('Fecha de Nacimiento') }}" />
-                    <x-input id="birth_date" class="block w-full mt-1" type="text" wire:model="birth_date"
+                    <x-input id="birth_date" class="block w-full mt-1" type="date" wire:model="birth_date"
                         :value="old('birth_date')" />
                 </div>
             </div>

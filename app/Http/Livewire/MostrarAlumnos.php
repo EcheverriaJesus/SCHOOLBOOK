@@ -30,6 +30,7 @@ class MostrarAlumnos extends Component
         $address = Address::find($student->address_id);
         $document = Document::find($student->document_id);
         $tutor = Tutor::find($student->tutor_id);
+        $address = Address::find($tutor->address_id);
         //Eliminamos photo Alumno
         if( $student->photo) {
             Storage::delete('public/imageStudents/' . $student->photo);
