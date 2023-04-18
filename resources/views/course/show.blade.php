@@ -2,6 +2,6 @@
     @extends('layouts.app')
 
     @section('content')
-        class.show template
+        course.show template
     @endsection
 --}}

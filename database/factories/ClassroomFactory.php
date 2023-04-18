@@ -21,9 +21,9 @@ class ClassroomFactory extends Factory
     public function definition(): array
     {
         return [
-            'classroom_name' => $this->faker->name(),
-            'building' => $this->faker->name(),
-            'capacity' => $this->faker->numberBetween(1, 50),
+            'classroom_name' => $this->faker->regexify('[A-Za-z0-9]{50}'),
+            'building' => $this->faker->regexify('[A-Za-z0-9]{50}'),
+            'capacity' => $this->faker->numberBetween(-1000, 1000),
         ];
     }
 }

@@ -21,10 +21,10 @@ class SubjectFactory extends Factory
     public function definition(): array
     {
         return [
-            'subject_name' => $this->faker->name(),
+            'subject_name' => $this->faker->regexify('[A-Za-z0-9]{50}'),
             'description' => $this->faker->text,
-            'grade' => $this->faker->numberBetween(1, 3),
-            'syllabus' => $this->faker->uuid(),
+            'grade' => $this->faker->numberBetween(-10000, 10000),
+            'syllabus' => $this->faker->regexify('[A-Za-z0-9]{255}'),
         ];
     }
 }

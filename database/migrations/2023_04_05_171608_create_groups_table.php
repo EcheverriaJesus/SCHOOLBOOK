@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
-            $table->char('group_name');
-            $table->integer('num_max_students');
+            $table->char('name');
+            $table->string('shift', 20);
+            $table->smallInteger('grade');
+            $table->boolean('status');
+            $table->string('classroom_id');
             $table->timestamps();
         });
     }

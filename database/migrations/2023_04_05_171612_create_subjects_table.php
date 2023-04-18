@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('subject_name', 50);
             $table->text('description');
             $table->integer('grade');
-            $table->string('syllabus',255);
+            $table->string('syllabus', 255);
             $table->timestamps();
         });
     }

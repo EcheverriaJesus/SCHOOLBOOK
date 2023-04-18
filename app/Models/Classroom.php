@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Classroom extends Model
 {
@@ -18,7 +19,7 @@ class Classroom extends Model
     protected $fillable = [
         'classroom_name',
         'building',
-        'capacity'
+        'capacity',
     ];
 
     /**
@@ -28,10 +29,11 @@ class Classroom extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'capacity' => 'integer',
     ];
 
-    // public function class(): BelongsTo
-    // {
-    //     return $this->belongsTo(Class::class);
-    // }
+    public function group(): HasOne
+    {
+        return $this->hasOne(Group::class);
+    }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\School_cycleController;
@@ -49,9 +50,6 @@ Route::resource('classroom', ClassroomController::class)
     ->middleware('auth:sanctum')
     ->names([
         'index' => 'classroom.index',
-        'create' => 'classroom.create',
-        'show' => 'classroom.show',
-        'edit' => 'classroom.edit',
     ]);
 
 Route::resource('subjects', SubjectController::class)
@@ -61,6 +59,15 @@ Route::resource('subjects', SubjectController::class)
         'create' => 'subjects.create',
         'show' => 'subjects.show',
         'edit' => 'subjects.edit',
+    ]);
+
+Route::resource('groups', GroupController::class)
+    ->middleware('auth:sanctum')
+    ->names([
+        'index' => 'groups.index',
+        'create' => 'groups.create',
+        'show' => 'groups.show',
+        'edit' => 'groups.edit',
     ]);
 
 Route::resource('schoolCycles', School_cycleController::class)
@@ -98,6 +105,93 @@ Route::resource('qualification', App\Http\Controllers\QualificationController::c
 Route::resource('group', App\Http\Controllers\GroupController::class);
 
 Route::resource('class', App\Http\Controllers\ClassController::class);
+
+Route::resource('schedule', App\Http\Controllers\ScheduleController::class);
+
+Route::resource('subject', App\Http\Controllers\SubjectController::class);
+
+
+Route::resource('contribution', App\Http\Controllers\ContributionController::class);
+
+Route::resource('tutor', App\Http\Controllers\TutorController::class);
+
+Route::resource('document', App\Http\Controllers\DocumentController::class);
+
+Route::resource('student', App\Http\Controllers\StudentController::class);
+
+Route::resource('school_cycle', App\Http\Controllers\School_cycleController::class);
+
+Route::resource('address', App\Http\Controllers\AddressController::class);
+
+Route::resource('classroom', App\Http\Controllers\ClassroomController::class);
+
+Route::resource('qualification', App\Http\Controllers\QualificationController::class);
+
+Route::resource('notice', App\Http\Controllers\NoticeController::class);
+
+Route::resource('teacher', App\Http\Controllers\TeacherController::class);
+
+Route::resource('group', App\Http\Controllers\GroupController::class);
+
+Route::resource('course', App\Http\Controllers\CourseController::class);
+
+Route::resource('schedule', App\Http\Controllers\ScheduleController::class);
+
+Route::resource('subject', App\Http\Controllers\SubjectController::class);
+
+
+Route::resource('contribution', App\Http\Controllers\ContributionController::class);
+
+Route::resource('tutor', App\Http\Controllers\TutorController::class);
+
+Route::resource('document', App\Http\Controllers\DocumentController::class);
+
+Route::resource('student', App\Http\Controllers\StudentController::class);
+
+Route::resource('school_cycle', App\Http\Controllers\School_cycleController::class);
+
+Route::resource('address', App\Http\Controllers\AddressController::class);
+
+Route::resource('classroom', App\Http\Controllers\ClassroomController::class);
+
+Route::resource('qualification', App\Http\Controllers\QualificationController::class);
+
+Route::resource('notice', App\Http\Controllers\NoticeController::class);
+
+Route::resource('teacher', App\Http\Controllers\TeacherController::class);
+
+Route::resource('group', App\Http\Controllers\GroupController::class);
+
+Route::resource('course', App\Http\Controllers\CourseController::class);
+
+Route::resource('schedule', App\Http\Controllers\ScheduleController::class);
+
+Route::resource('subject', App\Http\Controllers\SubjectController::class);
+
+
+Route::resource('contribution', App\Http\Controllers\ContributionController::class);
+
+Route::resource('tutor', App\Http\Controllers\TutorController::class);
+
+Route::resource('document', App\Http\Controllers\DocumentController::class);
+
+Route::resource('student', App\Http\Controllers\StudentController::class);
+
+Route::resource('school_cycle', App\Http\Controllers\School_cycleController::class);
+
+Route::resource('address', App\Http\Controllers\AddressController::class);
+
+Route::resource('classroom', App\Http\Controllers\ClassroomController::class);
+
+Route::resource('qualification', App\Http\Controllers\QualificationController::class);
+
+Route::resource('notice', App\Http\Controllers\NoticeController::class);
+
+Route::resource('teacher', App\Http\Controllers\TeacherController::class);
+
+Route::resource('group', App\Http\Controllers\GroupController::class);
+
+Route::resource('course', App\Http\Controllers\CourseController::class);
 
 Route::resource('schedule', App\Http\Controllers\ScheduleController::class);
 

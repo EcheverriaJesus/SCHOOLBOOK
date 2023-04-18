@@ -22,6 +22,8 @@ class Qualification extends Model
         'bim4',
         'bim5',
         'promedio_final',
+        'course_id',
+        'student_id',
     ];
 
     /**
@@ -42,5 +44,15 @@ class Qualification extends Model
     public function subject(): BelongsTo
     {
         return $this->belongsTo(Subject::class);
+    }
+
+    public function course(): BelongsTo
+    {
+        return $this->belongsTo(Course::class);
+    }
+
+    public function student(): BelongsTo
+    {
+        return $this->belongsTo(Student::class);
     }
 }

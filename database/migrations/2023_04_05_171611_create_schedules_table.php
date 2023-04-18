@@ -16,7 +16,6 @@ return new class extends Migration
             $table->time('start_time');
             $table->time('end_time');
             $table->date('day');
-            $table->string('class_id');
             $table->timestamps();
         });
     }

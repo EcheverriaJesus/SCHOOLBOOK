@@ -19,6 +19,8 @@ return new class extends Migration
             $table->float('bim4');
             $table->float('bim5');
             $table->float('promedio_final');
+            $table->string('course_id');
+            $table->string('student_id');
             $table->timestamps();
         });
     }

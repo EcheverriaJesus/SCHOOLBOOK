@@ -58,23 +58,24 @@ models:
         country: string:50 
         relationships:
             hasMany: Student, Tutor, Teacher
-    Student_class:
+    Student_course:
         student_id: foreignIdFor 
-        class_id: foreignIdFor 
+        course_id: foreignIdFor 
         relationships:
-            belongsTo: Student, Class
+            belongsTo: Student, Course
     Classroom:
-        classroom_name: string:5 
-        building: string:5 
+        classroom_name: string:50 
+        building: string:50 
+        capacity: smallInteger
         relationships:
-            belongsTo: Class
+            belongsTo: Group
     School_cycle:
         cycle_name: string:100 
         start_date: date 
         end_date: date
         status: boolean 
         relationships:
-            hasMany: Cycle_student, Class
+            hasMany: Cycle_student, Course
     Qualification: 
         bim1: float 
         bim2: float 
@@ -82,8 +83,10 @@ models:
         bim4: float 
         bim5: float 
         promedio_final: float 
+        course_id: foreignIdFor 
+        student_id: foreignIdFor
         relationships:
-            belongsTo: Subject
+            belongsTo: Subject, Course, Student
     
     Notice:
         title: string:100 
@@ -94,11 +97,11 @@ models:
         recipient: string:50 
         image: string:255 
         
-    group_class:
-        class_id: foreignIdFor 
+    Group_course:
+        course_id: foreignIdFor 
         group_id: foreignIdFor 
         relationships:
-            belongsTo: Class, Group
+            belongsTo: Course, Group
     Teacher:
         first_name: string:50 
         father_surname: string:50 
@@ -116,44 +119,45 @@ models:
             belongsTo: Address
             hasMany: Teacher_subject
     Group: 
-        group_name: char 
-        num_max_students: integer 
-        relationships:
-            hasMany: Group_class
-    Class: 
-        subject_id: foreignIdFor
+        name: char 
+        shift: string:20
+        grade: smallInteger
+        status: boolean
         classroom_id: foreignIdFor
-        history_id: foreignIdFor 
+        relationships:
+            belongsTo: Classroom
+            hasMany: Group_course
+    Course: 
+        subject_id: foreignIdFor
         cycle_id: foreignIdFor 
         relationships:
-            belongsTo: Subject, Classroom
-            hasMany: Class_group, Class_student, Class_schedule, School_cycle
-    Class_schedule:
-        class_id: foreignIdFor 
+            belongsTo: Subject
+            hasMany: Group_course, Student_course, Course_schedule, School_cycle
+    Course_schedule:
+        course_id: foreignIdFor 
         schedule_id: foreignIdFor 
         relationships:
-            belongsTo: Class, Schedule
+            belongsTo: Course, Schedule
     Schedule: 
         start_time: time 
         end_time: time 
         day: date 
-        class_id: foreignIdFor 
         relationships:
-            hasMany: Class_schedule
+            hasMany: Course_schedule
     Subject: 
         subject_name: string:50 
-        description: string:50 
+        description: text 
         grade: integer 
-        qualification_id: foreignIdFor 
+        syllabus: string:255
         relationships:
-            belongsTo: Class
-            hasMany: Qualification, Teacher_subject
+            belongsTo: Course
+            hasMany: Teacher_subject
     Teacher_subject:
         subject_id: foreignIdFor 
         teacher_id: foreignIdFor 
         relationships:
-            belongsTo: Subject, Teacher
-seeders: Contribution, Tutor, Document, Student, Student_cycle, Address, Student_class, Classroom, School_cycle, Grade, User, Notice, Class_group, Teacher, Group, Class, Class_schedule, Schedule, Subject, Subject_teacher
+            belongsTo: Subject, Teacher, Class
+seeders: Contribution, Tutor, Document, Student, Student_cycle, Address, Student_course, Classroom, School_cycle, User, Notice, Group_course, Teacher, Group, Course, Course_schedule, Schedule, Subject, Subject_teacher
 controllers:
     Contribution:
         resource: web
@@ -177,7 +181,7 @@ controllers:
         resource: web
     Group:
         resource: web
-    Class:
+    Course:
         resource: web
     Schedule:
         resource: web

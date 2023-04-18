@@ -32,10 +32,10 @@ class Subject extends Model
         'id' => 'integer',
     ];
 
-    // public function class(): BelongsTo
-    // {
-    //     return $this->belongsTo(Class::class2);
-    // }
+    public function course(): BelongsTo
+    {
+        return $this->belongsTo(Course::class);
+    }
 
     public function teacherSubjects(): HasMany
     {

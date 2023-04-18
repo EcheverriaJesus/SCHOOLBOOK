@@ -63,20 +63,17 @@ class ScheduleControllerTest extends TestCase
         $start_time = $this->faker->time();
         $end_time = $this->faker->time();
         $day = $this->faker->date();
-        $class_id = $this->faker->word;
 
         $response = $this->post(route('schedule.store'), [
             'start_time' => $start_time,
             'end_time' => $end_time,
             'day' => $day,
-            'class_id' => $class_id,
         ]);
 
         $schedules = Schedule::query()
             ->where('start_time', $start_time)
             ->where('end_time', $end_time)
             ->where('day', $day)
-            ->where('class_id', $class_id)
             ->get();
         $this->assertCount(1, $schedules);
         $schedule = $schedules->first();
@@ -137,13 +134,11 @@ class ScheduleControllerTest extends TestCase
         $start_time = $this->faker->time();
         $end_time = $this->faker->time();
         $day = $this->faker->date();
-        $class_id = $this->faker->word;
 
         $response = $this->put(route('schedule.update', $schedule), [
             'start_time' => $start_time,
             'end_time' => $end_time,
             'day' => $day,
-            'class_id' => $class_id,
         ]);
 
         $schedule->refresh();
@@ -154,7 +149,6 @@ class ScheduleControllerTest extends TestCase
         $this->assertEquals($start_time, $schedule->start_time);
         $this->assertEquals($end_time, $schedule->end_time);
         $this->assertEquals(Carbon::parse($day), $schedule->day);
-        $this->assertEquals($class_id, $schedule->class_id);
     }
 
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Group extends Model
@@ -16,8 +17,11 @@ class Group extends Model
      * @var array
      */
     protected $fillable = [
-        'group_name',
-        'num_max_students',
+        'name',
+        'shift',
+        'grade',
+        'status',
+        'classroom_id',
     ];
 
     /**
@@ -27,10 +31,17 @@ class Group extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'grade' => 'integer',
+        'status' => 'boolean',
     ];
 
-    public function groupClasses(): HasMany
+    public function classroom(): BelongsTo
     {
-        return $this->hasMany(GroupClass::class);
+        return $this->belongsTo(Classroom::class);
+    }
+
+    public function groupCourses(): HasMany
+    {
+        return $this->hasMany(GroupCourse::class);
     }
 }

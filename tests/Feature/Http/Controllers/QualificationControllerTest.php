@@ -65,6 +65,8 @@ class QualificationControllerTest extends TestCase
         $bim4 = $this->faker->randomFloat(/** float_attributes **/);
         $bim5 = $this->faker->randomFloat(/** float_attributes **/);
         $promedio_final = $this->faker->randomFloat(/** float_attributes **/);
+        $course_id = $this->faker->word;
+        $student_id = $this->faker->word;
 
         $response = $this->post(route('qualification.store'), [
             'bim1' => $bim1,
@@ -73,6 +75,8 @@ class QualificationControllerTest extends TestCase
             'bim4' => $bim4,
             'bim5' => $bim5,
             'promedio_final' => $promedio_final,
+            'course_id' => $course_id,
+            'student_id' => $student_id,
         ]);
 
         $qualifications = Qualification::query()
@@ -82,6 +86,8 @@ class QualificationControllerTest extends TestCase
             ->where('bim4', $bim4)
             ->where('bim5', $bim5)
             ->where('promedio_final', $promedio_final)
+            ->where('course_id', $course_id)
+            ->where('student_id', $student_id)
             ->get();
         $this->assertCount(1, $qualifications);
         $qualification = $qualifications->first();
@@ -145,6 +151,8 @@ class QualificationControllerTest extends TestCase
         $bim4 = $this->faker->randomFloat(/** float_attributes **/);
         $bim5 = $this->faker->randomFloat(/** float_attributes **/);
         $promedio_final = $this->faker->randomFloat(/** float_attributes **/);
+        $course_id = $this->faker->word;
+        $student_id = $this->faker->word;
 
         $response = $this->put(route('qualification.update', $qualification), [
             'bim1' => $bim1,
@@ -153,6 +161,8 @@ class QualificationControllerTest extends TestCase
             'bim4' => $bim4,
             'bim5' => $bim5,
             'promedio_final' => $promedio_final,
+            'course_id' => $course_id,
+            'student_id' => $student_id,
         ]);
 
         $qualification->refresh();
@@ -166,6 +176,8 @@ class QualificationControllerTest extends TestCase
         $this->assertEquals($bim4, $qualification->bim4);
         $this->assertEquals($bim5, $qualification->bim5);
         $this->assertEquals($promedio_final, $qualification->promedio_final);
+        $this->assertEquals($course_id, $qualification->course_id);
+        $this->assertEquals($student_id, $qualification->student_id);
     }
 
 

@@ -59,17 +59,26 @@ class GroupControllerTest extends TestCase
      */
     public function store_saves_and_redirects(): void
     {
-        $group_name = $this->faker->randomLetter;
-        $num_max_students = $this->faker->numberBetween(-10000, 10000);
+        $name = $this->faker->name;
+        $shift = $this->faker->word;
+        $grade = $this->faker->numberBetween(-1000, 1000);
+        $status = $this->faker->boolean;
+        $classroom_id = $this->faker->word;
 
         $response = $this->post(route('group.store'), [
-            'group_name' => $group_name,
-            'num_max_students' => $num_max_students,
+            'name' => $name,
+            'shift' => $shift,
+            'grade' => $grade,
+            'status' => $status,
+            'classroom_id' => $classroom_id,
         ]);
 
         $groups = Group::query()
-            ->where('group_name', $group_name)
-            ->where('num_max_students', $num_max_students)
+            ->where('name', $name)
+            ->where('shift', $shift)
+            ->where('grade', $grade)
+            ->where('status', $status)
+            ->where('classroom_id', $classroom_id)
             ->get();
         $this->assertCount(1, $groups);
         $group = $groups->first();
@@ -127,12 +136,18 @@ class GroupControllerTest extends TestCase
     public function update_redirects(): void
     {
         $group = Group::factory()->create();
-        $group_name = $this->faker->randomLetter;
-        $num_max_students = $this->faker->numberBetween(-10000, 10000);
+        $name = $this->faker->name;
+        $shift = $this->faker->word;
+        $grade = $this->faker->numberBetween(-1000, 1000);
+        $status = $this->faker->boolean;
+        $classroom_id = $this->faker->word;
 
         $response = $this->put(route('group.update', $group), [
-            'group_name' => $group_name,
-            'num_max_students' => $num_max_students,
+            'name' => $name,
+            'shift' => $shift,
+            'grade' => $grade,
+            'status' => $status,
+            'classroom_id' => $classroom_id,
         ]);
 
         $group->refresh();
@@ -140,8 +155,11 @@ class GroupControllerTest extends TestCase
         $response->assertRedirect(route('group.index'));
         $response->assertSessionHas('group.id', $group->id);
 
-        $this->assertEquals($group_name, $group->group_name);
-        $this->assertEquals($num_max_students, $group->num_max_students);
+        $this->assertEquals($name, $group->name);
+        $this->assertEquals($shift, $group->shift);
+        $this->assertEquals($grade, $group->grade);
+        $this->assertEquals($status, $group->status);
+        $this->assertEquals($classroom_id, $group->classroom_id);
     }
 
 
