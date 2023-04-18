@@ -93,7 +93,7 @@ class EditarProfesor extends Component
             //Se guarda la imagen y se obtiene la ruta
             $image = $this->photo_new->store('public/imageTeachers');
             //Cortamos la ruta de la imagen para almacenar unicamente el nombre de la imagen
-            $datos['photo'] = str_replace('public/imageTeachers/','',$image);
+            $datos['image'] = str_replace('public/imageTeachers/','',$image);
             //Eliminamos imagen vieja
             Storage::delete('public/imageTeachers/'.$teacher->photo);
         }
