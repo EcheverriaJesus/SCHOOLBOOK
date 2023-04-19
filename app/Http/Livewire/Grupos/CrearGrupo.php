@@ -18,13 +18,16 @@ class CrearGrupo extends Component
         'nombre' => 'required|string|max:1',
         'turno' => 'required|in:matutino,vespertino',
         'grado' => 'required|in:1,2,3',
-        'estatus' => 'nullable|in:1,0',
+        'estatus' => 'nullable|boolean',
         'aula' => 'required|numeric',
     ];
 
     public function crearGrupo(){
         //Validar
         $datos = $this->validate();
+        if($datos['estatus'] != 1){
+            $datos['estatus'] = 0;
+        }
         //Se gurda registro de docente
         Group::create([
             'name' => $datos['nombre'],

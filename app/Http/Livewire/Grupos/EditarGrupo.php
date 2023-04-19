@@ -19,7 +19,7 @@ class EditarGrupo extends Component
         'nombre' => 'required|string|max:1',
         'turno' => 'required|in:matutino,vespertino',
         'grado' => 'required|in:1,2,3',
-        'estatus' => 'nullable|in:1,0',
+        'estatus' => 'nullable|boolean',
         'aula' => 'nullable|numeric',
     ];
 
@@ -36,7 +36,7 @@ class EditarGrupo extends Component
     {
         //Validar campos
         $datos = $this->validate();
-        
+
         $group = Group::find($this->group_id);
 
         //Asignar los valores group

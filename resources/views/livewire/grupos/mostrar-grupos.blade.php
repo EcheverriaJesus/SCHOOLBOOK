@@ -4,6 +4,7 @@
         <p class="my-2">Visualizar y editar datos de los grupos</p>
     </div>
     <div class="block w-full md:justify-between md:flex ">
+        <livewire:grupos.buscar-grupo />
         <div class="flex justify-end my-5">
             <a href="{{route('groups.create')}}"
                 class="flex items-center px-4 py-2 font-semibold tracking-widest text-white transition duration-150 ease-in-out bg-blue-700 border rounded-md tet-sm border-transparet hover:bg-blue-600">
@@ -46,8 +47,7 @@
                     @foreach($groups as $group)
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th scope="row"
-                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {{$group->name}}
                         </th>
                         <td class="px-6 py-4 text-center">
@@ -89,18 +89,45 @@
                             </button>
                         </td>
                     </tr>
-                    @endforeach 
+                    @endforeach
                 </tbody>
             </table>
         </div>
-        {{-- @if (!empty($searchTerm) && $subjects->count() == 0)
+        @if (!empty($searchTerm) && $groups->count() == 0)
         <p class="p-3 text-sm text-center text-gray-600"> No hay coincidencias para su búsqueda</p>
+        @elseif($data->count() == 0)
+        <p class="p-3 text-sm text-center text-gray-600"> No hay Grupos por mostrar</p>
         @endif
-        @if ($data->count() == 0)
-        <p class="p-3 text-sm text-center text-gray-600"> No hay Materias por mostrar</p>
-        @endif --}}
     </div>
-    {{-- <div class="mt-10">
-        {{$subjects->links()}}
-    </div> --}}
+    <div class="mt-10">
+        {{$groups->links()}}
+    </div>
 </div>
+
+@push('scripts')
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    Livewire.on('mostrarAlerta', (groupId) => {
+    Swal.fire({
+        title: '¿Eliminar Grupo?',
+        text: "Una Grupo Eliminado ya no se podrá recuperar.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, ¡Eliminar!',
+        cancelButtonText: 'Cancelar',
+}).then((result) => {
+  if (result.isConfirmed) {
+    //Eliminar profesor desde servidor (Emitir evento hacia el componente)
+    Livewire.emit('deleteGroup',groupId)
+    Swal.fire(
+      'Se Eliminó el Grupo',
+      'Eliminada Correctamente',
+      'success'
+    )
+  }
+})
+})
+</script>
+@endpush
