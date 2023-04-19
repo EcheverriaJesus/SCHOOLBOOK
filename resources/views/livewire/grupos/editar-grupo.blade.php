@@ -49,6 +49,9 @@
                 </div>
                 <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Activo</span>
             </label>
+            <div class="block mt-2">
+                <x-alert-danger :messages="$errors->get('estatus')" />
+            </div>
         </div>
     </section>
 
