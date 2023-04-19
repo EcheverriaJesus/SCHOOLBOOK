@@ -32,14 +32,9 @@ class Subject extends Model
         'id' => 'integer',
     ];
 
-    public function group(): BelongsTo
+    public function course(): BelongsTo
     {
-        return $this->belongsTo(Group::class);
-    }
-
-    public function qualifications(): HasMany
-    {
-        return $this->hasMany(Qualification::class);
+        return $this->belongsTo(Course::class);
     }
 
     public function teacherSubjects(): HasMany

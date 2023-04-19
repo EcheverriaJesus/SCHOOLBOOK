@@ -21,9 +21,11 @@ class GroupFactory extends Factory
     public function definition(): array
     {
         return [
-            'subject_id' => $this->faker->word,
+            'name' => $this->faker->name,
+            'shift' => $this->faker->regexify('[A-Za-z0-9]{20}'),
+            'grade' => $this->faker->numberBetween(-1000, 1000),
+            'status' => $this->faker->boolean,
             'classroom_id' => $this->faker->word,
-            'cycle_id' => $this->faker->word,
         ];
     }
 }

@@ -4,16 +4,16 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\Schedule;
+use App\Models\Group_course;
 
-class ScheduleFactory extends Factory
+class GroupCourseFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Schedule::class;
+    protected $model = GroupCourse::class;
 
     /**
      * Define the model's default state.
@@ -21,9 +21,8 @@ class ScheduleFactory extends Factory
     public function definition(): array
     {
         return [
-            'start_time' => $this->faker->time(),
-            'end_time' => $this->faker->time(),
-            'day' => $this->faker->date(),
+            'course_id' => $this->faker->word,
+            'group_id' => $this->faker->word,
         ];
     }
 }

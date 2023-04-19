@@ -39,8 +39,8 @@ class School_cycle extends Model
         return $this->hasMany(CycleStudent::class);
     }
 
-    public function groups(): HasMany
+    public function courses(): HasMany
     {
-        return $this->hasMany(Group::class);
+        return $this->hasMany(Course::class);
     }
 }

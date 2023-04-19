@@ -1,4 +1,4 @@
-<form class="space-y-5 md:w-full" wire:submit.prevent='crearGrupo'>
+<form class="space-y-5 md:w-full" wire:submit.prevent='editarGrupo'>
     <h2 class="flex justify-center text-xl font-bold text-indigo-600">Informacion del grupo</h2>
     <section
         class="grid w-full h-auto p-6 mb-10 bg-white border shadow-2xl md:gap-4 md:grid-cols-2 sm:bg-white rounded-xl">
@@ -36,7 +36,7 @@
             </select>
 
             <div class="block mt-2">
-                <x-alert-danger :messages="$errors->get('materia')" />
+                <x-alert-danger :messages="$errors->get('grado')" />
             </div>
         </div>
 
@@ -101,12 +101,11 @@
                 <option value="{{$aula->id}}">{{$aula->classroom_name}}</option>
                 @endforeach
             </select>
+
             <div class="block mt-2">
                 <x-alert-danger :messages="$errors->get('aula')" />
             </div>
         </div>
-
-        
         
     </section>
 

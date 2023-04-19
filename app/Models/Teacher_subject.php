@@ -38,4 +38,9 @@ class TeacherSubject extends Model
     {
         return $this->belongsTo(Teacher::class);
     }
+
+    public function class(): BelongsTo
+    {
+        return $this->belongsTo(Class::class);
+    }
 }

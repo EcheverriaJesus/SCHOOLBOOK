@@ -91,9 +91,14 @@
     aria-label="Sidebar">
     <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
         <ul class="space-y-2">
-            <li>
+            <li @class(['bg-amber-300 rounded-lg' => request()->routeIs('dashboard')])>
                 <a href="{{ route('login') }}"
-                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                @class([
+                    'flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white' => true,
+                    'hover:bg-amber-300 dark:hover:bg-gray-700' => !request()->routeIs('dashboard'),
+                    'bg-amber-300' => request()->routeIs('dashboard')
+                ])
+                >
                     <svg width="32" height="32" fill="none" stroke="#284CDA" stroke-width="1.5" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -103,20 +108,31 @@
                     <span class="ml-3">Inicio</span>
                 </a>
             </li>
-            <li>
-                <a href="{{route('subjects.index')}}"
-                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <svg fill="#284CDA" width="32" height="32" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
-                        clip-rule="evenodd">
-                        <path
-                            d="M22 24h-17c-1.657 0-3-1.343-3-3v-18c0-1.657 1.343-3 3-3h17v24zm-2-4h-14.505c-1.375 0-1.375 2 0 2h14.505v-2zm0-18h-15v16h15v-16zm-3 3v3h-9v-3h9z" />
+
+            <li @class(['bg-amber-300 rounded-lg' => request()->routeIs('subjects.index', 'subjects.create', 'subjects.edit', 'subjects.show')])>
+                <a href="{{ route('subjects.index') }}" 
+                    @class([
+                        'flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white' => true,
+                        'hover:bg-amber-300 dark:hover:bg-gray-700' => !request()->routeIs('subjects.index', 'subjects.create', 'subjects.edit', 'subjects.show'),
+                        'bg-amber-300' => request()->routeIs('subjects.index', 'subjects.create', 'subjects.edit', 'subjects.show')
+                    ])
+                >
+                    <svg fill="#284CDA" width="32" height="32" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
+                        <path d="M22 24h-17c-1.657 0-3-1.343-3-3v-18c0-1.657 1.343-3 3-3h17v24zm-2-4h-14.505c-1.375 0-1.375 2 0 2h14.505v-2zm0-18h-15v16h15v-16zm-3 3v3h-9v-3h9z" />
                     </svg>
                     <span class="flex-1 ml-3 whitespace-nowrap">Materias</span>
                 </a>
             </li>
-            <li>
-                <a href="{{route('groups.create')}}"
-                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+            
+            
+            <li @class(['bg-amber-300 rounded-lg' => request()->routeIs('groups.index', 'groups.create', 'groups.edit', 'groups.show')])>
+                <a href="{{route('groups.index')}}"
+                @class([
+                    'flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white' => true,
+                    'hover:bg-amber-300 dark:hover:bg-gray-700' => !request()->routeIs('groups.index', 'groups.create', 'groups.edit', 'groups.show'),
+                    'bg-amber-300' => request()->routeIs('groups.index', 'groups.create', 'groups.edit', 'groups.show')
+                ])
+                >
                     <svg fill="#284CDA" width="32" height="32" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
                         clip-rule="evenodd">
                         <path
@@ -127,7 +143,7 @@
             </li>
             <li>
                 <a href="#"
-                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-amber-300 dark:hover:bg-gray-700">
                     <svg fill="#284CDA" width="32" height="32" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
                         clip-rule="evenodd">
                         <path
@@ -138,7 +154,7 @@
             </li>
             <li>
                 <a href="#"
-                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-amber-300 dark:hover:bg-gray-700">
                     <svg fill="#284CDA" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
                         <path
                             d="M24 12c0 6.627-5.373 12-12 12s-12-5.373-12-12h2c0 5.514 4.486 10 10 10s10-4.486 10-10-4.486-10-10-10c-2.777 0-5.287 1.141-7.099 2.977l2.061 2.061-6.962 1.354 1.305-7.013 2.179 2.18c2.172-2.196 5.182-3.559 8.516-3.559 6.627 0 12 5.373 12 12zm-13-6v8h7v-2h-5v-6h-2z" />
@@ -146,9 +162,14 @@
                     <span class="flex-1 ml-3 whitespace-nowrap">Histórico</span>
                 </a>
             </li>
-            <li>
+            <li @class(['bg-amber-300 rounded-lg' => request()->routeIs('students.index', 'students.create', 'students.edit', 'students.show')])>
                 <a href="{{route('students.index')}}"
-                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                @class([
+                    'flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white' => true,
+                    'hover:bg-amber-300 dark:hover:bg-gray-700' => !request()->routeIs('teachers.index', 'teachers.create', 'teachers.edit', 'teachers.show'),
+                    'bg-amber-300' => request()->routeIs('students.index', 'students.create', 'students.edit', 'students.show')
+                ])
+                >
                     <svg fill="#284CDA" width="32" height="32" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
                         clip-rule="evenodd" viewBox="0 0 24 24">
                         <path
@@ -157,9 +178,14 @@
                     <span class="flex-1 ml-3 whitespace-nowrap">Alumnos</span>
                 </a>
             </li>
-            <li>
+            <li @class(['bg-amber-300 rounded-lg' => request()->routeIs('teachers.index', 'teachers.create', 'teachers.edit', 'teachers.show')])>
                 <a href="{{route('teachers.index')}}"
-                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                @class([
+                    'flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white' => true,
+                    'hover:bg-amber-300 dark:hover:bg-gray-700' => !request()->routeIs('teachers.index', 'teachers.create', 'teachers.edit', 'teachers.show'),
+                    'bg-amber-300' => request()->routeIs('teachers.index', 'teachers.create', 'teachers.edit', 'teachers.show')
+                ])
+                >
                     <svg fill="#284CDA" width="32" height="32" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
                         clip-rule="evenodd" viewBox="0 0 24 24">
                         <path
@@ -170,7 +196,7 @@
             </li>
             <li>
                 <a href="#"
-                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-amber-300 dark:hover:bg-gray-700">
                     <svg stroke="#284CDA" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"
                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -180,9 +206,14 @@
                     <span class="flex-1 ml-3 whitespace-nowrap">Usuarios</span>
                 </a>
             </li>
-            <li>
+            <li @class(['bg-amber-300 rounded-lg' => request()->routeIs('contributions.index', 'contributions.create', 'contributions.edit', 'contributions.show')])>
                 <a href="{{route('contributions.index')}}"
-                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                @class([
+                    'flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white' => true,
+                    'hover:bg-amber-300 dark:hover:bg-gray-700' => !request()->routeIs('schoolCycles.index'),
+                    'bg-amber-300' => request()->routeIs('contributions.index', 'contributions.create', 'contributions.edit', 'contributions.show')
+                ])
+                >
                     <svg fill="#284CDA" width="32" height="32" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         viewBox="0 0 24 24">
                         <path
@@ -191,9 +222,14 @@
                     <span class="flex-1 ml-3 whitespace-nowrap">Aportaciones</span>
                 </a>
             </li>
-            <li>
+            <li @class(['bg-amber-300 rounded-lg' => request()->routeIs('schoolCycles.index')])>
                 <a href="{{route('schoolCycles.index')}}"
-                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                @class([
+                    'flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white' => true,
+                    'hover:bg-amber-300 dark:hover:bg-gray-700' => !request()->routeIs('schoolCycles.index'),
+                    'bg-amber-300' => request()->routeIs('schoolCycles.index')
+                ])
+                >
                     <svg stroke="#284CDA" width="32" height="32" fill="#FFFFFF" stroke-width="1.5" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -203,9 +239,14 @@
                     <span class="flex-1 ml-3 whitespace-nowrap">Ciclos escolares</span>
                 </a>
             </li>
-            <li>
+            <li @class(['bg-amber-300 rounded-lg' => request()->routeIs('classroom.index')])>
                 <a href="{{route('classroom.index')}}"
-                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                @class([
+                    'flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white' => true,
+                    'hover:bg-amber-300 dark:hover:bg-gray-700' => !request()->routeIs('classroom.index'),
+                    'bg-amber-300' => request()->routeIs('classroom.index')
+                ])
+                >
                     <svg stroke="#284CDA" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round"

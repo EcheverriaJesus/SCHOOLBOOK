@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
-            $table->string('subject_id');
+            $table->char('name');
+            $table->string('shift', 20);
+            $table->smallInteger('grade');
+            $table->boolean('status');
             $table->string('classroom_id');
-            $table->string('cycle_id');
             $table->timestamps();
         });
     }

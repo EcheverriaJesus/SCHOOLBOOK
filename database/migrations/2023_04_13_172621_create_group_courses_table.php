@@ -11,16 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('qualifications', function (Blueprint $table) {
+        Schema::create('group_courses', function (Blueprint $table) {
             $table->id();
-            $table->float('bim1');
-            $table->float('bim2');
-            $table->float('bim3');
-            $table->float('bim4');
-            $table->float('bim5');
-            $table->float('promedio_final');
             $table->string('course_id');
-            $table->string('student_id');
+            $table->string('group_id');
             $table->timestamps();
         });
     }
@@ -30,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('qualifications');
+        Schema::dropIfExists('group_courses');
     }
 };

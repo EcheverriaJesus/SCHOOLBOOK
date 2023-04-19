@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Classroom extends Model
 {
@@ -31,8 +32,8 @@ class Classroom extends Model
         'capacity' => 'integer',
     ];
 
-    public function group(): BelongsTo
+    public function group(): HasOne
     {
-        return $this->belongsTo(Group::class);
+        return $this->hasOne(Group::class);
     }
 }

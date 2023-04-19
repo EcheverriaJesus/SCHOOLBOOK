@@ -58,11 +58,11 @@ models:
         country: string:50 
         relationships:
             hasMany: Student, Tutor, Teacher
-    Student_group:
+    Student_course:
         student_id: foreignIdFor 
-        class_id: foreignIdFor 
+        course_id: foreignIdFor 
         relationships:
-            belongsTo: Student, Group
+            belongsTo: Student, Course
     Classroom:
         classroom_name: string:50 
         building: string:50 
@@ -75,7 +75,7 @@ models:
         end_date: date
         status: boolean 
         relationships:
-            hasMany: Cycle_student, Group
+            hasMany: Cycle_student, Course
     Qualification: 
         bim1: float 
         bim2: float 
@@ -83,8 +83,10 @@ models:
         bim4: float 
         bim5: float 
         promedio_final: float 
+        course_id: foreignIdFor 
+        student_id: foreignIdFor
         relationships:
-            belongsTo: Group, Student
+            belongsTo: Subject, Course, Student
     
     Notice:
         title: string:100 
@@ -95,6 +97,11 @@ models:
         recipient: string:50 
         image: string:255 
         
+    Group_course:
+        course_id: foreignIdFor 
+        group_id: foreignIdFor 
+        relationships:
+            belongsTo: Course, Group
     Teacher:
         first_name: string:50 
         father_surname: string:50 
@@ -112,38 +119,45 @@ models:
             belongsTo: Address
             hasMany: Teacher_subject
     Group: 
-        subject_id: foreignIdFor
+        name: char 
+        shift: string:20
+        grade: smallInteger
+        status: boolean
         classroom_id: foreignIdFor
+        relationships:
+            belongsTo: Classroom
+            hasMany: Group_course
+    Course: 
+        subject_id: foreignIdFor
         cycle_id: foreignIdFor 
         relationships:
-            belongsTo: Subject, Classroom, School_cycle
-            hasMany: Group_student, Group_schedule
-    Group_schedule:
-        group_id: foreignIdFor 
+            belongsTo: Subject
+            hasMany: Group_course, Student_course, Course_schedule, School_cycle
+    Course_schedule:
+        course_id: foreignIdFor 
         schedule_id: foreignIdFor 
         relationships:
-            belongsTo: Group, Schedule
+            belongsTo: Course, Schedule
     Schedule: 
         start_time: time 
         end_time: time 
         day: date 
-        group_id: foreignIdFor 
         relationships:
-            hasMany: Group_schedule
+            hasMany: Course_schedule
     Subject: 
         subject_name: string:50 
         description: text 
         grade: integer 
         syllabus: string:255
         relationships:
-            belongsTo: Group
-            hasMany: Qualification, Teacher_subject
+            belongsTo: Course
+            hasMany: Teacher_subject
     Teacher_subject:
         subject_id: foreignIdFor 
         teacher_id: foreignIdFor 
         relationships:
-            belongsTo: Subject, Teacher
-seeders: Contribution, Tutor, Document, Student, Student_cycle, Address, Student_group, Classroom, School_cycle, Grade, User, Notice, Teacher, Group, Group_schedule, Schedule, Subject, Subject_teacher
+            belongsTo: Subject, Teacher, Class
+seeders: Contribution, Tutor, Document, Student, Student_cycle, Address, Student_course, Classroom, School_cycle, User, Notice, Group_course, Teacher, Group, Course, Course_schedule, Schedule, Subject, Subject_teacher
 controllers:
     Contribution:
         resource: web
@@ -166,6 +180,8 @@ controllers:
     Teacher:
         resource: web
     Group:
+        resource: web
+    Course:
         resource: web
     Schedule:
         resource: web

@@ -18,7 +18,7 @@ $noticesCount = count($notices);
 </div>
 
 <!-- Slider -->
-<div class="mb-4 relative w-full" data-carousel="slide">
+<div class="relative w-full mb-4" data-carousel="slide">
     <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
          {{-- Imagenes --}}
          @foreach ($notices as $notice)
@@ -59,7 +59,7 @@ $noticesCount = count($notices);
 @foreach ($notices as $notice)
 
 {{-- Imagen --}}
-   <div class="bg-white w-auto sm:bg-white w-full h-auto shadow-2xl rounded-xl mb-10 p-6 space-y-6 border">
+   <div class="w-auto w-full h-auto p-6 mb-10 space-y-6 bg-white border shadow-2xl sm:bg-white rounded-xl">
      <img class="w-full rounded-lg" src="{{ asset('storage/imageNotice/' . $notice->image) }}"alt="{{ 'Imagen aviso ' . $notice->title }}">
      
      {{-- Titulo --}}
@@ -71,11 +71,11 @@ $noticesCount = count($notices);
 <div>
  <div class="flex flex-col">
         <p class="font-semibold">Fecha de Publicacion: </p>
-        <p class="text-slate-400 font-normal tracking-wider">{{ $notice->start_date }}</p>
+        <p class="font-normal tracking-wider text-slate-400">{{ $notice->start_date }}</p>
     </div>
     <div class="flex flex-col">
         <p class="font-semibold">Dirijido a: </p>
-        <p class="text-slate-400 font-normal tracking-wider">{{ $notice->recipient }}</p>
+        <p class="font-normal tracking-wider text-slate-400">{{ $notice->recipient }}</p>
     </div>
 
     

@@ -4,7 +4,7 @@
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 
                <x-button_back>
-                <x-slot name="route"> {{route('subjects.index')}} </x-slot>
+                <x-slot name="route"> {{route('groups.index')}} </x-slot>
                  {{ __('teachers.index') }}
                </x-button_back>
 
@@ -19,7 +19,7 @@
                     </div>
                     @endif
                     <div class="p-5 md:justify-center md:flex">
-                        <livewire:grupos.crear-grupo />
+                        <livewire:grupos.crear-grupo /> 
                     </div>
                 </div>
             </div>

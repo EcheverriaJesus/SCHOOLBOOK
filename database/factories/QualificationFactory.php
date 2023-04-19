@@ -27,6 +27,8 @@ class QualificationFactory extends Factory
             'bim4' => $this->faker->randomFloat(0, 0, 9999999999.),
             'bim5' => $this->faker->randomFloat(0, 0, 9999999999.),
             'promedio_final' => $this->faker->randomFloat(0, 0, 9999999999.),
+            'course_id' => $this->faker->word,
+            'student_id' => $this->faker->word,
         ];
     }
 }
