@@ -41,8 +41,8 @@ models:
         tutor_id: foreignIdFor
         document_id: foreignIdFor
         relationships:
-            belongsTo: Address, Tutor
-            hasMany: Student_cycle, Contribution, Document
+            belongsTo: Address, Tutor, Document
+            hasMany: Student_cycle, Contribution
     Student_cycle:
         student_id: foreignIdFor 
         cycle_id: foreignIdFor 

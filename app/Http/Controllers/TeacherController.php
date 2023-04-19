@@ -8,6 +8,7 @@ use App\Models\Teacher;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use LaravelLang\Lang\Plugins\Breeze\V1;
 
 class TeacherController extends Controller
 {

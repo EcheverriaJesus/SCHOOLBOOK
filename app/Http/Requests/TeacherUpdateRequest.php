@@ -23,7 +23,7 @@ class TeacherUpdateRequest extends FormRequest
             'id_teacher' => ['required'],
             'first_name' => ['required', 'string', 'max:50'],
             'father_surname' => ['required', 'string', 'max:50'],
-            'father's_last_name' => ['required', 'string', 'max:50'],
+            'fathers_last_name' => ['required', 'string', 'max:50'],
             'phone' => ['required', 'string'],
             'email' => ['required', 'email'],
             'curp' => ['required', 'string'],

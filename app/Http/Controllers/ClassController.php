@@ -13,7 +13,7 @@ class ClassController extends Controller
 {
     public function index(Request $request): Response
     {
-        $classes = Class::all();
+        $classes = Classe::all();
 
         return view('class.index', compact('classes'));
     }
@@ -25,24 +25,24 @@ class ClassController extends Controller
 
     public function store(ClassStoreRequest $request): Response
     {
-        $class = Class::create($request->validated());
+        $class = Classe::create($request->validated());
 
         $request->session()->flash('class.id', $class->id);
 
         return redirect()->route('class.index');
     }
 
-    public function show(Request $request, Class $class): Response
+    public function show(Request $request, Classe $class): Response
     {
         return view('class.show', compact('class'));
     }
 
-    public function edit(Request $request, Class $class): Response
+    public function edit(Request $request, Classe $class): Response
     {
         return view('class.edit', compact('class'));
     }
 
-    public function update(ClassUpdateRequest $request, Class $class): Response
+    public function update(ClasseUpdateRequest $request, Classe $class): Response
     {
         $class->update($request->validated());
 
@@ -51,7 +51,7 @@ class ClassController extends Controller
         return redirect()->route('class.index');
     }
 
-    public function destroy(Request $request, Class $class): Response
+    public function destroy(Request $request, Classe $class): Response
     {
         $class->delete();
 

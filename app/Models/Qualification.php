@@ -41,9 +41,14 @@ class Qualification extends Model
         'promedio_final' => 'float',
     ];
 
-    public function subject(): BelongsTo
+    public function group(): BelongsTo
     {
-        return $this->belongsTo(Subject::class);
+        return $this->belongsTo(Group::class);
+    }
+
+    public function student(): BelongsTo
+    {
+        return $this->belongsTo(Student::class);
     }
 
     public function course(): BelongsTo

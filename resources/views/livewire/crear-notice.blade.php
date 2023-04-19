@@ -1,4 +1,4 @@
-<form action="" class="space-y-5 md:w-1/2" wire:submit.prevent='crearNotice'>
+<form action="" class="" wire:submit.prevent='crearNotice'>
     
     <section class="bg-white w-auto sm:bg-white w-full h-auto shadow-2xl rounded-xl mb-10 p-6 space-y-6 border">
         <h2 class="flex justify-center text-xl font-bold text-indigo-600">Informacion del Aviso</h2>
@@ -39,13 +39,16 @@
         </div>
     </div>
     <div>
-        <x-label for="status" value="{{ __('Estado') }}" />
-        <x-input id="status" class="block w-1/6 mt-1" type="checkbox" wire:model="status" {{-- DEJAR WIRE  --}}
-            :value="old('status')" />
+        <x-label class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="status" value="{{ __('Estado') }}" />
+        <x-input id="status" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" wire:model="status" {{-- DEJAR WIRE  --}}
+            :value="old('status')" />Activo
         <div class="block mt-2">
             <x-alert-danger :messages="$errors->get('status')"/>
         </div>
     </div>
+
+   
+
     <div>
         <x-label for="recipient" value="{{ __('Dirigido a') }}" />
         <x-input id="recipient" class="block w-full mt-1" type="text" wire:model="recipient" {{-- DEJAR WIRE  --}}

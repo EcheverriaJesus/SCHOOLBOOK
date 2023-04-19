@@ -162,9 +162,14 @@
                     <span class="flex-1 ml-3 whitespace-nowrap">Histórico</span>
                 </a>
             </li>
-            <li>
-                <a href="#"
-                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-amber-300 dark:hover:bg-gray-700">
+            <li @class(['bg-amber-300 rounded-lg' => request()->routeIs('students.index', 'students.create', 'students.edit', 'students.show')])>
+                <a href="{{route('students.index')}}"
+                @class([
+                    'flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white' => true,
+                    'hover:bg-amber-300 dark:hover:bg-gray-700' => !request()->routeIs('teachers.index', 'teachers.create', 'teachers.edit', 'teachers.show'),
+                    'bg-amber-300' => request()->routeIs('students.index', 'students.create', 'students.edit', 'students.show')
+                ])
+                >
                     <svg fill="#284CDA" width="32" height="32" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
                         clip-rule="evenodd" viewBox="0 0 24 24">
                         <path
@@ -201,9 +206,14 @@
                     <span class="flex-1 ml-3 whitespace-nowrap">Usuarios</span>
                 </a>
             </li>
-            <li>
-                <a href="#"
-                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-amber-300 dark:hover:bg-gray-700">
+            <li @class(['bg-amber-300 rounded-lg' => request()->routeIs('contributions.index', 'contributions.create', 'contributions.edit', 'contributions.show')])>
+                <a href="{{route('contributions.index')}}"
+                @class([
+                    'flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white' => true,
+                    'hover:bg-amber-300 dark:hover:bg-gray-700' => !request()->routeIs('schoolCycles.index'),
+                    'bg-amber-300' => request()->routeIs('contributions.index', 'contributions.create', 'contributions.edit', 'contributions.show')
+                ])
+                >
                     <svg fill="#284CDA" width="32" height="32" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         viewBox="0 0 24 24">
                         <path

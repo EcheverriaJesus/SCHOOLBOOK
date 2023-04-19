@@ -36,7 +36,7 @@
             </select>
 
             <div class="block mt-2">
-                <x-alert-danger :messages="$errors->get('grado')" />
+                <x-alert-danger :messages="$errors->get('materia')" />
             </div>
         </div>
 
@@ -101,11 +101,12 @@
                 <option value="{{$aula->id}}">{{$aula->classroom_name}}</option>
                 @endforeach
             </select>
-
             <div class="block mt-2">
                 <x-alert-danger :messages="$errors->get('aula')" />
             </div>
         </div>
+
+        
         
     </section>
 
