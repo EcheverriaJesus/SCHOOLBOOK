@@ -60,6 +60,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
+    <link rel="icon" href="../../images/logo.png">
     @vite(['resources/css/main.scss', 'resources/js/app.js'])
     <title>Log in</title>
 </head>

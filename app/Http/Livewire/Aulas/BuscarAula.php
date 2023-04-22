@@ -7,7 +7,6 @@ use Livewire\Component;
 class BuscarAula extends Component
 {
     public $searchClassroom;
-
     protected $queryString = [ 'searchClassroom'];
 
     public function render()
