@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Student;
 use Livewire\Component;
 
 class MuestraAlumno extends Component
@@ -10,6 +11,11 @@ class MuestraAlumno extends Component
 
     public function render()
     {
-        return view('livewire.muestra-alumno');
+        
+        //$studentId = $this->student->studentID;
+        $student = Student::where('studentID', $this->student->studentID)->first();
+        return view('livewire.muestra-alumno',[
+            'student' => $student
+        ]);
     }
 }

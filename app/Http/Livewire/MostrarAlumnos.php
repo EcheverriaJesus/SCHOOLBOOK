@@ -54,7 +54,8 @@ class MostrarAlumnos extends Component
         $students = Student::when($this->searchTerm,function($query){
             $query->where('student_name','LIKE',"%" .$this->searchTerm ."%")
             ->orWhere('paternal_surname','LIKE',"%" .$this->searchTerm ."%")
-            ->orWhere('maternal_surname','LIKE',"%" .$this->searchTerm ."%");
+            ->orWhere('maternal_surname','LIKE',"%" .$this->searchTerm ."%")
+            ->orWhere('studentID','LIKE',"%" .$this->searchTerm ."%");
         })
         ->paginate(8);
         return view('livewire.mostrar-alumnos',[

@@ -128,8 +128,10 @@ models:
             belongsTo: Classroom
             hasMany: Group_course
     Course: 
+        name: string:80
         subject_id: foreignIdFor
         cycle_id: foreignIdFor 
+        status: boolean
         relationships:
             belongsTo: Subject
             hasMany: Group_course, Student_course, Course_schedule, School_cycle

@@ -15,38 +15,41 @@
     </div>
 
     {{-- Informacion del Alumno --}}
-    <article class="bg-white w-auto sm:bg-white w-full h-auto shadow-xl rounded-xl mb-10 border">
-        <h2 class="pb-5 pt-5 flex justify-center text-xl font-bold text-indigo-600">General</h2>
-        <section class="sm:flex justify-around pb-5">
-        <div class="flex justify-center items-center h-auto">
+    <article class="w-auto w-full h-auto mb-10 bg-white border shadow-xl sm:bg-white rounded-xl">
+        <h2 class="flex justify-center pt-5 pb-5 text-xl font-bold text-indigo-600">General</h2>
+        <section class="justify-around pb-5 sm:flex">
+        <div class="flex items-center justify-center h-auto">
                 <img class="transition delay-700 duration-300 ease-in-out w-40 overflow-hidden rounded-[50%] shadow-2xl flex items-center justify-center"
                     src="{{ asset('storage/imageStudents/' . $student->photo) }}"
                     alt="{{ 'Imagen ' . $student->student_name }}">
             </div>      
             <div class="space-y-3">
-                <p class="pt-5 sm:text-base font-semibold">Nombre:
-                    <span class="font-normal normal-case text-gray-600">{{ $student->student_name . ' ' . $student->paternal_surname . ' ' . $student->maternal_surname }}</span>
+                <p class="pt-5 font-semibold sm:text-base">Nombre:
+                    <span class="font-normal text-gray-600 normal-case">{{ $student->student_name . ' ' . $student->paternal_surname . ' ' . $student->maternal_surname }}</span>
+                </p>
+                <p class="font-semibold sm:text-base">Matricula:
+                    <span class="font-normal text-gray-600 normal-case">{{ $student->studentID}}</span>
                 </p>
                 <p class="text-base font-semibold">Grado:
-                    <span class="font-normal normal-case text-gray-600">{{ $student->grade }}</span>
+                    <span class="font-normal text-gray-600 normal-case">{{ $student->grade }}</span>
                 </p>
                 <p class="text-base font-semibold">Fecha de Nacimiento:
-                    <span class="font-normal normal-case text-gray-600">{{ $student->birth_date }}</span>
+                    <span class="font-normal text-gray-600 normal-case">{{ $student->birth_date }}</span>
                 </p>
                 <p class="text-base font-semibold">CURP:
-                    <span class="font-normal normal-case text-gray-600">{{ $student->curp }}</span>
+                    <span class="font-normal text-gray-600 normal-case">{{ $student->curp }}</span>
                 </p>
                 <p class="text-base font-semibold">Genero:
-                    <span class="font-normal normal-case text-gray-600">{{ $student->gender }}</span>
+                    <span class="font-normal text-gray-600 normal-case">{{ $student->gender }}</span>
                 </p>
                 <p class="text-base font-semibold">Email:
-                    <span class="font-normal normal-case text-gray-600">{{ $student->email }}</span>
+                    <span class="font-normal text-gray-600 normal-case">{{ $student->email }}</span>
                 </p>
                 <p class="text-base font-semibold">Telefono:
-                    <span class="font-normal normal-case text-gray-600">{{ $student->phone }}</span>
+                    <span class="font-normal text-gray-600 normal-case">{{ $student->phone }}</span>
                 </p>
                 <p class="text-base font-semibold">Estado:
-                    <span class="font-normal normal-case text-gray-600">
+                    <span class="font-normal text-gray-600 normal-case">
                         @switch($student->status)
                         @case('0')
                             {{'Inactivo'}}
@@ -63,42 +66,42 @@
     </article>
 
     {{-- Informacion Contacto --}}
-    <section class="bg-white w-auto sm:bg-white w-full h-auto shadow-xl rounded-xl mb-10 border">
-        <h2 class="pb-5 pt-5 flex justify-center text-xl font-bold text-indigo-600">Contacto</h2>
-        <div class="p-4 grid grid-cols-2 space-y-3">
+    <section class="w-auto w-full h-auto mb-10 bg-white border shadow-xl sm:bg-white rounded-xl">
+        <h2 class="flex justify-center pt-5 pb-5 text-xl font-bold text-indigo-600">Contacto</h2>
+        <div class="grid grid-cols-2 p-4 space-y-3">
             <p class="text-base font-semibold">Calle:
-                <span class="font-normal normal-case text-gray-600">{{ $student->address->street }}</span>
+                <span class="font-normal text-gray-600 normal-case">{{ $student->address->street }}</span>
             </p>
             <p class="text-base font-semibold">No Interior:
-                <span class="font-normal normal-case text-gray-600">{{ $student->address->num_int }}</span>
+                <span class="font-normal text-gray-600 normal-case">{{ $student->address->num_int }}</span>
             </p>
             <p class="text-base font-semibold">No Exterior:
-                <span class="font-normal normal-case text-gray-600">{{ $student->address->num_ext }}</span>
+                <span class="font-normal text-gray-600 normal-case">{{ $student->address->num_ext }}</span>
             </p>
             <p class="text-base font-semibold">Colonia/Fraccionamineto:
-                <span class="font-normal normal-case text-gray-600">{{ $student->address->neighborhood }}</span>
+                <span class="font-normal text-gray-600 normal-case">{{ $student->address->neighborhood }}</span>
             </p>
             <p class="text-base font-semibold">Municipio:
-                <span class="font-normal normal-case text-gray-600">{{ $student->address->city }}</span>
+                <span class="font-normal text-gray-600 normal-case">{{ $student->address->city }}</span>
             </p>
             <p class="text-base font-semibold">Estado:
-                <span class="font-normal normal-case text-gray-600">{{ $student->address->state }}</span>
+                <span class="font-normal text-gray-600 normal-case">{{ $student->address->state }}</span>
             </p>
             <p class="text-base font-semibold">Pais:
-                <span class="font-normal normal-case text-gray-600">{{ $student->address->country }}</span>
+                <span class="font-normal text-gray-600 normal-case">{{ $student->address->country }}</span>
             </p>
         </div>
     </section>
 
 {{-- Documentacion --}}
-    <section class="bg-white w-auto sm:bg-white w-full h-auto shadow-xl rounded-xl mb-10 border">
-        <h2 class="pb-5 pt-5 flex justify-center text-xl font-bold text-indigo-600">Documentos</h2>
-        <div class="p-4 grid grid-cols-2 space-y-3">
+    <section class="w-auto w-full h-auto mb-10 bg-white border shadow-xl sm:bg-white rounded-xl">
+        <h2 class="flex justify-center pt-5 pb-5 text-xl font-bold text-indigo-600">Documentos</h2>
+        <div class="grid grid-cols-2 p-4 space-y-3">
             <p class="text-base font-semibold">Nombre del Documento:
-                <span class="font-normal normal-case text-gray-600">{{ $student->document->document_name }}</span>
+                <span class="font-normal text-gray-600 normal-case">{{ $student->document->document_name }}</span>
             </p>
             <p class="text-base font-semibold">Estado del Documento:
-                    <span class="font-normal normal-case text-gray-600">
+                    <span class="font-normal text-gray-600 normal-case">
                         @switch($student->document->status)
                         @case('0')
                             {{'Inactivo'}}
@@ -119,49 +122,49 @@
     </section>
 
     {{-- Datos Tutor--}}
-    <section class="bg-white w-auto sm:bg-white w-full h-auto shadow-xl rounded-xl mb-10 border">
-        <h2 class="pb-5 pt-5 flex justify-center text-xl font-bold text-indigo-600">Documentos</h2>
-        <div class="p-4 grid grid-cols-2 space-y-3">
+    <section class="w-auto w-full h-auto mb-10 bg-white border shadow-xl sm:bg-white rounded-xl">
+        <h2 class="flex justify-center pt-5 pb-5 text-xl font-bold text-indigo-600">Documentos</h2>
+        <div class="grid grid-cols-2 p-4 space-y-3">
             <p class="text-base font-semibold">Nombre del Tutor:
-                <span class="font-normal normal-case text-gray-600">{{ $student->tutor->tutor_name }}</span>
+                <span class="font-normal text-gray-600 normal-case">{{ $student->tutor->tutor_name }}</span>
             </p>
             <p class="text-base font-semibold">Apellido Paterno:
-                <span class="font-normal normal-case text-gray-600">{{ $student->tutor->paternal_surname }}</span>
+                <span class="font-normal text-gray-600 normal-case">{{ $student->tutor->paternal_surname }}</span>
             </p>
             <p class="text-base font-semibold">Apellido Materno:
-                <span class="font-normal normal-case text-gray-600">{{ $student->tutor->maternal_surname }}</span>
+                <span class="font-normal text-gray-600 normal-case">{{ $student->tutor->maternal_surname }}</span>
             </p>
             <p class="text-base font-semibold">Genero:
-                <span class="font-normal normal-case text-gray-600">{{ $student->tutor->gender }}</span>
+                <span class="font-normal text-gray-600 normal-case">{{ $student->tutor->gender }}</span>
             </p>
             <p class="text-base font-semibold">Email:
-                <span class="font-normal normal-case text-gray-600">{{ $student->tutor->email }}</span>
+                <span class="font-normal text-gray-600 normal-case">{{ $student->tutor->email }}</span>
             </p>
             <p class="text-base font-semibold">Telefono:
-                <span class="font-normal normal-case text-gray-600">{{ $student->tutor->phone }}</span>
+                <span class="font-normal text-gray-600 normal-case">{{ $student->tutor->phone }}</span>
             </p>
         </div>
-        <div class="p-4 grid grid-cols-2 space-y-3">
+        <div class="grid grid-cols-2 p-4 space-y-3">
         <p class="text-base font-semibold">Calle:
-                <span class="font-normal normal-case text-gray-600">{{ $student->tutor->address->street }}</span>
+                <span class="font-normal text-gray-600 normal-case">{{ $student->tutor->address->street }}</span>
             </p>
             <p class="text-base font-semibold">No Interior:
-                <span class="font-normal normal-case text-gray-600">{{ $student->tutor->address->num_int }}</span>
+                <span class="font-normal text-gray-600 normal-case">{{ $student->tutor->address->num_int }}</span>
             </p>
             <p class="text-base font-semibold">No Exterior:
-                <span class="font-normal normal-case text-gray-600">{{ $student->tutor->address->num_ext }}</span>
+                <span class="font-normal text-gray-600 normal-case">{{ $student->tutor->address->num_ext }}</span>
             </p>
             <p class="text-base font-semibold">Colonia/Fraccionamineto:
-                <span class="font-normal normal-case text-gray-600">{{ $student->tutor->address->neighborhood }}</span>
+                <span class="font-normal text-gray-600 normal-case">{{ $student->tutor->address->neighborhood }}</span>
             </p>
             <p class="text-base font-semibold">Municipio:
-                <span class="font-normal normal-case text-gray-600">{{ $student->tutor->address->city }}</span>
+                <span class="font-normal text-gray-600 normal-case">{{ $student->tutor->address->city }}</span>
             </p>
             <p class="text-base font-semibold">Estado:
-                <span class="font-normal normal-case text-gray-600">{{ $student->tutor->address->state }}</span>
+                <span class="font-normal text-gray-600 normal-case">{{ $student->tutor->address->state }}</span>
             </p>
             <p class="text-base font-semibold">Pais:
-                <span class="font-normal normal-case text-gray-600">{{ $student->tutor->address->country }}</span>
+                <span class="font-normal text-gray-600 normal-case">{{ $student->tutor->address->country }}</span>
             </p>
         </div>
     </section>

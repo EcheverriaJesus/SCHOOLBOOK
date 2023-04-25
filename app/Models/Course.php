@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Course extends Model
 {
@@ -17,8 +18,10 @@ class Course extends Model
      * @var array
      */
     protected $fillable = [
+        'name',
         'subject_id',
         'cycle_id',
+        'status'
     ];
 
     /**
@@ -37,7 +40,7 @@ class Course extends Model
 
     public function groupCourses(): HasMany
     {
-        return $this->hasMany(GroupCourse::class);
+        return $this->hasMany(Group_course::class);
     }
 
     public function studentCourses(): HasMany
@@ -50,8 +53,8 @@ class Course extends Model
         return $this->hasMany(CourseSchedule::class);
     }
 
-    public function schoolCycles(): HasMany
+    public function schoolCycles(): BelongsTo
     {
-        return $this->hasMany(SchoolCycle::class);
+        return $this->belongsTo(School_cycle::class, 'cycle_id');
     }
 }

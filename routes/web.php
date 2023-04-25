@@ -10,6 +10,7 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\ContributionController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\School_cycleController;
 
 /*
@@ -62,7 +63,7 @@ Route::resource('classroom', ClassroomController::class)
         'edit' => 'classroom.edit',
     ]);
 
-    Route::resource('Contribution', ContributionController::class)
+Route::resource('Contribution', ContributionController::class)
     ->middleware('auth:sanctum')
     ->names([
         'index' => 'contributions.index',
@@ -70,7 +71,7 @@ Route::resource('classroom', ClassroomController::class)
         'edit' => 'contributions.edit'
     ]);
 
-    Route::resource('groups', GroupController::class)
+Route::resource('groups', GroupController::class)
     ->middleware('auth:sanctum')
     ->names([
         'index' => 'groups.index',
@@ -79,7 +80,7 @@ Route::resource('classroom', ClassroomController::class)
         'edit' => 'groups.edit',
     ]);
 
- Route::resource('subjects', SubjectController::class)
+Route::resource('subjects', SubjectController::class)
     ->middleware('auth:sanctum')
     ->names([
         'index' => 'subjects.index',
@@ -88,17 +89,26 @@ Route::resource('classroom', ClassroomController::class)
         'edit' => 'subjects.edit',
     ]);
 
+Route::resource('courses', CourseController::class)
+    ->middleware('auth:sanctum')
+    ->names([
+        'index' => 'courses.index',
+        'create' => 'courses.create',
+        'show' => 'courses.show',
+        'edit' => 'courses.edit',
+    ]);
+
 Route::resource('schoolCycles', School_cycleController::class)
     ->middleware('auth:sanctum')
     ->names([
         'index' => 'schoolCycles.index',
     ]);
- 
 
-Route::get('/students', [StudentController::class,'index']) -> middleware('auth:sanctum')->name('students.index');
-Route::get('/students/create', [StudentController::class,'create']) -> middleware('auth:sanctum') ->name('students.create');
-Route::get('/students/{student}',[StudentController::class,'show'])-> middleware('auth:sanctum')->name('students.show');
-Route::get('/students/{student}/edit',[TeacherController::class,'edit'])-> middleware('auth:sanctum')->name('students.edit');
+
+Route::get('/students', [StudentController::class, 'index'])->middleware('auth:sanctum')->name('students.index');
+Route::get('/students/create', [StudentController::class, 'create'])->middleware('auth:sanctum')->name('students.create');
+Route::get('/students/{student}', [StudentController::class, 'show'])->middleware('auth:sanctum')->name('students.show');
+Route::get('/students/{student}/edit', [TeacherController::class, 'edit'])->middleware('auth:sanctum')->name('students.edit');
 
 Route::resource('tutor', App\Http\Controllers\TutorController::class);
 
