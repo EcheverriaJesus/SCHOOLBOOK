@@ -2,9 +2,11 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
+use App\Models\Subject;
 use App\Models\Course;
+use App\Models\School_cycle;
+use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CourseFactory extends Factory
 {
@@ -21,8 +23,10 @@ class CourseFactory extends Factory
     public function definition(): array
     {
         return [
-            'subject_id' => $this->faker->word,
-            'cycle_id' => $this->faker->word,
+            'name' => $this->faker->name,
+            'subject_id' => Subject::all()->random()->id,
+            'cycle_id' => School_cycle::all()->random()->id,
+            'status' => $this->faker->boolean
         ];
     }
 }

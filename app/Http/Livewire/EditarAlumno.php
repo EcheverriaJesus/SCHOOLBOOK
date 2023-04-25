@@ -95,7 +95,7 @@ class EditarAlumno extends Component
     ];
 
     public function mount(Student $student){
-        $this->student_id = $student->id;
+        $this->student_id = $student->studentID;
         $this->address_id = $student->address_id; 
         $this->document_id = $student->document_id; 
         $this->tutor_id = $student->tutor_id; 
