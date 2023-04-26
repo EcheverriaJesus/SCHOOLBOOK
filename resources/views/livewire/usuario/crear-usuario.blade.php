@@ -9,7 +9,7 @@
             </svg>
             <label class="ml-1">Añadir</label>
         </button>
-    
+      
         <div wire:ignore.self id="authentication-modal" tabindex="-1" aria-hidden="true" 
         class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
     <div class="relative w-full h-full max-w-md md:h-auto">
@@ -27,36 +27,6 @@
                     </button>
                     <div class="px-6 py-6 lg:px-8">
                         <h3 class="text-2xl font-extrabold text-indigo-600 pb-5">Registrar Usuario</h3>
-                        <form method="POST" action="{{ route('register') }}">
-                            @csrf
-                
-                            <div>
-                                <x-label for="name" value="{{ __('Name') }}" />
-                                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-                            </div>
-                
-                            <div class="mt-4">
-                                <x-label for="email" value="{{ __('Email') }}" />
-                                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-                            </div>
-                
-                            <div class="mt-4">
-                                <x-label for="password" value="{{ __('Password') }}" />
-                                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-                            </div>
-                
-                            <div class="mt-4">
-                                <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-                            </div>
-                
-                            <div class="flex items-center justify-end mt-4">
-                                <x-button class="ml-4">
-                                    {{ __('Registrar') }}
-                                </x-button>
-                            </div>
-                        </form>
-    
                     </div>
         </div>
     </div>

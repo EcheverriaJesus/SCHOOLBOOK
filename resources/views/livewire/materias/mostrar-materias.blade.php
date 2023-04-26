@@ -34,8 +34,7 @@
                     </div>
                 </li>
             </ul>
-
-        </div>
+        </div>  
         <div class="flex justify-end my-5">
             <a href="{{route('subjects.create')}}"
                 class="flex items-center px-4 py-2 font-semibold tracking-widest text-white transition duration-150 ease-in-out bg-blue-700 border rounded-md tet-sm border-transparet hover:bg-blue-600">
@@ -46,7 +45,7 @@
                 </svg>
                 <label class="ml-1 text-sm">Añadir</label>
             </a>
-        </div>
+        </div>     
     </div>
 
     <div class="w-full h-auto p-6 mb-10 space-y-6 bg-white border shadow-2xl sm:bg-white rounded-xl">

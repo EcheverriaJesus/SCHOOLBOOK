@@ -103,7 +103,8 @@
                     <span class="ml-3">Inicio</span>
                 </a>
             </li>
-            <li>
+            @role('admin|coordinador')
+             <li>
                 <a href="{{route('subjects.index')}}"
                     class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                     <svg fill="#284CDA" width="32" height="32" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
@@ -114,6 +115,8 @@
                     <span class="flex-1 ml-3 whitespace-nowrap">Materias</span>
                 </a>
             </li>
+            @endrole
+           
             <li>
                 <a href="{{route('classroom.create')}}"
                     class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -146,7 +149,8 @@
                     <span class="flex-1 ml-3 whitespace-nowrap">Histórico</span>
                 </a>
             </li>
-            <li>
+            @role('admin|coordinador')
+             <li>
                 <a href="#"
                     class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                     <svg fill="#284CDA" width="32" height="32" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
@@ -157,7 +161,9 @@
                     <span class="flex-1 ml-3 whitespace-nowrap">Alumnos</span>
                 </a>
             </li>
-            <li>
+            @endrole
+            @role('admin|coordinador')
+             <li>
                 <a href="{{route('teachers.index')}}"
                     class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                     <svg fill="#284CDA" width="32" height="32" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
@@ -168,6 +174,8 @@
                     <span class="flex-1 ml-3 whitespace-nowrap">Docentes</span>
                 </a>
             </li>
+            @endrole
+           
             <li>
                 <a href="{{route('user.index')}}"
                     class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -180,6 +188,7 @@
                     <span class="flex-1 ml-3 whitespace-nowrap">Usuarios</span>
                 </a>
             </li>
+            @role('admin|coordinador')
             <li>
                 <a href="#"
                     class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -191,6 +200,8 @@
                     <span class="flex-1 ml-3 whitespace-nowrap">Aportaciones</span>
                 </a>
             </li>
+            @endrole
+            @role('admin|coordinador')
             <li>
                 <a href="{{route('schoolCycles.index')}}"
                     class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -203,7 +214,9 @@
                     <span class="flex-1 ml-3 whitespace-nowrap">Ciclos escolares</span>
                 </a>
             </li>
-            <li>
+            @endrole
+            @role('admin|coordinador')
+             <li>
                 <a href="{{route('classroom.index')}}"
                     class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                     <svg stroke="#284CDA" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
@@ -215,6 +228,8 @@
                     <span class="flex-1 ml-3 whitespace-nowrap">Aulas</span>
                 </a>
             </li>
+            @endrole
+           
         </ul>
     </div>
 </aside>

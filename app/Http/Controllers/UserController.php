@@ -9,6 +9,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
+use Spatie\Permission\Models\Role;
+
+
 class UserController extends Controller
 {
     /**
@@ -48,17 +51,25 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user): Response
+    public function edit(User $user): View
     {
-        //
+        $roles = Role::all();
+        return view('user.edit', compact('user','roles'));
     }
+
+    /* public function edit(User $user): View
+    {
+        $roles = Role::all();
+        return view('user.edit', compact('user','roles'));
+    } */
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, User $user): RedirectResponse
     {
-        //
+        $user->roles()->sync($request->roles);
+        return redirect()->route('user.index', $user)->with('info', 'Se asignaron los roles correctamente');
     }
 
     /**

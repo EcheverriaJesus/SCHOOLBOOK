@@ -5,7 +5,7 @@
         </div>
         <div class="block w-full mb-2 md:justify-between md:flex"> 
             <livewire:usuario.buscar-usuario />
-            <livewire:usuario.crear-usuario />
+            <livewire:usuario.crear-usuario />     
         </div>
             <div class="w-full h-auto p-6 mb-10 space-y-6 bg-white border shadow-2xl sm:bg-white rounded-xl">
                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -25,14 +25,14 @@
                                  <td class="px-6 py-4 text-center">{{ $user->name }}</td>
                                  <td class="px-6 py-4 text-center">{{ $user->email }}</td>
                                  <td class="flex justify-center px-6 py-4 space-x-4 text-center">
-                                    <button wire:click="$emit('setData', {{$user->id}})" data-modal-target="authentication-modal-edit" data-modal-toggle="authentication-modal-edit"
-                                        class="flex justify-center gap-2 px-2 py-2 text-xs font-bold text-white uppercase bg-green-600 rounded-lg">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <a href="{{route('user.edit',$user->id)}}"
+                                        class="flex justify-center gap-2 px-4 py-2 text-xs font-bold text-white uppercase bg-green-600 rounded-lg">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                            stroke="currentColor" class="w-6 h-6">
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                                         </svg>
-                                    </button>
+                                    </a>
                                     <button wire:click="$emit('mostrarAlerta', {{$user->id}})"
                                         class="flex justify-center gap-2 px-2 py-2 text-xs font-bold text-white uppercase bg-red-600 rounded-lg">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
