@@ -34,9 +34,9 @@
                     </div>
                 </li>
             </ul>
-
-        </div>
-        <div class="flex justify-end my-5">
+        </div>  
+        @role('admin|coordinador')
+         <div class="flex justify-end my-5">
             <a href="{{route('subjects.create')}}"
                 class="flex items-center px-4 py-2 font-semibold tracking-widest text-white transition duration-150 ease-in-out bg-blue-700 border rounded-md tet-sm border-transparet hover:bg-blue-600">
                 <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
@@ -46,7 +46,8 @@
                 </svg>
                 <label class="ml-1 text-sm">Añadir</label>
             </a>
-        </div>
+        </div> 
+        @endrole
     </div>
 
     <div class="w-full h-auto p-6 mb-10 space-y-6 bg-white border shadow-2xl sm:bg-white rounded-xl">
@@ -60,9 +61,11 @@
                         <th scope="col" class="px-6 py-3 text-center">
                             Grado
                         </th>
-                        <th scope="col" class="px-6 py-3 text-center">
+                        @role('admin|coordinador')
+                         <th scope="col" class="px-6 py-3 text-center">
                             Acciones
                         </th>
+                        @endrole
                     </tr>
                 </thead>
                 <tbody>
@@ -76,6 +79,7 @@
                         <td class="px-6 py-4 text-center">
                             {{$subject->grade}}
                         </td>
+                        @role('admin|coordinador')
                         <td class="flex justify-center px-6 py-4 space-x-4 text-center">
                             <a href="{{route('subjects.show', $subject)}}"
                                 class="flex justify-center gap-2 px-2 py-2 text-xs font-bold text-white uppercase bg-indigo-600 rounded-lg">
@@ -106,6 +110,7 @@
                                 </svg>
                             </button>
                         </td>
+                        @endrole
                     </tr>
                     @endforeach
                 </tbody>

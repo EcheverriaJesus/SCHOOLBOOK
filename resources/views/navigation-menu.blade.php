@@ -196,7 +196,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#"
+                    <a href="{{route('user.index')}}"
                         class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-amber-300 dark:hover:bg-gray-700">
                         <svg stroke="#284CDA" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"
                             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
