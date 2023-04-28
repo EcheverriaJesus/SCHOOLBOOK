@@ -9,7 +9,7 @@ class MostrarNotice extends Component
 {
     public $searchTerm;
     protected $listeners = [
-        'deleteTeacher',
+        'deleteNotice',
         'search' => 'setData'
     ];
 
@@ -33,7 +33,6 @@ class MostrarNotice extends Component
             $notice->delete();
     
             // Emitir un evento para actualizar la lista de avisos
-            $this->emit('noticeDeleted');
         }
     }
 
