@@ -58,3 +58,31 @@
             </div>
 
 </div>
+
+@push('scripts')
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    Livewire.on('mostrarAlerta', (userId) => {
+    Swal.fire({
+        title: '¿Eliminar Usuario?',
+        text: "Un Usuario Eliminado ya no se podrá recuperar.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, ¡Eliminar!',
+        cancelButtonText: 'Cancelar',
+}).then((result) => {
+  if (result.isConfirmed) {
+    //Eliminar profesor desde servidor (Emitir evento hacia el componente)
+    Livewire.emit('deleteUser',userId)
+    Swal.fire(
+      'Se Eliminó la el Usuario',
+      'Eliminado Correctamente',
+      'success'
+    )
+  }
+})
+})
+</script>
+@endpush

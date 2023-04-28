@@ -13,6 +13,7 @@ class MostrarUsuario extends Component
     public $searchTerm;
 
     protected $listeners = [
+        'deleteUser',
         'setData',
         'searchUser' => 'setSearch'
     ];
@@ -25,6 +26,10 @@ class MostrarUsuario extends Component
         $this->email = $user->email;
     }
     
+    public function deleteUser(User $user)
+    {   
+        $user->delete();
+    }
 
     public function setSearch($searchUser)
     {

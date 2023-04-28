@@ -75,8 +75,10 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user): RedirectResponse
+    public function destroy(Request $request, User $user): Response
     {
-        //
+        $user->delete();
+        return redirect()->route('user.index');
+
     }
 }
