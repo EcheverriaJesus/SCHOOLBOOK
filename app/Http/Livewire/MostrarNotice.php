@@ -53,5 +53,4 @@ class MostrarNotice extends Component
         'data' => $data,
     ]);
 }
-
 }
