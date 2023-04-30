@@ -107,7 +107,7 @@ class CrearAlumno extends Component
     // Obtener los últimos dos dígitos del año actual
     $anio = date('y');
 
-    // Indicador de la escuela (en este caso es 12)
+    // Indicador de la escuela (en este caso es 70)
     $escuela = '70';
 
     // Obtener el último registro de la tabla Students
