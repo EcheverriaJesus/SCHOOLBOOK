@@ -24,6 +24,7 @@
             <div class="space-y-1">
                 <p class="text-2xl font-bold text-gray-600">{{$teacher->first_name.' '.$teacher->father_surname.'
                     '.$teacher->fathers_last_name}}</p>
+                <p class="text-gray-500 tetxt-sm">{{'Clave interna del docente: '.$teacher->teacherID}}</p>
                 <p class="text-gray-500 tetxt-sm">
                     @switch($teacher->education_level)
                     @case('licenciatura')
@@ -38,7 +39,6 @@
                     @default
                     @endswitch
                 </p>
-                <p class="text-gray-500 tetxt-sm">{{'Especialidad: '.$teacher->major}}</p>
             </div>
             <div class="flex flex-col items-stretch gap-3 mt-5 md:mt-0 md:flex-row">
                 <a href="{{route('teachers.show', $teacher)}}"
