@@ -129,10 +129,6 @@ class CrearAlumno extends Component
     return $matricula;
 }
 
-    
-    
-
-
     public function crearAlumno()
     {
         //Validar
@@ -199,6 +195,7 @@ class CrearAlumno extends Component
             'address_id' => $direccion->id,
             'document_id' => $documentos->id,
             'tutor_id' => $tutor->id
+            
         ]);
 
         session()->flash('mensaje', 'Se registro al Alumno correctamente');

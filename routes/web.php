@@ -108,11 +108,10 @@ Route::resource('schoolCycles', School_cycleController::class)
         'index' => 'schoolCycles.index',
     ]);
 
-
 Route::get('/students', [StudentController::class, 'index'])->middleware('auth:sanctum')->name('students.index');
 Route::get('/students/create', [StudentController::class, 'create'])->middleware('auth:sanctum')->name('students.create');
 Route::get('/students/{student}', [StudentController::class, 'show'])->middleware('auth:sanctum')->name('students.show');
-Route::get('/students/{student}/edit', [TeacherController::class, 'edit'])->middleware('auth:sanctum')->name('students.edit');
+Route::get('/students/{student}/edit', [StudentController::class, 'edit'])->middleware('auth:sanctum')->name('students.edit');
 
 Route::resource('tutor', App\Http\Controllers\TutorController::class);
 

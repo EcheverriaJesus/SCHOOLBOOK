@@ -7,6 +7,8 @@ use App\Models\Teacher;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 
 class CrearProfesor extends Component
@@ -73,9 +75,11 @@ class CrearProfesor extends Component
             'city' => $datos['city'],
             'state' => $datos['state'],
             'country' => $datos['country'],
+
+            
         ]);
         //Se gurda registro de docente
-        Teacher::create([
+        $teacher = Teacher::create([
             'first_name' => $datos['first_name'],
             'father_surname' => $datos['father_surname'],
             'fathers_last_name' => $datos['fathers_last_name'],
@@ -89,8 +93,20 @@ class CrearProfesor extends Component
             'professional_license' => $datos['professional_license'],
             'address_id' => $direccion->id
         ]);
+        
+        //Se crea usuario para el docente
+       
+
+        $user = User::create([
+            'name' => $teacher->first_name,
+            'email' => $teacher->email,
+            'password' => bcrypt($datos['curp']), //contraseña temporal
+        ]);
+        
+        $user->assignRole('docente'); // Asignar rol al usuario
+        
         // Crear mensaje
-        session()->flash('mensaje','Se registro al docente correctamente');
+        session()->flash('mensaje','Se registró al docente correctamente');
         return redirect()->route('teachers.index');
     }
 
