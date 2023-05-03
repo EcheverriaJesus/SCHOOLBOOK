@@ -6,7 +6,7 @@ $noticesCount = count($notices);
 <div>
     {{-- Boton asignar --}}
 
-    @role('admin|coordinador')
+    @role('admin')
     <div class="flex justify-end">
         <a href="{{route('notices.create')}}"
             class="flex items-center px-4 py-2 font-semibold tracking-widest text-white transition duration-150 ease-in-out bg-blue-700 border rounded-md tet-sm border-transparet hover:bg-blue-600">
@@ -19,8 +19,7 @@ $noticesCount = count($notices);
         </a>
     </div>
     @endrole
-
-
+    
 <!-- Slider -->
 <div class="relative w-full mb-4" data-carousel="slide">
     <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
