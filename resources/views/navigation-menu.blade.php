@@ -110,22 +110,23 @@
                     </a>
                 </li>
     
+                @role('admin')
                 <li @class(['bg-amber-300 rounded-lg' => request()->routeIs('subjects.index', 'subjects.create', 'subjects.edit', 'subjects.show')])>
                     <a href="{{ route('subjects.index') }}" 
                         @class([
                             'flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white' => true,
                             'hover:bg-amber-300 dark:hover:bg-gray-700' => !request()->routeIs('subjects.index', 'subjects.create', 'subjects.edit', 'subjects.show'),
                             'bg-amber-300' => request()->routeIs('subjects.index', 'subjects.create', 'subjects.edit', 'subjects.show')
-                        ])
-                    >
+                        ])>
                         <svg fill="#284CDA" width="32" height="32" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
                             <path d="M22 24h-17c-1.657 0-3-1.343-3-3v-18c0-1.657 1.343-3 3-3h17v24zm-2-4h-14.505c-1.375 0-1.375 2 0 2h14.505v-2zm0-18h-15v16h15v-16zm-3 3v3h-9v-3h9z" />
                         </svg>
                         <span class="flex-1 ml-3 whitespace-nowrap">Materias</span>
                     </a>
                 </li>
+                @endrole
                 
-                
+                @role('admin')
                 <li @class(['bg-amber-300 rounded-lg' => request()->routeIs('groups.index', 'groups.create', 'groups.edit', 'groups.show')])>
                     <a href="{{route('groups.index')}}"
                     @class([
@@ -142,6 +143,9 @@
                         <span class="flex-1 ml-3 whitespace-nowrap">Grupos</span>
                     </a>
                 </li>
+                @endrole
+
+                @role('alumno|docente')
                 <li>
                     <a href="#"
                         class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-amber-300 dark:hover:bg-gray-700">
@@ -153,6 +157,9 @@
                         <span class="flex-1 ml-3 whitespace-nowrap">Mis datos</span>
                     </a>
                 </li>
+                @endrole
+                
+                @role('alumno')
                 <li>
                     <a href="#"
                         class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-amber-300 dark:hover:bg-gray-700">
@@ -163,6 +170,9 @@
                         <span class="flex-1 ml-3 whitespace-nowrap">Histórico</span>
                     </a>
                 </li>
+                @endrole
+                
+                @role('admin')
                 <li @class(['bg-amber-300 rounded-lg' => request()->routeIs('students.index', 'students.create', 'students.edit', 'students.show')])>
                     <a href="{{route('students.index')}}"
                     @class([
@@ -179,6 +189,9 @@
                         <span class="flex-1 ml-3 whitespace-nowrap">Alumnos</span>
                     </a>
                 </li>
+                @endrole
+                
+                @role('admin')
                 <li @class(['bg-amber-300 rounded-lg' => request()->routeIs('teachers.index', 'teachers.create', 'teachers.edit', 'teachers.show')])>
                     <a href="{{route('teachers.index')}}"
                     @class([
@@ -195,7 +208,10 @@
                         <span class="flex-1 ml-3 whitespace-nowrap">Docentes</span>
                     </a>
                 </li>
-                <li>
+                @endrole
+                
+                {{-- @role('admin') --}}
+                 <li>
                     <a href="{{route('user.index')}}"
                         class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-amber-300 dark:hover:bg-gray-700">
                         <svg stroke="#284CDA" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"
@@ -207,6 +223,9 @@
                         <span class="flex-1 ml-3 whitespace-nowrap">Usuarios</span>
                     </a>
                 </li>
+               {{--  @endrole --}}
+               
+                @role('admin')
                 <li @class(['bg-amber-300 rounded-lg' => request()->routeIs('contributions.index', 'contributions.create', 'contributions.edit', 'contributions.show')])>
                     <a href="{{route('contributions.index')}}"
                     @class([
@@ -223,7 +242,10 @@
                         <span class="flex-1 ml-3 whitespace-nowrap">Aportaciones</span>
                     </a>
                 </li>
-                <li @class(['bg-amber-300 rounded-lg' => request()->routeIs('schoolCycles.index')])>
+                @endrole
+                
+                @role('admin')
+                 <li @class(['bg-amber-300 rounded-lg' => request()->routeIs('schoolCycles.index')])>
                     <a href="{{route('schoolCycles.index')}}"
                     @class([
                         'flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white' => true,
@@ -240,6 +262,9 @@
                         <span class="flex-1 ml-3 whitespace-nowrap">Ciclos escolares</span>
                     </a>
                 </li>
+                @endrole
+               
+                @role('admin')
                 <li @class(['bg-amber-300 rounded-lg' => request()->routeIs('classroom.index')])>
                     <a href="{{route('classroom.index')}}"
                     @class([
@@ -257,6 +282,9 @@
                         <span class="flex-1 ml-3 whitespace-nowrap">Aulas</span>
                     </a>
                 </li>
+                @endrole
+                
+                @role('admin')
                 <li @class(['bg-amber-300 rounded-lg' => request()->routeIs('courses.index', 'courses.create', 'courses.edit', 'courses.show')])>
                     <a href="{{route('courses.index')}}"
                     @class([
@@ -271,6 +299,7 @@
                         <span class="flex-1 ml-3 whitespace-nowrap">Cursos</span>
                     </a>
                 </li>
+                @endrole
             </ul>
         </div>
     </aside>
