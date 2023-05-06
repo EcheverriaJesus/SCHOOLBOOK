@@ -36,11 +36,20 @@
     <div>
             <div class="flex justify-between space-x-5">
                 <!-- Grado del alumno-->
-                <div class="block w-1/2">
-                    <x-label for="grade" value="{{ __('Grado') }}" />
-                    <x-input id="grade" class="block w-full mt-1" type="text" wire:model="grade"
-                        :value="old('grade')" />
-                </div>
+                <div>
+            <x-label for="grade" value="{{ __('Grado') }}" />
+            <select id="grade" wire:model="grade"
+                class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200">
+                <option value="">-Seleccionar Grado-</option>
+                <option value="1">1°</option>
+                <option value="2">2°</option>
+                <option value="3">3°</option>
+            </select>
+
+            <div class="block mt-2">
+                <x-alert-danger :messages="$errors->get('grade')" />
+            </div>
+        </div>
                 <!-- Fecha de nacimiento-->
                 <div class="block w-1/2">
                     <x-label for="birth_date" value="{{ __('Fecha de Nacimiento') }}" />
@@ -65,10 +74,16 @@
 
         <!-- Genero -->
         <div>
-            <x-label for="gender" value="{{ __('Genero') }}" />
-            <x-input id="gender" class="block w-full mt-1" type="text" wire:model="genderS" :value="old('gender')" />
+            <x-label for="genderS" value="{{ __('Genero') }}" />
+            <select id="genderS" wire:model="genderS"
+                class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200">
+                <option value="">-- Genero--</option>
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
+            </select>
+
             <div class="block mt-2">
-                <x-alert-danger :messages="$errors->get('genderS')"/>
+                <x-alert-danger :messages="$errors->get('genderS')" />
             </div>
         </div>
 
@@ -303,12 +318,18 @@
 
       <!-- Genero -->
       <div>
-        <x-label for="genderT" value="{{ __('Genero') }}" />
-        <x-input id="genderT" class="block w-full mt-1" type="text" wire:model="genderT" :value="old('gender')" />
-        <div class="block mt-2">
-            <x-alert-danger :messages="$errors->get('genderT')"/>
+            <x-label for="genderT" value="{{ __('Genero') }}" />
+            <select id="genderT" wire:model="genderT"
+                class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200">
+                <option value="">-- Genero--</option>
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
+            </select>
+
+            <div class="block mt-2">
+                <x-alert-danger :messages="$errors->get('genderT')" />
+            </div>
         </div>
-    </div>
 
         <!-- email -->
     <div>
