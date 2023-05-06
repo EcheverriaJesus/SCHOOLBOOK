@@ -24,6 +24,7 @@
             <div class="space-y-1">
                 <p class="text-2xl font-bold text-gray-600">{{$teacher->first_name.' '.$teacher->father_surname.'
                     '.$teacher->fathers_last_name}}</p>
+                    <p class="text-gray-500 tetxt-sm">{{'Matricula: '.$teacher->id}}</p>
                 <p class="text-gray-500 tetxt-sm">
                     @switch($teacher->education_level)
                     @case('licenciatura')

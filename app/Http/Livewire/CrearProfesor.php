@@ -61,7 +61,7 @@ class CrearProfesor extends Component
     $anio = date('y');
 
     // Indicador de la escuela (en este caso es 12)
-    $abreviatura = '00';
+    $abreviatura = '11';
     $escuela = '70';
 
     // Obtener el último registro de la tabla Teachers
