@@ -127,18 +127,15 @@
                         </svg>
                         <span class="sr-only">Close modal</span>
                     </button>
-                    <div class="px-6 py-6 lg:px-8">
-                        <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Editar Aportaciones Escolares</h3>
+                <div class="px-6 py-6 lg:px-8">
+                    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Editar Aportaciones Escolares</h3>
                         <form class="space-y-6" wire:submit.prevent='editarAporte' novalidate>
                         <div>
-                            <label for="student_id">Estudiante:</label>
-                            <select wire:model="student_id" id="student_id">
-                                <option value="">Seleccione un estudiante</option>
-                                @foreach($students as $student)
-                                    <option value="{{ $student->studentID}}">{{ $student->studentID}}</option>
-                                @endforeach
-                            </select>
-                            <!-- @error('student_id') <span class="error">{{ $message }}</span> @enderror -->
+                        <label for="student_id">Estudiante:</label>
+                            <input wire:model="student_id" id="student_id" 
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"    
+                                placeholder="Ingrese la Matricula del estudiante">
+                            @error('student_id') <span class="error">{{ $message }}</span> @enderror
                         </div>
                     <div>  
                         <div>       

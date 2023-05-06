@@ -33,7 +33,7 @@ class MostrarAporte extends Component
         'description' => 'required|string|max:100',
         'contribution_date_new' => 'nullable|date',
         'deadline_date_new' => 'nullable|date',
-        'student_id' => 'required|exists:students,id'
+        'student_id' => 'required|exists:students,studentID'
     ];
     public function setData($idAporte)
     {

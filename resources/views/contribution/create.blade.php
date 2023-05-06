@@ -11,7 +11,7 @@
                 </div>
                 <div class="p-6 text-gray-900">
                     <h1 class="my-6 text-xl font-extrabold text-center">
-                        Registro de Alumnos
+                        Registro de Aportaciones
                     </h1>
                     @if (session()->has('mensaje'))
                     <div

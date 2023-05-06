@@ -1,7 +1,7 @@
     <form action="" class="space-y-5 md:w-1/2" wire:submit.prevent='crearAporte'>
         <section class="bg-white w-auto sm:bg-white w-full h-auto shadow-2xl rounded-xl mb-10 p-6 space-y-6 border">
-            <h2 class="flex justify-center text-xl font-bold text-indigo-600">Informacion Personal</h2>
-                    <div wire:submit.prevent="submit">
+            <h2 class="flex justify-center text-xl font-bold text-indigo-600">Registro de aportaciones</h2>
+                    <div>
                         <label for="student_id">Estudiante:</label>
                             <input wire:model="student_id" id="student_id" 
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"    
