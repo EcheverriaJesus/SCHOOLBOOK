@@ -54,10 +54,51 @@ class CrearProfesor extends Component
         'photo' => 'required|image|max:1024',
         'professional_license' => 'required|mimes:pdf'
     ];
-    
+
+       public function generarMatricula()
+{
+    // Obtener los últimos dos dígitos del año actual
+    $anio = date('y');
+
+    // Indicador de la escuela (en este caso es 12)
+    $abreviatura = '00';
+    $escuela = '70';
+
+    // Obtener el último registro de la tabla Teachers
+    $ultimo = Teacher::orderBy('id', 'desc')->first();
+
+    // Verificar si hay registros previos
+    if ($ultimo) {
+        // Obtener el número de estudiante a partir del campo studentID
+        $ultimoDocente = substr($ultimo->id, -4);
+        $docente = str_pad($ultimoDocente + 1, 4, '0', STR_PAD_LEFT);
+    } else {
+        // Si no hay registros previos, asignar el número 1
+        $docente = '0001';
+    }
+
+    // Concatenar los tres componentes para formar la matrícula
+    $matricula = $abreviatura . $anio . $escuela . $docente;
+
+    return $matricula;
+}
+
+ function generarPassword()
+    {
+        $password = '';
+        for ($i = 0; $i < 6; $i++) {
+            $password .= rand(0, 9); 
+        }
+        return $password;
+    }
+
     public function crearProfesor(){
         //Validar
         $datos = $this->validate();
+
+        $matricula = $this->generarMatricula();
+        $passwordTeacher = $this->generarPassword();
+
         //Almacenamos imagen del profesor
         $photo = $this->photo->store('public/imageTeachers');
         $datos['photo'] = str_replace('public/imageTeachers/','',$photo);
@@ -78,7 +119,8 @@ class CrearProfesor extends Component
             
         ]);
         //Se gurda registro de docente
-        $teacher = Teacher::create([
+        /* $teacher = */ Teacher::create([
+            'id'=>$matricula,
             'first_name' => $datos['first_name'],
             'father_surname' => $datos['father_surname'],
             'fathers_last_name' => $datos['fathers_last_name'],
@@ -95,17 +137,22 @@ class CrearProfesor extends Component
         
         //Se crea usuario para el docente
        
-
         $user = User::create([
+            'name' => $datos['first_name'].' '.$datos['father_surname'].$datos['fathers_last_name'],
+            'email' => $datos['email'],
+            'password' => Hash::make($passwordTeacher),
+        ]);
+
+       /*  $user = User::create([
             'name' => $teacher->first_name,
             'email' => $teacher->email,
             'password' => bcrypt($datos['curp']), //contraseña temporal
-        ]);
+        ]); */
         
         $user->assignRole('docente'); // Asignar rol al usuario
         
         // Crear mensaje
-        session()->flash('mensaje','Se registró al docente correctamente');
+        session()->flash('mensaje','Se registró al docente correctamente. La contraseña inicial del docente es '.$passwordTeacher);
         return redirect()->route('teachers.index');
     }
 

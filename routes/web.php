@@ -44,6 +44,7 @@ Route::middleware([
     })->name('dashboard');
 });
 
+
 Route::resource('teachers', TeacherController::class)
     ->middleware('auth:sanctum')
     ->names([

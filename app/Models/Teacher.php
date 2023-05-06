@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Teacher extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'id';
 
     /**
      * The attributes that are mass assignable.
@@ -17,6 +18,7 @@ class Teacher extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'first_name',
         'father_surname',
         'fathers_last_name',
