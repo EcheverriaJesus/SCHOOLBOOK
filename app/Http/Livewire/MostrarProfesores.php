@@ -45,7 +45,8 @@ class MostrarProfesores extends Component
         $teachers = Teacher::when($this->searchTerm,function($query){
             $query->where('first_name','LIKE',"%" .$this->searchTerm ."%")
             ->orWhere('father_surname','LIKE',"%" .$this->searchTerm ."%")
-            ->orWhere('fathers_last_name','LIKE',"%" .$this->searchTerm ."%");
+            ->orWhere('fathers_last_name','LIKE',"%" .$this->searchTerm ."%")
+            ->orWhere('teacherID','LIKE',"%" .$this->searchTerm ."%");
         })
         ->paginate(8);
         return view('livewire.mostrar-profesores',[

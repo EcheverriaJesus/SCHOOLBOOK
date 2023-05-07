@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\User;
 use App\Models\Tutor;
 use App\Models\Address;
 use App\Models\Student;
@@ -9,6 +10,7 @@ use Livewire\Component;
 use App\Models\Document;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class CrearAlumno extends Component
 {
@@ -103,40 +105,49 @@ class CrearAlumno extends Component
     ];
 
     public function generarMatricula()
-{
-    // Obtener los últimos dos dígitos del año actual
-    $anio = date('y');
+    {
+        // Obtener los últimos dos dígitos del año actual
+        $anio = date('y');
 
-    // Indicador de la escuela (en este caso es 12)
-    $escuela = '70';
+        // Indicador de la escuela (en este caso es 70)
+        $escuela = '70';
 
-    // Obtener el último registro de la tabla Students
-    $ultimo = Student::orderBy('studentID', 'desc')->first();
+        // Obtener el último registro de la tabla Students
+        $ultimo = Student::orderBy('studentID', 'desc')->first();
 
-    // Verificar si hay registros previos
-    if ($ultimo) {
-        // Obtener el número de estudiante a partir del campo studentID
-        $ultimoEstudiante = substr($ultimo->studentID, -4);
-        $estudiante = str_pad($ultimoEstudiante + 1, 4, '0', STR_PAD_LEFT);
-    } else {
-        // Si no hay registros previos, asignar el número 1
-        $estudiante = '0001';
+        // Verificar si hay registros previos
+        if ($ultimo) {
+            // Obtener el número de estudiante a partir del campo studentID
+            $ultimoEstudiante = substr($ultimo->studentID, -4);
+            $estudiante = str_pad($ultimoEstudiante + 1, 4, '0', STR_PAD_LEFT);
+        } else {
+            // Si no hay registros previos, asignar el número 1
+            $estudiante = '0001';
+        }
+
+        // Concatenar los tres componentes para formar la matrícula
+        $matricula = $anio . $escuela . $estudiante;
+
+        return $matricula;
     }
 
-    // Concatenar los tres componentes para formar la matrícula
-    $matricula = $anio . $escuela . $estudiante;
-
-    return $matricula;
-}
+    function generarPassword()
+    {
+        $password = '';
+        for ($i = 0; $i < 6; $i++) {
+            $password .= rand(0, 9); 
+        }
+        return $password;
+    }
 
     public function crearAlumno()
     {
         //Validar
         $datos = $this->validate();
         //Generar matricula
-
         $matricula = $this->generarMatricula();
-        
+        //Contraseña inicial de alumno
+        $passwordStudent = $this->generarPassword();
         //Almacenamos imagen del Alumno
         $photo = $this->photo->store('public/imageStudents');
         $datos['photo'] = str_replace('public/imageStudents/', '', $photo);
@@ -179,7 +190,7 @@ class CrearAlumno extends Component
         ]);
 
         Student::create([
-            'studentID'=> $matricula,
+            'studentID' => $matricula,
             'student_name' => $datos['student_name'],
             'paternal_surname' => $datos['paternal_surnameS'],
             'maternal_surname' => $datos['maternal_surnameS'],
@@ -198,7 +209,15 @@ class CrearAlumno extends Component
             
         ]);
 
-        session()->flash('mensaje', 'Se registro al Alumno correctamente');
+        $user = User::create([
+            'name' => $datos['student_name'].' '.$datos['paternal_surnameS'].$datos['maternal_surnameS'],
+            'email' => $datos['emailS'],
+            'password' => Hash::make($passwordStudent),
+        ]);
+
+        $user->assignRole('alumno'); // Asignar rol al usuario
+
+        session()->flash('mensaje', 'Se registro al Alumno correctamente. La contraseña inicial del alumno es '.$passwordStudent);
         return redirect()->route('students.index');
     }
 

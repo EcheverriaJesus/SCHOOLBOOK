@@ -85,6 +85,8 @@ Route::resource('groups', GroupController::class)
         'edit' => 'groups.edit',
     ]);
 
+Route::get('/subjects/assign-teacher',[SubjectController::class,'assignTeacher'])->middleware('auth:sanctum')->name('subjects.assign-teacher');
+
 Route::resource('subjects', SubjectController::class)
     ->middleware('auth:sanctum')
     ->names([
@@ -93,6 +95,8 @@ Route::resource('subjects', SubjectController::class)
         'show' => 'subjects.show',
         'edit' => 'subjects.edit',
     ]);
+
+
 
 Route::resource('courses', CourseController::class)
     ->middleware('auth:sanctum')

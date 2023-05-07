@@ -42,6 +42,12 @@ class SubjectController extends Controller
         return view('subject.edit', compact('subject'));
     }
 
+    public function assignTeacher(Request $request) :View
+    {
+        return view('subject.assign-teacher');
+    }
+
+
     public function update(SubjectUpdateRequest $request, Subject $subject): Response
     {
         $subject->update($request->validated());

@@ -26,29 +26,28 @@
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-white uppercase bg-blue-600 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th scope="col" class="w-1/3 px-6 py-3 text-center">
+                        <th scope="col" class="px-3 py-2 text-center">
+                            Matricula del Alumno
+                        </th>
+                        <th scope="col" class="w-1/3 px-3 py-3 text-center">
                             Monto de Aportacion
                         </th>
-                        <th scope="col" class="px-6 py-3 text-center">
+                        <th scope="col" class="px-3 py-3 text-center">
                             Descripcion de pago
                         </th>
-                        <th scope="col" class="px-6 py-3 text-center">
+                        <!-- <th scope="col" class="px-6 py-3 text-center">
                             Fecha de inicio
+                        </th> -->
+                        <th scope="col" class="px-3 py-3 text-center">
+                            Fecha de pago Realizado
                         </th>
-                        <th scope="col" class="px-6 py-3 text-center">
-                            Fecha de fin
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-center">
-                            Nombre del Alumno
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-center">
+                        <th scope="col" class="px-3 py-3 text-center">
                             Estatus
                         </th>
-                        @role('admin|coordinador')
-    <th scope="col" class="px-6 py-3 text-center">
+                        <th scope="col" class="px-3 py-3 text-center">
                             Acciones
                         </th>
-                            @endrole
+                            
                         
                     </tr>
                 </thead>
@@ -56,23 +55,23 @@
                     @foreach($contributions as $contribution)
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th scope="row"
-                            class="w-1/3 px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <td class="px-6 py-4 text-center">
+                        {{$contribution->student_id}}
+                    </td>
+                    <th scope="row"
+                            class="w-1/3 px-16 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {{$contribution->amount}}
                         </th>
                         <th scope="row"
-                            class="w-1/3 px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            class="w-1/3 px-16 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {{$contribution->description}}
                         </th>
-                        <td class="px-6 py-4 text-center">
+                        <!-- <td class="px-6 py-4 text-center">
                             {{$contribution->contribution_date->formatLocalized('%d/%B/%Y')}}
-                        </td>
+                        </td> -->
                         <td class="px-6 py-4 text-center">
                             {{$contribution->deadline_date->formatLocalized('%d/%B/%Y')}}
                         </td> 
-                        <td class="px-6 py-4 text-center">
-                            {{$contribution->student->student_name}}
-                        </td>
                         <td class="px-6 py-4 text-center">
                             @if ($contribution->status ==  1)
                             <div class="flex items-center ">
@@ -84,9 +83,8 @@
                             </div>
                             @endif
                         </td>
-                        @role('admin|coordinador')
-    <td class="flex justify-center px-6 py-4 space-x-4 text-center">
-                            <button wire:click="$emit('setData', {{$contribution->id}})" data-modal-target="authentication-modal-edit" data-modal-toggle="authentication-modal-edit"
+                        <td class="flex justify-center px-6 py-4 space-x-4 text-center">
+                            <button title="{{ __('Editar') }}"  wire:click="$emit('setData', {{$contribution->id}})" data-modal-target="authentication-modal-edit" data-modal-toggle="authentication-modal-edit"
                                 class="flex justify-center gap-2 px-2 py-2 text-xs font-bold text-white uppercase bg-green-600 rounded-lg">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -94,7 +92,7 @@
                                         d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                                 </svg>
                             </button>
-                            <button wire:click="$emit('mostrarAlerta', {{$contribution->id}})"
+                            <button title="{{ __('Eliminar') }}" wire:click="$emit('mostrarAlerta', {{$contribution->id}})"
                                 class="flex justify-center gap-2 px-2 py-2 text-xs font-bold text-white uppercase bg-red-600 rounded-lg">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -103,7 +101,7 @@
                                 </svg>
                             </button>
                         </td>
-                            @endrole
+                           
                         
                     </tr>
                     @endforeach
@@ -139,6 +137,17 @@
                     <div class="px-6 py-6 lg:px-8">
                         <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Editar Aportaciones Escolares</h3>
                         <form class="space-y-6" wire:submit.prevent='editarAporte' novalidate>
+                        <div>
+                            <label for="student_id">Estudiante:</label>
+                            <select wire:model="student_id" id="student_id">
+                                <option value="">Seleccione un estudiante</option>
+                                @foreach($students as $student)
+                                    <option value="{{ $student->studentID}}">{{ $student->studentID}}</option>
+                                @endforeach
+                            </select>
+                            <!-- @error('student_id') <span class="error">{{ $message }}</span> @enderror -->
+                        </div>
+                    <div>  
                         <div>       
                             <label for="amount"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Monto de Aportacion</label>
@@ -174,12 +183,12 @@
                             </div>
                         </div>
                         <div>
-                            <label for="" class="text-sm ">Fecha actual de Fin de la Aportacion:
+                            <label for="" class="text-sm ">Fecha actual de aportación realizada:
                                 <span class="block mb-4 font-bold">{{$deadline_date}}</span>
                             </label>
                             <label for="deadline_date_new"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha
-                                de fin
+                                de aportación realizada
                             </label>
                             <input wire:model.defer="deadline_date_new" type="date" name="deadline_date_new" id="deadline_date_new"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
@@ -201,16 +210,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <label for="student_id">Estudiante:</label>
-                            <select wire:model="student_id" id="student_id">
-                                <option value="">Seleccione un estudiante</option>
-                                @foreach($students as $student)
-                                    <option value="{{ $student->id }}">{{ $student->student_name }}</option>
-                                @endforeach
-                            </select>
-                            @error('student_id') <span class="error">{{ $message }}</span> @enderror
-                        </div>
                             <button type="submit"
                                 class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Guardar
                             </button>
@@ -228,8 +227,8 @@
 <script>
     Livewire.on('mostrarAlerta', (aporteId) => {
     Swal.fire({
-        title: '¿Eliminar El Ciclo Escolar?',
-        text: "Un Ciclo Escolar eliminado ya no se podrá recuperar.",
+        title: '¿Eliminar Aportación?',
+        text: "Una Aportacion eliminada ya no se podrá recuperar.",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -238,10 +237,9 @@
         cancelButtonText: 'Cancelar',
 }).then((result) => {
   if (result.isConfirmed) {
-    //Eliminar profesor desde servidor (Emitir evento hacia el componente)
     Livewire.emit('deleteAporte',aporteId)
     Swal.fire(
-      'Se Eliminó El Ciclo Escolar',
+      'Se Eliminó la Aportacion',
       'Eliminado Correctamente',
       'success'
     )

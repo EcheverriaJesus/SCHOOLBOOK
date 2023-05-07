@@ -21,7 +21,7 @@ class CrearAporte extends Component
         'description' => 'required|string|max:100',
         'contribution_date' => 'required|date',
         'deadline_date' => 'required|date',
-        'student_id' => 'required|exists:students,id'
+        'student_id' => 'required|exists:students,studentID'
     ];
 
     public function crearAporte()

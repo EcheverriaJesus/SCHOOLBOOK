@@ -3,9 +3,9 @@
         <h1 class="text-2xl font-extrabold text-indigo-600">Usuarios</h1>
         <p class="my-2">Visualizar y editar los datos de los usuarios</p>
         </div>
-        <div class="block w-full mb-2 md:justify-between md:flex"> 
+        <div class="flex flex-col w-full mb-2 md:justify-between md:flex pb-4"> 
             <livewire:usuario.buscar-usuario />
-            <livewire:usuario.crear-usuario />     
+            {{-- <livewire:usuario.crear-usuario />  --}}    
         </div>
             <div class="w-full h-auto p-6 mb-10 space-y-6 bg-white border shadow-2xl sm:bg-white rounded-xl">
                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">

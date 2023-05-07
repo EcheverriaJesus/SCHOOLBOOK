@@ -53,7 +53,8 @@ class MostrarMaterias extends Component
         $searchTerm = $this->searchTerm;
         $data = Subject::all();
         $subjects = Subject::when($this->searchTerm,function($query){
-            $query->where('subject_name','LIKE',"%" .$this->searchTerm ."%");
+            $query->where('subject_name','LIKE',"%" .$this->searchTerm ."%")
+            ->orWhere('subjectID','LIKE',"%" .$this->searchTerm ."%");
         })->when($this->filtro1,function($query){
             $query->orWhere('grade',1);
         })->when($this->filtro2,function($query){

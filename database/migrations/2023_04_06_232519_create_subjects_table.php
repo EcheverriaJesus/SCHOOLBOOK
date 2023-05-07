@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
+            $table->string('subjectID');
             $table->string('subject_name', 50);
             $table->text('description');
             $table->integer('grade');

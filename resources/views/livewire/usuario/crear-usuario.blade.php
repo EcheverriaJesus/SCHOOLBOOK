@@ -81,9 +81,8 @@
                     
         </div>
     </div>
-        </div>
 </div>
-    @push('scripts')
+@push('scripts')
 <script>
     // Obtener el modal
     var modal = document.getElementById("authentication-modal");
