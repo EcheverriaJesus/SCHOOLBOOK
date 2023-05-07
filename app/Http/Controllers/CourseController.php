@@ -18,6 +18,17 @@ class CourseController extends Controller
         return view('course.index', compact('courses'));
     }
 
+    public function groups(Request $request): View
+    {
+        $courses = Course::all();
+        return view('course.groups', compact('courses'));
+    }
+
+    public function qualifications(Request $request, Course $group): View
+    {
+        return view('course.qualifications', compact('group'));
+    }
+
     public function create(Request $request): View
     {
         return view('course.create');

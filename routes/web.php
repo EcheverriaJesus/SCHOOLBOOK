@@ -77,6 +77,8 @@ Route::resource('Contribution', ContributionController::class)
         'edit' => 'contributions.edit'
     ]);
 
+Route::get('/groups/main',[CourseController::class,'groups'])->middleware('auth:sanctum')->name('courses.groups');
+Route::get('/groups/{group}/qualifications',[CourseController::class,'qualifications'])->middleware('auth:sanctum')->name('courses.qualifications');
 Route::resource('groups', GroupController::class)
     ->middleware('auth:sanctum')
     ->names([
