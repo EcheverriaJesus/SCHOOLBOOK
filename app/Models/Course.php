@@ -45,7 +45,7 @@ class Course extends Model
 
     public function studentCourses(): HasMany
     {
-        return $this->hasMany(StudentCourse::class);
+        return $this->hasMany(Student_course::class);
     }
 
     public function courseSchedules(): HasMany
@@ -56,5 +56,10 @@ class Course extends Model
     public function schoolCycles(): BelongsTo
     {
         return $this->belongsTo(School_cycle::class, 'cycle_id');
+    }
+
+    public function qualifications(): HasMany
+    {
+        return $this->hasMany(Qualification::class);
     }
 }

@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Subject extends Model
 {
     use HasFactory;
-
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -40,6 +40,6 @@ class Subject extends Model
 
     public function teacherSubjects(): HasMany
     {
-        return $this->hasMany(TeacherSubject::class);
+        return $this->hasMany(Teacher_subject::class,'subject_id','subjectID');
     }
 }

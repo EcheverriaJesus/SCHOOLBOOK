@@ -13,12 +13,10 @@ return new class extends Migration
     {
         Schema::create('qualifications', function (Blueprint $table) {
             $table->id();
-            $table->float('bim1');
-            $table->float('bim2');
-            $table->float('bim3');
-            $table->float('bim4');
-            $table->float('bim5');
-            $table->float('promedio_final');
+            $table->float('p1')->nullable();
+            $table->float('p2')->nullable();
+            $table->float('p3')->nullable();
+            $table->float('promedio_final')->nullable();
             $table->string('course_id');
             $table->string('student_id');
             $table->timestamps();

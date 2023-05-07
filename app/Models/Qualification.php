@@ -16,11 +16,9 @@ class Qualification extends Model
      * @var array
      */
     protected $fillable = [
-        'bim1',
-        'bim2',
-        'bim3',
-        'bim4',
-        'bim5',
+        'p1',
+        'p2',
+        'p3',
         'promedio_final',
         'course_id',
         'student_id',
@@ -33,13 +31,37 @@ class Qualification extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'bim1' => 'float',
-        'bim2' => 'float',
-        'bim3' => 'float',
-        'bim4' => 'float',
-        'bim5' => 'float',
+        'p1' => 'float',
+        'p2' => 'float',
+        'p3' => 'float',
         'promedio_final' => 'float',
     ];
+
+    protected static function booted()
+    {
+        static::updating(function ($qualification) {
+            // Verificar si todas las calificaciones están presentes
+            if ($qualification->p1 !== null && $qualification->p2 !== null && $qualification->p3 !== null) {
+                // Calcular promedio final
+                $promedioFinal = ($qualification->p1 + $qualification->p2 + $qualification->p3) / 3;
+
+                // Redondear según las reglas solo si es mayor o igual a 6
+                if ($promedioFinal >= 6) {
+                    if ($promedioFinal - floor($promedioFinal) >= 0.5) {
+                        $promedioFinal = ceil($promedioFinal);
+                    } else {
+                        $promedioFinal = floor($promedioFinal);
+                    }
+                }
+
+                $qualification->promedio_final = $promedioFinal;
+            } else {
+                $qualification->promedio_final = null;
+            }
+        });
+    }
+
+
 
     public function group(): BelongsTo
     {
@@ -54,10 +76,5 @@ class Qualification extends Model
     public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
-    }
-
-    public function student(): BelongsTo
-    {
-        return $this->belongsTo(Student::class);
     }
 }
