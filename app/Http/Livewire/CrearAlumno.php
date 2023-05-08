@@ -206,6 +206,7 @@ class CrearAlumno extends Component
             'address_id' => $direccion->id,
             'document_id' => $documentos->id,
             'tutor_id' => $tutor->id
+            
         ]);
 
         $user = User::create([

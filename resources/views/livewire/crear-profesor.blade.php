@@ -54,7 +54,6 @@
             <x-alert-danger :messages="$errors->get('curp')"/>
         </div>
     </div>
-
     <!-- RFC -->
     <div>
         <x-label for="rfc" value="{{ __('RFC') }}" />

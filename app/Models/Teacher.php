@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Teacher extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'teacherID';
 
     /**
      * The attributes that are mass assignable.
@@ -50,4 +51,5 @@ class Teacher extends Model
     {
         return $this->hasMany(Teacher_subject::class,'teacher_id','teacherID');
     }
+    
 }

@@ -7,7 +7,8 @@ use App\Models\Teacher;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class CrearProfesor extends Component
 {
@@ -54,11 +55,40 @@ class CrearProfesor extends Component
         'professional_license' => 'required|mimes:pdf'
     ];
 
-    public function crearProfesor()
+    function generarPassword()
     {
+        $password = '';
+        for ($i = 0; $i < 6; $i++) {
+            $password .= rand(0, 9); 
+        }
+        return $password;
+    }
+
+function generarClaveProfesor()
+{
+    // Obtener el último número de la clave de la base de datos
+    $ultimoNumero = DB::table('teachers')
+        ->where('teacherID', 'like', '70%')
+        ->orderBy('teacherID', 'desc')
+        ->value(DB::raw('SUBSTRING(teacherID, 3)'));
+
+    // Si no hay profesores previos con la misma clave, establecer el siguiente número como 1, de lo contrario, sumar 1 al último número
+    $siguienteNumero = ($ultimoNumero) ? intval($ultimoNumero) + 1 : 1;
+
+    // Obtener la letra correspondiente
+    $letra = chr(65 + ((int)($siguienteNumero / 10000) % 3)); // Cambiar letra cada 9999 claves, se establecen 3 letras A, B, C
+
+    // Concatenar los elementos de la clave y devolverla
+    return '70' . str_pad($siguienteNumero % 10000, 4, '0', STR_PAD_LEFT) . $letra;
+}
+
+    public function crearProfesor(){
         //Validar
         $datos = $this->validate();
-        $claveDocente = $this->generarClaveProfesor();
+        
+        $matricula = $this->generarClaveProfesor();
+        $passwordTeacher = $this->generarPassword();
+
         //Almacenamos imagen del profesor
         $photo = $this->photo->store('public/imageTeachers');
         $datos['photo'] = str_replace('public/imageTeachers/', '', $photo);
@@ -75,10 +105,11 @@ class CrearProfesor extends Component
             'city' => $datos['city'],
             'state' => $datos['state'],
             'country' => $datos['country'],
+            
         ]);
         //Se gurda registro de docente
-        Teacher::create([
-            'teacherID' => $claveDocente,
+        /* $teacher = */ Teacher::create([
+            'teacherID'=>$matricula,
             'first_name' => $datos['first_name'],
             'father_surname' => $datos['father_surname'],
             'fathers_last_name' => $datos['fathers_last_name'],
@@ -92,29 +123,20 @@ class CrearProfesor extends Component
             'professional_license' => $datos['professional_license'],
             'address_id' => $direccion->id
         ]);
+        
+        //Se crea usuario para el docente
+        $user = User::create([
+            'name' => $datos['first_name'].' '.$datos['father_surname'].$datos['fathers_last_name'],
+            'email' => $datos['email'],
+            'password' => Hash::make($passwordTeacher),
+        ]);
+
+        $user->assignRole('docente'); // Asignar rol al usuario
+        
         // Crear mensaje
-        session()->flash('mensaje', 'Se registro al docente correctamente');
+        session()->flash('mensaje','Se registró al docente correctamente. La contraseña inicial del docente es '.$passwordTeacher);
         return redirect()->route('teachers.index');
     }
-
-    function generarClaveProfesor()
-    {
-        // Obtener el último número de la clave de la base de datos
-        $ultimoNumero = DB::table('teachers')
-            ->where('teacherID', 'like', '70%')
-            ->orderBy('teacherID', 'desc')
-            ->value(DB::raw('SUBSTRING(teacherID, 3)'));
-
-        // Si no hay profesores previos con la misma clave, establecer el siguiente número como 1, de lo contrario, sumar 1 al último número
-        $siguienteNumero = ($ultimoNumero) ? intval($ultimoNumero) + 1 : 1;
-
-        // Obtener la letra correspondiente
-        $letra = chr(65 + ((int)($siguienteNumero / 10000) % 3)); // Cambiar letra cada 9999 claves, se establecen 3 letras A, B, C
-
-        // Concatenar los elementos de la clave y devolverla
-        return '70' . str_pad($siguienteNumero % 10000, 4, '0', STR_PAD_LEFT) . $letra;
-    }
-
 
 
     public function render()
