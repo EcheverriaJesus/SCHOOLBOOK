@@ -87,7 +87,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg>  
                         </a>
-                        <a href="{{route('student.edit',$student->studentID)}}" title="{{ __('Editar') }}" 
+                        <a href="{{route('students.edit',$student->studentID)}}" title="{{ __('Editar') }}" 
                             class="flex justify-center gap-2 px-2 py-2 text-xs font-bold text-white uppercase bg-green-600 rounded-lg">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-6 h-6">

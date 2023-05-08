@@ -49,6 +49,7 @@ class MostrarProfesores extends Component
             ->orWhere('teacherID','LIKE',"%" .$this->searchTerm ."%");
         })
         ->paginate(8);
+        //dd($teachers);
         return view('livewire.mostrar-profesores',[
             'teachers' => $teachers,
             'searchTerm' => $searchTerm,
