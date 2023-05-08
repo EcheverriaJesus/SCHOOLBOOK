@@ -54,7 +54,7 @@
                     @foreach($course->subject->teacherSubjects as $teacherSubject)
                     {{ $teacherSubject->teacher->first_name.' '.$teacherSubject->teacher->father_surname.'
                     '.$teacherSubject->teacher->fathers_last_name }}
-                    @endforeach
+                    @endforeach 
                 </span>
             </p>
             <p class="my-2 font-bold text-indigo-800">

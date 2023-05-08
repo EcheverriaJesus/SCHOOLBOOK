@@ -44,14 +44,14 @@ Route::middleware([
     })->name('dashboard');
 });
 
+Route::get('teachers/{teacherId}',[TeacherController::class,'show'])->middleware('auth:sanctum')->name('teachers.show');
+Route::get('teachers/{teacherId}/edit', [TeacherController::class, 'edit'])->middleware('auth:sanctum')->name('teachers.edit');
 
 Route::resource('teachers', TeacherController::class)
     ->middleware('auth:sanctum')
     ->names([
         'index' => 'teachers.index',
         'create' => 'teachers.create',
-        'show' => 'teachers.show',
-        'edit' => 'teachers.edit',
     ]);
 
 Route::resource('user', UserController::class)->middleware('auth:sanctum');
