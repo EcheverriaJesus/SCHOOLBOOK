@@ -55,33 +55,14 @@ class CrearProfesor extends Component
         'professional_license' => 'required|mimes:pdf'
     ];
 
-       public function generarMatricula()
-{
-    // Obtener los últimos dos dígitos del año actual
-    $anio = date('y');
-
-    // Indicador de la escuela (en este caso es 12)
-    $abreviatura = '11';
-    $escuela = '70';
-
-    // Obtener el último registro de la tabla Teachers
-    $ultimo = Teacher::orderBy('teacherID', 'desc')->first();
-
-    // Verificar si hay registros previos
-    if ($ultimo) {
-        // Obtener el número de estudiante a partir del campo studentID
-        $ultimoDocente = substr($ultimo->id, -4);
-        $docente = str_pad($ultimoDocente + 1, 4, '0', STR_PAD_LEFT);
-    } else {
-        // Si no hay registros previos, asignar el número 1
-        $docente = '0001';
+    function generarPassword()
+    {
+        $password = '';
+        for ($i = 0; $i < 6; $i++) {
+            $password .= rand(0, 9); 
+        }
+        return $password;
     }
-
-    // Concatenar los tres componentes para formar la matrícula
-    $matricula = $abreviatura . $anio . $escuela . $docente;
-
-    return $matricula;
-}
 
 function generarClaveProfesor()
 {
@@ -101,22 +82,12 @@ function generarClaveProfesor()
     return '70' . str_pad($siguienteNumero % 10000, 4, '0', STR_PAD_LEFT) . $letra;
 }
 
-/* 
- function generarPassword()
-    {
-        $password = '';
-        for ($i = 0; $i < 6; $i++) {
-            $password .= rand(0, 9); 
-        }
-        return $password;
-    } */
-
     public function crearProfesor(){
         //Validar
         $datos = $this->validate();
-
-        $matricula = $this->generarMatricula();
-        $passwordTeacher = $this->generarClaveProfesor();
+        
+        $matricula = $this->generarClaveProfesor();
+        $passwordTeacher = $this->generarPassword();
 
         //Almacenamos imagen del profesor
         $photo = $this->photo->store('public/imageTeachers');
@@ -134,7 +105,6 @@ function generarClaveProfesor()
             'city' => $datos['city'],
             'state' => $datos['state'],
             'country' => $datos['country'],
-
             
         ]);
         //Se gurda registro de docente
@@ -155,19 +125,12 @@ function generarClaveProfesor()
         ]);
         
         //Se crea usuario para el docente
-       
         $user = User::create([
             'name' => $datos['first_name'].' '.$datos['father_surname'].$datos['fathers_last_name'],
             'email' => $datos['email'],
             'password' => Hash::make($passwordTeacher),
         ]);
 
-       /*  $user = User::create([
-            'name' => $teacher->first_name,
-            'email' => $teacher->email,
-            'password' => bcrypt($datos['curp']), //contraseña temporal
-        ]); */
-        
         $user->assignRole('docente'); // Asignar rol al usuario
         
         // Crear mensaje

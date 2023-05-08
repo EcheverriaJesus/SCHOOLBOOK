@@ -183,17 +183,50 @@
                 @endrole
                 
                 @role('alumno')
-                <li>
-                    <a href="#"
-                        class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-amber-300 dark:hover:bg-gray-700">
-                        <svg fill="#284CDA" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-                            viewBox="0 0 24 24">
-                            <path
-                                d="M24 12c0 6.627-5.373 12-12 12s-12-5.373-12-12h2c0 5.514 4.486 10 10 10s10-4.486 10-10-4.486-10-10-10c-2.777 0-5.287 1.141-7.099 2.977l2.061 2.061-6.962 1.354 1.305-7.013 2.179 2.18c2.172-2.196 5.182-3.559 8.516-3.559 6.627 0 12 5.373 12 12zm-13-6v8h7v-2h-5v-6h-2z" />
-                        </svg>
-                        <span class="flex-1 ml-3 whitespace-nowrap">Histórico</span>
-                    </a>
-                </li>
+                <div>
+                    <li>
+                        <button type="button"
+                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-amber-300"
+                            aria-controls="dropdown-history" data-collapse-toggle="dropdown-history">
+                            <svg fill="#284CDA" width="32" height="32" xmlns="http://www.w3.org/2000/svg"
+                                fill-rule="evenodd" clip-rule="evenodd">
+                                <path
+                                    d="M24 12c0 6.627-5.373 12-12 12s-12-5.373-12-12h2c0 5.514 4.486 10 10 10s10-4.486 10-10-4.486-10-10-10c-2.777 0-5.287 1.141-7.099 2.977l2.061 2.061-6.962 1.354 1.305-7.013 2.179 2.18c2.172-2.196 5.182-3.559 8.516-3.559 6.627 0 12 5.373 12 12zm-13-6v8h7v-2h-5v-6h-2z" />
+                            </svg>
+                            <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Histórico</span>
+                            <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </li>
+                    <ul id="dropdown-history" class="hidden py-2 space-y-2">
+                        <li class="flex w-full justify-center items-center">
+                            <a href="{{ route('historial.mostrar') }}"
+                                class="flex gap-5 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-amber-300 ">
+                                <svg fill="#284CDA" sidebar-toggle-item class="w-6 h-6"  viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="m21 4c0-.478-.379-1-1-1h-16c-.62 0-1 .519-1 1v16c0 .621.52 1 1 1h16c.478 0 1-.379 1-1zm-16.5.5h15v15h-15zm13.5 10.75c0-.414-.336-.75-.75-.75h-4.5c-.414 0-.75.336-.75.75s.336.75.75.75h4.5c.414 0 .75-.336.75-.75zm-11.772-.537 1.25 1.114c.13.116.293.173.455.173.185 0 .37-.075.504-.222l2.116-2.313c.12-.131.179-.296.179-.459 0-.375-.303-.682-.684-.682-.185 0-.368.074-.504.221l-1.66 1.815-.746-.665c-.131-.116-.293-.173-.455-.173-.379 0-.683.307-.683.682 0 .188.077.374.228.509zm11.772-2.711c0-.414-.336-.75-.75-.75h-4.5c-.414 0-.75.336-.75.75s.336.75.75.75h4.5c.414 0 .75-.336.75-.75zm-11.772-1.613 1.25 1.114c.13.116.293.173.455.173.185 0 .37-.074.504-.221l2.116-2.313c.12-.131.179-.296.179-.46 0-.374-.303-.682-.684-.682-.185 0-.368.074-.504.221l-1.66 1.815-.746-.664c-.131-.116-.293-.173-.455-.173-.379 0-.683.306-.683.682 0 .187.077.374.228.509zm11.772-1.639c0-.414-.336-.75-.75-.75h-4.5c-.414 0-.75.336-.75.75s.336.75.75.75h4.5c.414 0 .75-.336.75-.75z"/></path>
+                                </svg>
+                                Avence Reticular
+                            </a>
+                        </li>
+                       
+                            <li class="flex w-full justify-center items-center">
+                                <a href="{{route('subjects.assign-teacher')}}"
+                                    class="flex gap-5 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-amber-300">
+                                    <svg fill="#284CDA" sidebar-toggle-item class="w-6 h-6"  viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22 0v14.386c0 2.391-6.648 9.614-9.811 9.614h-10.189v-24h20zm-10.638 22c4.156 0 2.638-6 2.638-6s6 1.65 6-2.457v-11.543h-16v20h7.362zm.638-4v1h-5v-1h5zm-5-2h5v1h-5v-1zm0-2h10v1h-10v-1zm0-2h10v1h-10v-1zm3.691-3.174l-2.055.001-.39 1.172-1.246.001 2.113-5.689 1.086-.001 2.133 5.686-1.246.001-.395-1.171zm4.373-2.015l1.41-.001.001 1.019-1.41.001.001 1.594-1.074.001-.001-1.594-1.414.001-.001-1.019 1.414-.001-.001-1.528h1.074l.001 1.527zm-6.112 1.067l1.422-.001-.717-2.129-.705 2.13z"/></path>
+                                </svg>
+                                    Boletas de Calificaciones
+                                </a>
+                            </li>
+                     
+                    </ul>
+                </div>
                 @endrole
                 
                 @role('admin')
