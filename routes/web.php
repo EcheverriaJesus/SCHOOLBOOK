@@ -44,15 +44,16 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('teachers/{teacherId}',[TeacherController::class,'show'])->middleware('auth:sanctum')->name('teachers.show');
-Route::get('teachers/{teacherId}/edit', [TeacherController::class, 'edit'])->middleware('auth:sanctum')->name('teachers.edit');
 
-Route::resource('teachers', TeacherController::class)
-    ->middleware('auth:sanctum')
-    ->names([
-        'index' => 'teachers.index',
-        'create' => 'teachers.create',
-    ]);
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('teachers/create', [TeacherController::class, 'create'])->name('teachers.create');
+    Route::get('teachers/{teacherId}/edit', [TeacherController::class, 'edit'])->name('teachers.edit');
+    Route::get('teachers/{teacherId}', [TeacherController::class, 'show'])->name('teachers.show');
+    Route::get('teachers', [TeacherController::class, 'index'])->name('teachers.index');
+});
+
+
+
 
 Route::resource('user', UserController::class)->middleware('auth:sanctum');
 

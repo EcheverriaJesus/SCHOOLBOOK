@@ -8,8 +8,8 @@
             Información del profesor
         </h3>
     </div>
-
-    {{-- Informacion del Docente --}}
+    @if ($teacher)
+        {{-- Informacion del Docente --}}
     <article class="w-auto w-full h-auto mb-10 bg-white border shadow-xl sm:bg-white rounded-xl">
         <h2 class="flex justify-center pt-5 pb-5 text-xl font-bold text-indigo-600">General</h2>
         <section class="justify-around pb-5 sm:flex">
@@ -84,4 +84,5 @@
             </p>
         </div>
     </section>
+    @endif
 </div>
