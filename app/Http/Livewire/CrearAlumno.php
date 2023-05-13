@@ -9,6 +9,7 @@ use App\Models\Student;
 use Livewire\Component;
 use App\Models\Document;
 use Livewire\WithFileUploads;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -77,10 +78,10 @@ class CrearAlumno extends Component
         'curp' => ['required', 'regex:/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/'],
         'genderT' => 'required|string|max:10',
         'genderS' => 'required|string|max:10',
-        'emailT' => 'required|email',
-        'emailS' => 'required|email',
-        'phoneT' => 'required|digits:10',
-        'phoneS' => 'required|digits:10',
+        'emailT' => ['required','email','unique:tutors,email'],
+        'emailS' => 'required|email|unique:students,email',
+        'phoneT' => 'required|digits:10|unique:tutors,phone',
+        'phoneS' => 'required|digits:10|unique:students,phone',
         'student_status' => 'required|boolean',
         'document_status' => 'required|boolean',
         'study_plan' => 'required|string|max:100',
@@ -135,7 +136,7 @@ class CrearAlumno extends Component
     {
         $password = '';
         for ($i = 0; $i < 6; $i++) {
-            $password .= rand(0, 9); 
+            $password .= rand(0, 9);
         }
         return $password;
     }
@@ -155,69 +156,75 @@ class CrearAlumno extends Component
         $file = $this->file->store('public/fileStudents');
         $datos['file'] = str_replace('public/fileStudents/', '', $file);
         //Guardando registros
-        //Se guarda dirección del Alumno 
-        $direccion = Address::create([
-            'street' => $datos['streetS'],
-            'num_ext' => $datos['num_extS'],
-            'num_int' => $datos['num_intS'],
-            'neighborhood' => $datos['neighborhoodS'],
-            'city' => $datos['cityS'],
-            'state' => $datos['stateS'],
-            'country' => $datos['countryS'],
-        ]);
-        $direc = Address::create([
-            'street' => $datos['streetT'],
-            'num_ext' => $datos['num_extT'],
-            'num_int' => $datos['num_intT'],
-            'neighborhood' => $datos['neighborhoodT'],
-            'city' => $datos['cityT'],
-            'state' => $datos['stateT'],
-            'country' => $datos['countryT'],
-        ]);
-        $tutor = Tutor::create([
-            'tutor_name' => $datos['tutor_name'],
-            'paternal_surname' => $datos['paternal_surnameT'],
-            'maternal_surname' => $datos['maternal_surnameT'],
-            'gender' => $datos['genderT'],
-            'email' => $datos['emailT'],
-            'phone' => $datos['phoneT'],
-            'address_id' => $direc->id
-        ]);
-        $documentos = Document::create([
-            'document_name' => $datos['document_name'],
-            'status' => $datos['document_status'],
-            'file' => $datos['file']
-        ]);
+        try {
+            DB::beginTransaction(); // Inicia la transacción
+            //Se guarda dirección del Alumno 
+            $direccion = Address::create([
+                'street' => $datos['streetS'],
+                'num_ext' => $datos['num_extS'],
+                'num_int' => $datos['num_intS'],
+                'neighborhood' => $datos['neighborhoodS'],
+                'city' => $datos['cityS'],
+                'state' => $datos['stateS'],
+                'country' => $datos['countryS'],
+            ]);
+            $direc = Address::create([
+                'street' => $datos['streetT'],
+                'num_ext' => $datos['num_extT'],
+                'num_int' => $datos['num_intT'],
+                'neighborhood' => $datos['neighborhoodT'],
+                'city' => $datos['cityT'],
+                'state' => $datos['stateT'],
+                'country' => $datos['countryT'],
+            ]);
+            $tutor = Tutor::create([
+                'tutor_name' => $datos['tutor_name'],
+                'paternal_surname' => $datos['paternal_surnameT'],
+                'maternal_surname' => $datos['maternal_surnameT'],
+                'gender' => $datos['genderT'],
+                'email' => $datos['emailT'],
+                'phone' => $datos['phoneT'],
+                'address_id' => $direc->id
+            ]);
+            $documentos = Document::create([
+                'document_name' => $datos['document_name'],
+                'status' => $datos['document_status'],
+                'file' => $datos['file']
+            ]);
 
-        Student::create([
-            'studentID' => $matricula,
-            'student_name' => $datos['student_name'],
-            'paternal_surname' => $datos['paternal_surnameS'],
-            'maternal_surname' => $datos['maternal_surnameS'],
-            'grade' => $datos['grade'],
-            'birth_date' => $datos['birth_date'],
-            'curp' => $datos['curp'],
-            'gender' => $datos['genderS'],
-            'email' => $datos['emailS'],
-            'phone' => $datos['phoneS'],
-            'status' => $datos['student_status'],
-            'study_plan' => $datos['study_plan'],
-            'photo' => $datos['photo'],
-            'address_id' => $direccion->id,
-            'document_id' => $documentos->id,
-            'tutor_id' => $tutor->id
-            
-        ]);
+            Student::create([
+                'studentID' => $matricula,
+                'student_name' => $datos['student_name'],
+                'paternal_surname' => $datos['paternal_surnameS'],
+                'maternal_surname' => $datos['maternal_surnameS'],
+                'grade' => $datos['grade'],
+                'birth_date' => $datos['birth_date'],
+                'curp' => $datos['curp'],
+                'gender' => $datos['genderS'],
+                'email' => $datos['emailS'],
+                'phone' => $datos['phoneS'],
+                'status' => $datos['student_status'],
+                'study_plan' => $datos['study_plan'],
+                'photo' => $datos['photo'],
+                'address_id' => $direccion->id,
+                'document_id' => $documentos->id,
+                'tutor_id' => $tutor->id
 
-        $user = User::create([
-            'name' => $datos['student_name'].' '.$datos['paternal_surnameS'].$datos['maternal_surnameS'],
-            'email' => $datos['emailS'],
-            'password' => Hash::make($passwordStudent),
-        ]);
+            ]);
 
-        $user->assignRole('alumno'); // Asignar rol al usuario
+            $user = User::create([
+                'name' => $datos['student_name'] . ' ' . $datos['paternal_surnameS'] . $datos['maternal_surnameS'],
+                'email' => $datos['emailS'],
+                'password' => Hash::make($passwordStudent),
+            ]);
 
-        session()->flash('mensaje', 'Se registro al Alumno correctamente. La contraseña inicial del alumno es '.$passwordStudent);
+            $user->assignRole('alumno'); // Asignar rol al usuario
+            DB::commit(); // Confirma la transacción si todos los registros se ejecutan correctamente
+        } catch (\Exception $e) {
+            DB::rollback(); // Deshace la transacción si ocurre algún error
+            throw $e; // Puedes manejar el error de alguna manera o simplemente arrojarlo
+        }
+        session()->flash('mensaje', 'Se registro al Alumno correctamente. La contraseña inicial del alumno es ' . $passwordStudent);
         return redirect()->route('students.index');
     }
 

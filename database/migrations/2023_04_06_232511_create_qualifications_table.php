@@ -16,7 +16,9 @@ return new class extends Migration
             $table->float('p1')->nullable();
             $table->float('p2')->nullable();
             $table->float('p3')->nullable();
-            $table->float('promedio_final')->nullable();
+            $table->float('promedio')->nullable();
+            $table->float('calificacion_final')->nullable();
+            $table->smallInteger('tipo_evaluacion')->nullable();
             $table->string('course_id');
             $table->string('student_id');
             $table->timestamps();

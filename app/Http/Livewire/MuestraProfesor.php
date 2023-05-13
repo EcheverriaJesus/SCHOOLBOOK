@@ -11,6 +11,7 @@ class MuestraProfesor extends Component
     protected $listeners = [
         'updateTeacher' => 'render'
     ];
+    
     public function render()
     {
         return view('livewire.muestra-profesor', [
