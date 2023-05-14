@@ -111,6 +111,7 @@
                     </a>
                 </li>
 
+                @role('docente|alumno')
                 <li @class(['bg-amber-300 rounded-lg'=> request()->routeIs('courses.groups')])>
                     <a href="{{route('courses.groups')}}"
                         @class([ 'flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white'=>
@@ -127,7 +128,9 @@
                         <span class="flex-1 ml-3 whitespace-nowrap">Mis Grupos</span>
                     </a>
                 </li>
+                @endrole
 
+                @role('admin')
                 <div >
                     <li @class(['bg-amber-300 rounded-lg'=> request()->routeIs('subjects.index', 'subjects.create',
                         'subjects.edit', 'subjects.show','subjects.assign-teacher')])>
@@ -183,6 +186,7 @@
                         <span class="flex-1 ml-3 whitespace-nowrap">Grupos</span>
                     </a>
                 </li>
+                @endrole
               
 
                 @role('alumno|docente')

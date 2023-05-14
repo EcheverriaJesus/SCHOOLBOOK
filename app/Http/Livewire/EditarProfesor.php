@@ -59,7 +59,7 @@ class EditarProfesor extends Component
     ];
 
     public function mount(Teacher $teacher){
-        $this->teacher_id = $teacher->id;
+        $this->teacher_id = $teacher->TeacherID;
         $this->address_id = $teacher->address_id; 
         $this->first_name = $teacher->first_name;
         $this->father_surname = $teacher->father_surname;
