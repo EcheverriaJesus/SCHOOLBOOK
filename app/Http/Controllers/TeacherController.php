@@ -33,13 +33,15 @@ class TeacherController extends Controller
         return redirect()->route('teacher.index');
     }
 
-    public function show(Request $request, Teacher $teacher): View
+    public function show(Request $request, $teacherId): View
     {
+        $teacher = Teacher::where('teacherID', $teacherId)->first();
         return view('teacher.show', compact('teacher'));
     }
 
-    public function edit(Request $request, Teacher $teacher): View
+    public function edit(Request $request, $teacherId): View
     {
+        $teacher = Teacher::where('teacherID', $teacherId)->first();
         return view('teacher.edit', compact('teacher'));
     }
 

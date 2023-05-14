@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Teacher extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'teacherID';
+    
 
     /**
      * The attributes that are mass assignable.

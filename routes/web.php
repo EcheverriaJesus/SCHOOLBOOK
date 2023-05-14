@@ -45,14 +45,15 @@ Route::middleware([
 });
 
 
-Route::resource('teachers', TeacherController::class)
-    ->middleware('auth:sanctum')
-    ->names([
-        'index' => 'teachers.index',
-        'create' => 'teachers.create',
-        'show' => 'teachers.show',
-        'edit' => 'teachers.edit',
-    ]);
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('teachers/create', [TeacherController::class, 'create'])->name('teachers.create');
+    Route::get('teachers/{teacherId}/edit', [TeacherController::class, 'edit'])->name('teachers.edit');
+    Route::get('teachers/{teacherId}', [TeacherController::class, 'show'])->name('teachers.show');
+    Route::get('teachers', [TeacherController::class, 'index'])->name('teachers.index');
+});
+
+
+
 
 Route::resource('user', UserController::class)->middleware('auth:sanctum');
 

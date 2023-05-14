@@ -41,7 +41,7 @@
                 </p>
             </div>
             <div class="flex flex-col items-stretch gap-3 mt-5 md:mt-0 md:flex-row">
-                <a href="{{route('teachers.show', $teacher)}}"
+                <a href="{{route('teachers.show', $teacher->teacherID)}}"
                     class="flex justify-center gap-2 px-4 py-2 text-xs font-bold text-white uppercase bg-indigo-600 rounded-lg">
                     <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

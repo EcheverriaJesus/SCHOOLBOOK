@@ -136,7 +136,13 @@
                                 P3
                             </th>
                             <th scope="col" class="px-2 py-3 text-center">
-                                Calificación final
+                                Promedio
+                            </th>
+                            <th scope="col" class="px-2 py-3 text-center">
+                                Calificación Final
+                            </th>
+                            <th scope="col" class="px-2 py-3 text-center">
+                                Tipo de Evaluación
                             </th>
                         </tr>
                     </thead>
@@ -149,7 +155,7 @@
                                 <th scope="row"
                                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{$student->studentID}}
-                                <td class="w-1/3 px-6 py-4 text-center">
+                                <td class="w-1/5 px-6 py-4 text-center">
                                     {{$student->student_name.' '.$student->paternal_surname.'
                                     '.$student->maternal_surname}}
                                 </td>
