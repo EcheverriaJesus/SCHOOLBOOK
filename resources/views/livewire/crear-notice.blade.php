@@ -47,14 +47,26 @@
         </div>
     </div>
 
-   
-
-    <div>
+   {{--  <div>
         <x-label for="recipient" value="{{ __('Dirigido a') }}" />
-        <x-input id="recipient" class="block w-full mt-1" type="text" wire:model="recipient" {{-- DEJAR WIRE  --}}
+        <x-input id="recipient" class="block w-full mt-1" type="text" wire:model="recipient"
             :value="old('recipient')" />
         <div class="block mt-2">
             <x-alert-danger :messages="$errors->get('recipient')"/>
+        </div>
+    </div> --}}
+    <div>
+        <x-label for="recipient" value="{{ __('Dirigido a') }}" />
+        <select id="recipient" wire:model="recipient"
+            class="block w-full px-4 py-2 mt-1 text-gray-700 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200">
+            <option value="">-- Seleccionar opcion --</option>
+            <option value="alumno">Alumnos</option>
+            <option value="docente">Docentes</option>
+            <option value="ambos">Docentes y Alumnos</option>
+        </select>
+
+        <div class="block mt-2">
+            <x-alert-danger :messages="$errors->get('recipient')" />
         </div>
     </div>
 </section>
