@@ -19,7 +19,9 @@ class Qualification extends Model
         'p1',
         'p2',
         'p3',
-        'promedio_final',
+        'promedio',
+        'calificacion_final',   
+        'tipo_evaluacion',
         'course_id',
         'student_id',
     ];
@@ -34,7 +36,9 @@ class Qualification extends Model
         'p1' => 'float',
         'p2' => 'float',
         'p3' => 'float',
-        'promedio_final' => 'float',
+        'promedio' => 'float',
+        'calificacion_final' => 'float',
+        'tipo_evaluacion' => 'integer',
     ];
 
     protected static function booted()
@@ -43,20 +47,20 @@ class Qualification extends Model
             // Verificar si todas las calificaciones están presentes
             if ($qualification->p1 !== null && $qualification->p2 !== null && $qualification->p3 !== null) {
                 // Calcular promedio final
-                $promedioFinal = ($qualification->p1 + $qualification->p2 + $qualification->p3) / 3;
+                $promedio = ($qualification->p1 + $qualification->p2 + $qualification->p3) / 3;
 
                 // Redondear según las reglas solo si es mayor o igual a 6
-                if ($promedioFinal >= 6) {
-                    if ($promedioFinal - floor($promedioFinal) >= 0.5) {
-                        $promedioFinal = ceil($promedioFinal);
+                if ($promedio >= 6) {
+                    if ($promedio - floor($promedio) >= 0.5) {
+                        $promedio = ceil($promedio);
                     } else {
-                        $promedioFinal = floor($promedioFinal);
+                        $promedio = floor($promedio);
                     }
                 }
 
-                $qualification->promedio_final = $promedioFinal;
+                $qualification->promedio = $promedio;
             } else {
-                $qualification->promedio_final = null;
+                $qualification->promedio = null;
             }
         });
     }
