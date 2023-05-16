@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('subject_id');
             $table->string('cycle_id');
             $table->boolean('status');
+            $table->boolean('grades_sent')->nullable();
+            $table->dateTime('deadline_date')->nullable();
             $table->timestamps();
         });
     }
