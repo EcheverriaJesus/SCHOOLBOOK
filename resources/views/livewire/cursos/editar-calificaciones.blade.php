@@ -1,9 +1,16 @@
 <div>
     <section class="w-full h-auto mb-10 bg-white border shadow-xl sm:bg-white rounded-xl">
+        @if ($usuario == 'admin')
+        <x-button_back class="bg-white">
+            <x-slot name="route"> {{route('courses.index')}} </x-slot>
+            {{ __('courses.index') }}
+        </x-button_back>
+        @else
         <x-button_back class="bg-white">
             <x-slot name="route"> {{route('courses.groups')}} </x-slot>
             {{ __('courses.groups') }}
         </x-button_back>
+        @endif
         <div class="flex items-center my-5 text-center">
             <?xml version="1.0" ?>
             <!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.0//EN' 'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
@@ -108,6 +115,14 @@
         <p class="my-2 ml-5 text-lg font-bold text-indigo-600">{{$course->name}}</p>
         <p class="my-2 ml-5 text-base font-bold text-gray-600">Ciclo escolar: <span
                 class="text-base font-normal">{{$course->schoolCycles->cycle_name}}</span></p>
+        @if ($usuario == 'admin')
+        <p class="my-2 ml-5 text-base font-bold text-gray-600">Docente: <span
+                class="text-base font-normal">{{$nombreDocente =
+                $course->subject->teacherSubjects->first()->teacher->first_name.' '.
+                $course->subject->teacherSubjects->first()->teacher->father_surname.' '.
+                $course->subject->teacherSubjects->first()->teacher->fathers_last_name;
+                }}</span></p>
+        @endif
         <p class="my-2 ml-5 text-base font-bold text-gray-600">Alumnos inscritos: <span
                 class="text-base font-normal">{{$course->studentCourses->count()}}</span></p>
     </section>
@@ -117,6 +132,32 @@
             class="w-full h-auto p-6 mb-10 space-y-6 bg-white border shadow-2xl sm:bg-white rounded-xl">
             @if ($students->count() >0)
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                @if ($usuario == 'docente')
+                <div class="flex p-4 mb-4 text-sm text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 dark:border-yellow-800"
+                role="alert">
+                <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor"
+                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                        clip-rule="evenodd"></path>
+                </svg>
+                <span class="sr-only">Info</span>
+                <div>
+                    <span class="font-medium">¡IMPORTANTE!</span> La fecha y hora límite para capturar y enviar las
+                    calificaciones finales es el {{ \Carbon\Carbon::parse($course->deadline_date)->isoFormat('D [de]
+                    MMMM [de] YYYY [a las] h:mm A') }}
+                </div>
+            </div>
+                @endif
+                @if ($grades_sent && $usuario == 'docente')
+                <div class="flex p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
+                    <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                    <span class="sr-only">Info</span>
+                    <div>
+                      <span class="font-medium">¡Calificaciones Enviadas!</span> Las calificaciones has sido enviadas al departamento de control escolar
+                    </div>
+                </div>
+                @endif
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-white uppercase bg-blue-600 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
@@ -147,64 +188,141 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if ($grades_sent == false && $usuario == 'docente')
                         <form wire:submit.prevent="saveQualifications">
+                            @elseif ($usuario == 'admin')
+                            <form wire:submit.prevent="saveQualifications">
+                                @endif
+                                @foreach($students as $student)
+                                <tr
+                                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{$student->studentID}}
+                                    <td class="w-1/5 px-6 py-4 text-center">
+                                        {{$student->student_name.' '.$student->paternal_surname.'
+                                        '.$student->maternal_surname}}
+                                    </td>
+                                    <td class="px-1 py-4 text-center">
+                                        <input type="text" id="student_{{ $student->studentID }}"
+                                            name="qualifications[{{ $student->studentID }}][p1]"
+                                            wire:model.defer="qualifications.{{ $student->studentID }}.p1"
+                                            class="w-full px-3 py-1 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                            min="0" max="10" step="0.1" @if (($grades_sent && $usuario=='docente' ) ||
+                                            (!Carbon\Carbon::parse($fechaHoraActual)->isBefore(Carbon\Carbon::parse($course->deadline_date)) && $usuario =='docente'))
+                                        readonly
+                                        @endif
 
-                            @foreach($students as $student)
-                            <tr
-                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{$student->studentID}}
-                                <td class="w-1/5 px-6 py-4 text-center">
-                                    {{$student->student_name.' '.$student->paternal_surname.'
-                                    '.$student->maternal_surname}}
-                                </td>
-                                <td class="px-1 py-4 text-center">
-                                    <input type="text" id="student_{{ $student->studentID }}"
-                                        name="qualifications[{{ $student->studentID }}][p1]"
-                                        wire:model.defer="qualifications.{{ $student->studentID }}.p1"
-                                        class="w-full px-3 py-1 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                        min="0" max="10" step="0.1">
+                                        >
+                                    </td>
+                                    <td class="px-1 py-4 text-center">
+                                        <input type="text" id="student_{{ $student->studentID }}"
+                                            name="qualifications[{{ $student->studentID }}][p2]"
+                                            wire:model.defer="qualifications.{{ $student->studentID }}.p2"
+                                            class="w-full px-3 py-1 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                            min="0" max="10" step="0.1" @if (($grades_sent && $usuario=='docente' ) ||
+                                            (!Carbon\Carbon::parse($fechaHoraActual)->isBefore(Carbon\Carbon::parse($course->deadline_date))&& $usuario =='docente'))
+                                        readonly
+                                        @endif>
+                                    </td>
+                                    <td class="px-1 py-4 text-center">
+                                        <input type="text" id="student_{{ $student->studentID }}"
+                                            name="qualifications[{{ $student->studentID }}][p3]"
+                                            wire:model.defer="qualifications.{{ $student->studentID }}.p3"
+                                            class="w-full px-3 py-1 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                            min="0" max="10" step="0.1" @if (($grades_sent && $usuario=='docente' ) ||
+                                            (!Carbon\Carbon::parse($fechaHoraActual)->isBefore(Carbon\Carbon::parse($course->deadline_date))&& $usuario =='docente'))
+                                        readonly
+                                        @endif>
+                                    </td>
+                                    <td class="px-1 py-4 text-center">
+                                        <input type="text" id="student_{{ $student->studentID }}"
+                                            name="qualifications[{{ $student->studentID }}][promedio]"
+                                            wire:model.defer="qualifications.{{ $student->studentID }}.promedio"
+                                            class="w-1/2 px-3 py-1 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                            min="0" max="10" readonly>
+                                    </td>
+                                    <td class="py-4 text-center w-1/7 w-1/6px-1">
+                                        <input type="text" id="student_{{ $student->studentID }}"
+                                            name="qualifications[{{ $student->studentID }}][calificacion_final]"
+                                            wire:model.defer="qualifications.{{ $student->studentID }}.calificacion_final"
+                                            class="w-1/2 px-3 py-1 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                            min="0" max="10" @if (($grades_sent && $usuario=='docente' ) ||
+                                            (!Carbon\Carbon::parse($fechaHoraActual)->isBefore(Carbon\Carbon::parse($course->deadline_date))&& $usuario =='docente'))
+                                        readonly
+                                        @endif>
+                                    </td>
+                                    <td class="w-1/6 px-1 py-4 text-center">
+                                        <select id="eval_type_{{ $student->studentID }}"
+                                            name="qualifications[{{ $student->studentID }}][tipo_evaluacion]"
+                                            wire:model.defer="qualifications.{{ $student->studentID }}.tipo_evaluacion"
+                                            class="w-full px-3 py-1 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                            @if (($grades_sent && $usuario=='docente' ) ||
+                                            (!Carbon\Carbon::parse($fechaHoraActual)->isBefore(Carbon\Carbon::parse($course->deadline_date))&& $usuario =='docente'))
+                                            disabled
+                                            @endif>
+                                            <option value="">- Selecciona -</option>
+                                            <option value="1" @if ($qualifications[$student->
+                                                studentID]['tipo_evaluacion']
+                                                == 1) selected @endif>Eva.Ord.1ra</option>
+                                            <option value="2" @if ($qualifications[$student->
+                                                studentID]['tipo_evaluacion']
+                                                == 2) selected @endif>Eva.Reg.1ra</option>
+                                            <option value="3" @if ($qualifications[$student->
+                                                studentID]['tipo_evaluacion']
+                                                == 3) selected @endif>Eva.Reg.2da</option>
+                                        </select>
 
+                                    </td>
+                                </tr>
+                                @endforeach
+                                <div class="flex justify-center my-4 space-x-4">
+                                    @if(Carbon\Carbon::parse($fechaHoraActual)->isBefore(Carbon\Carbon::parse($course->deadline_date))
+                                    && $usuario =='docente')
+                                    @if ($grades_sent == false)
+                                    <button type="submit"
+                                        class="flex items-center p-2 px-4 py-1 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-green-500 border border-transparent rounded-md hover:bg-green-600">
+                                        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="32"
+                                            height="32">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z">
+                                            </path>
+                                        </svg>
+                                        <span class="ml-2">Guardar</span>
+                                    </button>
 
-                                </td>
-                                <td class="px-1 py-4 text-center">
-                                    <input type="text" id="student_{{ $student->studentID }}"
-                                        name="qualifications[{{ $student->studentID }}][p2]"
-                                        wire:model.defer="qualifications.{{ $student->studentID }}.p2"
-                                        class="w-full px-3 py-1 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                        min="0" max="10" step="0.1">
-                                </td>
-                                <td class="px-1 py-4 text-center">
-                                    <input type="text" id="student_{{ $student->studentID }}"
-                                        name="qualifications[{{ $student->studentID }}][p3]"
-                                        wire:model.defer="qualifications.{{ $student->studentID }}.p3"
-                                        class="w-full px-3 py-1 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                        min="0" max="10" step="0.1">
-                                </td>
-                                <td class="px-1 py-4 text-center">
-                                    <input type="text" id="student_{{ $student->studentID }}"
-                                        name="qualifications[{{ $student->studentID }}][promedio_final]"
-                                        wire:model.defer="qualifications.{{ $student->studentID }}.promedio_final"
-                                        class="w-1/2 px-3 py-1 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                        min="0" max="10" readonly>
-                                </td>
-
-                            </tr>
-                            @endforeach
-                            <div class="flex justify-center my-4">
-                                <button type="submit"
-                                    class="flex items-center p-2 px-4 py-1 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-green-500 border border-transparent rounded-md hover:bg-green-600">
-                                    <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="32" height="32">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z">
-                                        </path>
-                                    </svg>
-                                    <label class="ml-2">Guardar</label>
-                                </button>
-                            </div>
+                                    <a wire:click="completeQualifications"
+                                        class="flex items-center p-2 px-4 py-1 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-red-500 border border-transparent rounded-md cursor-pointer hover:bg-red-600">
+                                        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="32"
+                                            height="32">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z">
+                                            </path>
+                                        </svg>
+                                        <span class="ml-2">Mandar a escolares</span>
+                                    </a>
+                                    @endif
+                                    @elseif ($usuario == 'admin')
+                                    <button type="submit"
+                                        class="flex items-center p-2 px-4 py-1 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-green-500 border border-transparent rounded-md hover:bg-green-600">
+                                        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="32"
+                                            height="32">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z">
+                                            </path>
+                                        </svg>
+                                        <span class="ml-2">Guardar</span>
+                                    </button>
+                                    @endif
+                                </div>
+                                @if ($grades_sent == false && $usuario == 'docente')
+                            </form>
+                            @elseif ($usuario == 'admin')
                         </form>
+                        @endif
                     </tbody>
                 </table>
             </div>
@@ -218,6 +336,14 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+    Livewire.on('alertWarning', function (data, title = 'Advertencia') {
+    Swal.fire({
+        icon: 'warning',
+        title: title,
+        text: data.message,
+        confirmButtonText: 'Aceptar',
+    });
+});
     Livewire.on('alertSuccess', function (data, title = 'Éxito') {
     Swal.fire({
         icon: 'success',
@@ -228,56 +354,96 @@
     });
 });    
 </script>
-
+<script>
+    Livewire.on('confirmacionEnvio', () => {
+    Swal.fire({
+        title: '¿Desea enviar las calificaciones al departamento de control escolar?',
+        text: "Una vez enviadas no podrá modificar ninguna calificación",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, ¡Enviar!',
+        cancelButtonText: 'Cancelar',
+        customClass: {
+            title: 'text-lg',
+            text: 'text-base',
+            confirmButton: 'px-4 py-2 text-sm',
+            cancelButton: 'px-4 py-2 text-sm',
+        },
+}).then((result) => {
+  if (result.isConfirmed) {
+    Livewire.emit('sentToSchool')
+    Swal.fire(
+      'Calificaciones Enviadas',
+      'Las calificaciones se enviaron correctamente',
+      'success'
+    )
+  }
+})
+})
+</script>
 <script>
     // Función para validar la entrada en tiempo real
     function validateInput(event) {
       var keyCode = event.keyCode || event.which;
       var key = String.fromCharCode(keyCode);
-      var value = event.target.value + key;
-    
+  
       var decimalSeparator = ".";
       var maxDecimals = 2;
-    
-      // Permitir las teclas de navegación y otras teclas especiales
-      if (event.keyCode === 8 || event.keyCode === 9 || event.keyCode === 13 || event.keyCode === 27 || event.keyCode === 46 || event.keyCode === 110 || event.keyCode === 190) {
+  
+      // Permitir las teclas de navegación
+      if (event.keyCode === 8 || event.keyCode === 9 || event.keyCode === 13 || event.keyCode === 27) {
         return;
       }
-    
-      // Rechazar cualquier tecla que no sea un número o el separador decimal
-      if (!/^\d$/.test(key) && key !== decimalSeparator) {
-        event.preventDefault();
-        return;
-      }
-    
-      // Rechazar el separador decimal si ya existe uno en el valor
+  
+      // Obtener el valor actual del campo de entrada
+      var value = event.target.value;
+  
+      // Rechazar la entrada si ya existe un punto decimal en el valor
       if (key === decimalSeparator && value.indexOf(decimalSeparator) !== -1) {
         event.preventDefault();
         return;
       }
-    
-      // Rechazar la entrada si se supera el número máximo de decimales permitidos
-      var decimalIndex = value.indexOf(decimalSeparator);
-      if (decimalIndex !== -1 && value.length - decimalIndex > maxDecimals + 1) {
-        event.preventDefault();
-        return;
-      }
-    
+  
       // Rechazar la entrada si el valor resultante está fuera del rango de 0 a 10
-      var floatValue = parseFloat(value);
+      var floatValue = parseFloat(value + key.replace(decimalSeparator, '.'));
       if (isNaN(floatValue) || floatValue < 0 || floatValue > 10) {
         event.preventDefault();
         return;
       }
+  
+      // Obtener el número de decimales en el valor actual
+      var decimalIndex = value.indexOf(decimalSeparator);
+      var currentDecimals = decimalIndex !== -1 ? value.substring(decimalIndex + 1).length : 0;
+  
+      // Rechazar la entrada si se supera el número máximo de decimales permitidos
+      if (decimalIndex !== -1 && currentDecimals >= maxDecimals) {
+        event.preventDefault();
+        return;
+      }
+  
+      // Rechazar la entrada si se supera el número máximo de dígitos enteros
+      var integerPart = decimalIndex !== -1 ? value.substring(0, decimalIndex) : value;
+      if (integerPart.length >= 2) {
+        event.preventDefault();
+        return;
+      }
+  
+      // Rechazar la entrada si se ingresa un carácter no numérico después del punto decimal
+      if (decimalIndex !== -1 && !/^\d$/.test(key)) {
+        event.preventDefault();
+        return;
+      }
     }
-    
+  
     // Obtener todos los inputs
     var inputs = document.querySelectorAll('input[type="text"]');
-    
+  
     // Asignar evento de escucha a cada input
     inputs.forEach(function(input) {
-      // Evento de escucha para el evento keydown
-      input.addEventListener("keydown", function(event) {
+      // Evento de escucha para el evento keypress
+      input.addEventListener("keypress", function(event) {
         validateInput(event);
       });
     });
