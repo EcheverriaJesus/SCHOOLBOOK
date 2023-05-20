@@ -21,7 +21,8 @@ class Course extends Model
         'name',
         'subject_id',
         'cycle_id',
-        'status'
+        'status',
+        'grades_sent'
     ];
 
     /**

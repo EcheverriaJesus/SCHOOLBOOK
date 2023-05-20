@@ -63,8 +63,8 @@
                     @if ($course->qualifications->count() > 0)
                     @foreach ($course->qualifications as $qualification)
                     <tr>
-                        @if ($qualification->promedio_final)
-                        <td>{{ $qualification->promedio_final }}</td>
+                        @if ($qualification->calificacion_final)
+                        <td>{{ $qualification->calificacion_final }}</td>
                         @else
                         <td>No capturada</td>
                         @endif
