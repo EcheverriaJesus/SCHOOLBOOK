@@ -35,8 +35,9 @@ public function crearNotice(){
     //Validar
     $datos = $this->validate();
     //Almacenamos imagen del aviso
-    $photo = $this->photo->store('public/imageNotice');
-    $datos['photo'] = str_replace('public/imageNotice/','',$photo);
+    $nombreOriginal = $this->photo->getClientOriginalName();
+    $this->photo->storeAs('public/imageNotice', $nombreOriginal);
+    $datos['photo'] = $nombreOriginal;
 
     //Se gurda registro de Noticia
     Notice::create([
