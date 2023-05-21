@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="my-5">
         <h1 class="text-2xl font-extrabold text-indigo-600">Avance Reticular</h1>
-        <p class="my-2">Visualiza las materias que has cursado, que estas cursando y que vas a cursar.</p>
+        <p class="my-2">Visualiza las calificaciones que has obtenido.</p>
     </div>
    
     <div class="flex-col w-full h-auto p-6 mb-10 space-y-6 bg-white border shadow-2xl sm:bg-white rounded-xl">
