@@ -17,8 +17,8 @@
                         <x-application-mark> </x-application-mark>
                     </a>
                 </div>
-                <h1 class="justify-start hidden text-2xl font-semibold text-black sm:flex flotar">Bienvenido a
-                    SCHOOLBOOK
+                <h1 class="justify-start hidden text-xl font-semibold text-black sm:flex flotar">Bienvenido a
+                    SCHOOLBOOK  {{ Auth::user()->name }}
                 </h1>
                 {{-- Perfil y cerrar sesion --}}
                 <div class="flex items-center">
@@ -191,7 +191,7 @@
 
                 @role('alumno|docente')
                 <li>
-                    <a href="#"
+                    <a href="{{ route('profile.show') }}"
                         class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-amber-300 dark:hover:bg-gray-700">
                         <svg fill="#284CDA" width="32" height="32" xmlns="http://www.w3.org/2000/svg"
                             fill-rule="evenodd" clip-rule="evenodd">
