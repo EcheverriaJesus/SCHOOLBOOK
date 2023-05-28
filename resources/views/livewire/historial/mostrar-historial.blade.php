@@ -43,7 +43,7 @@
                      10
                  </td>
                  <td class="px-6 py-4">
-                     <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                     <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">9.0</a>
                  </td>
              </tr>
              <tr class="border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
@@ -60,7 +60,7 @@
                      9.5
                  </td>
                  <td class="px-6 py-4">
-                     <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                     <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">8.0</a>
                  </td>
              </tr>
              <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
@@ -77,17 +77,12 @@
                      8.4
                  </td>
                  <td class="px-6 py-4">
-                     <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                     <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">8.0</a>
                  </td>
              </tr>
              
          </tbody>
      </table>
-   <div>
-     @foreach ($subjects as $subject)
-         <p>{{ $subject->subject_name }}</p>
-     @endforeach
-   </div>
      </div>
    </div>
 </x-app-layout>

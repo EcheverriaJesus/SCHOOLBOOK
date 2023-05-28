@@ -1,18 +1,20 @@
 <?php
 
 use App\Models\Group;
+use Laravel\Fortify\Fortify;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClaseController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\ContributionController;
-use App\Http\Controllers\CourseController;
 use App\Http\Controllers\School_cycleController;
-use App\Http\Controllers\UserController;
 /* use App\Http\Controllers\Auth\RegisteredUserController;
  */
 /*
@@ -74,8 +76,8 @@ Route::resource('Contribution', ContributionController::class)
         'edit' => 'contributions.edit'
     ]);
 
-Route::get('/groups/main',[CourseController::class,'groups'])->middleware('auth:sanctum')->name('courses.groups');
-Route::get('/groups/{group}/qualifications',[CourseController::class,'qualifications'])->middleware('auth:sanctum')->name('courses.qualifications');
+Route::get('/groups/main', [CourseController::class, 'groups'])->middleware('auth:sanctum')->name('courses.groups');
+Route::get('/groups/{group}/qualifications', [CourseController::class, 'qualifications'])->middleware('auth:sanctum')->name('courses.qualifications');
 Route::resource('groups', GroupController::class)
     ->middleware('auth:sanctum','can:groups.index')
     ->names([
@@ -105,6 +107,19 @@ Route::resource('courses', CourseController::class)
         'create' => 'courses.create',
         'show' => 'courses.show',
         'edit' => 'courses.edit',
+    ]);
+
+// Ruta para mostrar los horarios del docente
+Route::get('schedule/teacher', [ScheduleController::class, 'teacherSchedule'])->name('schedule.teacher');
+// Ruta para mostrar los horarios del alumno
+Route::get('schedule/student', [ScheduleController::class, 'studentSchedule'])->name('schedule.student');
+Route::resource('schedule', ScheduleController::class)
+    ->middleware('auth:sanctum')
+    ->names([
+        'index' => 'schedule.index',
+        'create' => 'schedule.create',
+        'show' => 'schedule.show',
+        'edit' => 'schedule.edit',
     ]);
 
 Route::resource('schoolCycles', School_cycleController::class)
@@ -138,4 +153,6 @@ Route::get('/historial/mostrar', function () {
     return view('livewire.historial.mostrar-historial');
 })->name('historial.mostrar');
 
-/* Route::livewire('/mostrar-historial', MostrarHistorial::class); */
+Fortify::registerView(function () {
+    abort(404);
+});
