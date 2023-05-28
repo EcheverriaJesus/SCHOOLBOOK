@@ -13,9 +13,13 @@ return new class extends Migration
     {
         Schema::create('course_schedules', function (Blueprint $table) {
             $table->id();
-            $table->string('course_id');
-            $table->string('schedule_id');
+            $table->unsignedBigInteger('course_id');
+            $table->unsignedBigInteger('schedule_id');
+            $table->smallInteger('day');
+            $table->time('start_time');
+            $table->time('end_time');
             $table->timestamps();
+            $table->foreign('schedule_id')->references('id')->on('schedules')->onDelete('cascade');
         });
     }
 

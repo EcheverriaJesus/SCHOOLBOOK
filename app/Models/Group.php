@@ -44,4 +44,9 @@ class Group extends Model
     {
         return $this->hasMany(GroupCourse::class);
     }
+
+    public function schedule()
+    {
+        return $this->hasOne(Schedule::class, 'grupo_id');
+    }
 }

@@ -39,7 +39,7 @@ class CrearProfesor extends Component
         'father_surname' => 'required|string|max:30',
         'fathers_last_name' => 'required|string|max:30',
         'phone' => 'required|digits:10|unique:teachers,phone',
-        'email' => 'required|email|unique:teachers,email',
+        'email' => 'required|email|unique:teachers,email|unique:users,email',
         'curp' => ['required', 'regex:/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/'],
         'rfc' => ['required', 'regex:/^[A-Z]{4}\d{6}[A-Z0-9]{3}$/'],
         'education_level' => 'required|in:licenciatura,maestría,doctorado',
@@ -126,7 +126,7 @@ function generarClaveProfesor()
         
         //Se crea usuario para el docente
         $user = User::create([
-            'name' => $datos['first_name'].' '.$datos['father_surname'].$datos['fathers_last_name'],
+            'name' => $datos['first_name'].' '.$datos['father_surname'].' '.$datos['fathers_last_name'],
             'email' => $datos['email'],
             'password' => Hash::make($passwordTeacher),
         ]);

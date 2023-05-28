@@ -2,7 +2,7 @@
 
 @if ($messages)
 <div
-  class="flex p-2 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
+  class="flex p-2 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50"
   role="alert">
   <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20"
     xmlns="http://www.w3.org/2000/svg">
