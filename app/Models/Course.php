@@ -51,7 +51,7 @@ class Course extends Model
 
     public function courseSchedules(): HasMany
     {
-        return $this->hasMany(CourseSchedule::class);
+        return $this->hasMany(Course_schedule::class);
     }
 
     public function schoolCycles(): BelongsTo

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class CourseSchedule extends Model
+class Course_schedule extends Model
 {
     use HasFactory;
 
@@ -18,6 +18,9 @@ class CourseSchedule extends Model
     protected $fillable = [
         'course_id',
         'schedule_id',
+        'start_time',
+        'end_time',
+        'day',
     ];
 
     /**
