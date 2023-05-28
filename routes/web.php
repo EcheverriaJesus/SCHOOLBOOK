@@ -137,3 +137,5 @@ Route::resource('subject', App\Http\Controllers\SubjectController::class);
 Route::get('/historial/mostrar', function () {
     return view('livewire.historial.mostrar-historial');
 })->name('historial.mostrar');
+
+/* Route::livewire('/mostrar-historial', MostrarHistorial::class); */
