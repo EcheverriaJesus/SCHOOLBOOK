@@ -16,3 +16,35 @@ transform: translateX(0%) translateY(15%);
     transform: scale(0.9);
 }
 }
+
+.one-div {
+    --dark: #63a9f0;
+    --light: #152e80;
+    --low-light: #2593ee;
+    background-color: var(--light);
+    background: linear-gradient(-45deg, var(--light), var(--low-light));
+    box-shadow: 5px 5px 0 white, 10px 10px 0 var(--dark);
+    border-right: 5px solid var(--dark);
+    border-bottom: 5px solid var(--dark);
+    border-radius: .5rem 2rem .5rem .5rem;
+    overflow: hidden;
+  }
+  
+  .one-div::after {
+    color:#07116b;
+    display: flex;
+    font-size: x-large;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 20%;
+    content: "SCHOOL BOOK";
+    font-weight: 600;
+    border-radius: .5rem;
+    padding: .5rem 1rem;
+    margin-top: 2rem;
+    background-color: white;
+    z-index: 50;
+  }
+  
+  
