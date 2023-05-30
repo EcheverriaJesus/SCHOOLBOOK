@@ -7,9 +7,9 @@
         <x-validation-errors class="mb-4" />
 
         @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
-            </div>
+        <div class="mb-4 text-sm font-medium text-green-600">
+            {{ session('status') }}
+        </div>
         @endif
 
         <form method="POST" action="{{ route('login') }}">
@@ -17,12 +17,14 @@
 
             <div>
                 <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                <x-input id="email" class="block w-full mt-1" type="email" name="email" :value="old('email')" required
+                    autofocus autocomplete="username" />
             </div>
 
             <div class="mt-4">
                 <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+                <x-input id="password" class="block w-full mt-1" type="password" name="password" required
+                    autocomplete="current-password" />
             </div>
 
             <div class="block mt-4">
@@ -34,9 +36,10 @@
 
             <div class="flex items-center justify-end mt-4">
                 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
+                <a class="text-sm text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    href="{{ route('password.request') }}">
+                    {{ __('Forgot your password?') }}
+                </a>
                 @endif
 
                 <x-button class="ml-4">
@@ -46,14 +49,14 @@
         </form>
     </x-authentication-card>
 </x-guest-layout>
- --}}
+--}}
 
 
- 
- <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-   
-    
+
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -65,126 +68,133 @@
     <title>Log in</title>
 </head>
 
-<body class="p-20 h-screen">
+<body class="h-screen p-20">
 
     <header class="">
-                @if (Route::has('login'))
-                    <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
-                        @auth
-                            <a href="{{ url('/dashboard') }}"
-                                class="font-semibold text-gray-600 hover:text-blue-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Iniciar
-                                Sesion</a>
-    @else
-                            <a href="{{ route('login') }}"
-                                class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Iniciar
-                                Sesion</a>
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}"
-                                    class="ml-4 font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Registrar</a>
-                            @endif
-                        @endauth
-                    </div>
-                @endif
-           </header>
+        @if (Route::has('login'))
+        <div class="p-6 text-right sm:fixed sm:top-0 sm:right-0">
+            @auth
+            <a href="{{ url('/dashboard') }}"
+                class="font-semibold text-gray-600 hover:text-blue-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Iniciar
+                Sesion</a>
+            @endauth
+        </div>
+        @endif
+    </header>
 
     <div class="h-full md:flex">
-        <section class="flotar rounded-2xl relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-blue-800 to-purple-700 i justify-around items-center hidden">
+        <section
+            class="relative items-center justify-around hidden w-1/2 overflow-hidden flotar rounded-2xl md:flex bg-gradient-to-tr from-blue-800 to-purple-700 i">
             <div>
                 <img class="w-64º h-40 pt-10" src="../images/logo_schoolbook_blanco.png" alt="">
-                {{-- <h1 class="text-white font-bold text-4xl font-sans">SchoolBook</h1> --}}
-                <p class="flex justify-center text-white mt-1">Sistema de Control Escolar</p>
+                {{-- <h1 class="font-sans text-4xl font-bold text-white">SchoolBook</h1> --}}
+                <p class="flex justify-center mt-1 text-white">Sistema de Control Escolar</p>
             </div>
-            <div class="absolute -bottom-32 -left-40 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8">
+            <div class="absolute border-4 border-t-8 rounded-full -bottom-32 -left-40 w-80 h-80 border-opacity-30">
             </div>
-            <div class="absolute -bottom-40 -left-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8">
+            <div class="absolute border-4 border-t-8 rounded-full -bottom-40 -left-20 w-80 h-80 border-opacity-30">
             </div>
-            <div class="absolute -top-40 -right-0 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
-            <div class="absolute -top-20 -right-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+            <div class="absolute border-4 border-t-8 rounded-full -top-40 -right-0 w-80 h-80 border-opacity-30"></div>
+            <div class="absolute border-4 border-t-8 rounded-full -top-20 -right-20 w-80 h-80 border-opacity-30"></div>
         </section>
 
-        <section class="flex md:w-1/2 justify-center py-10 items-center bg-white">
+        <section class="flex items-center justify-center py-10 bg-white md:w-1/2">
             @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
+            <div class="mb-4 text-sm font-medium text-green-600">
                 {{ session('status') }}
             </div>
-        @endif
+            @endif
             <form method="POST" action="{{ route('login') }}">
                 @csrf
-    <div class="flex flex-col pb-7 ">
-        <H1 class="flex justify-center font-bold text-blue-800 text-2xl pb-2">SCHOOL BOOK</H1>
-        <H3>Sistema de Control Escolar Vicente Saldaña</H3>
-    </div>
+                <div class="flex flex-col pb-7 ">
+                    <H1 class="flex justify-center pb-2 text-2xl font-bold text-blue-800">SCHOOL BOOK</H1>
+                    <H3>Sistema de Control Escolar Vicente Saldaña</H3>
+                </div>
                 <div>
                     <x-label for="email" value="{{ __('Email') }}" />
-                    <x-input id="email" class="pl-4 block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" placeholder="Matricula"/>
+                    <x-input id="email" class="block w-full pl-4 mt-1" type="email" name="email" :value="old('email')"
+                        required autofocus autocomplete="username" placeholder="Matricula" />
+                    <div class="block mt-2">
+                        <x-alert-danger :messages="$errors->get('email')" />
+                    </div>
                 </div>
-    
+
                 <div class="mt-4">
                     <x-label for="password" value="{{ __('Password') }}" />
-                    <x-input id="password" class="bor pl-4 block mt-1 w-full" type="password" name="password" required autocomplete="current-password" placeholder="Contraseña"/>
+                    <x-input id="password" class="block w-full pl-4 mt-1 bor" type="password" name="password" required
+                        autocomplete="current-password" placeholder="Contraseña" />
+                    <div class="block mt-2">
+                        <x-alert-danger :messages="$errors->get('password')" />
+                    </div>
                 </div>
-    
+
                 <div class="block mt-4">
                     <label for="remember_me" class="flex items-center">
                         <x-checkbox id="remember_me" name="remember" />
                         <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
                     </label>
                 </div>
-    
+
                 <div class="flex items-center justify-end mt-4">
                     @if (Route::has('password.request'))
-                        <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                            {{ __('Forgot your password?') }}
-                        </a>
+                    <a class="text-sm text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        href="{{ route('password.request') }}">
+                        {{ __('Forgot your password?') }}
+                    </a>
                     @endif
-    
+
                     <x-button class="ml-4">
                         {{ __('Aceptar') }}
                     </x-button>
                 </div>
             </form>
-                {{-- <x-validation-errors class="mb-4" />
-        
-                @if (session('status'))
-                    <div class="mb-4 font-medium text-sm text-green-600">
-                        {{ session('status') }}
-                    </div>
-                @endif
-                <form method="POST" action="{{ route('login') }}">
-                    @csrf
-                    <h1 class="text-gray-800 font-bold text-2xl mb-1">Bienvenido a SchoolBok!</h1>
-                    <p class="text-sm font-normal text-gray-600 mb-7">Sistema de Control Escolar "Vicente Guerrero Saldaña"</p>
-    
-                    <div>
-                        <x-label for="email" value="{{ __('Email') }}" />
-                        <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-                    </div>
-        
-                    <div class="mt-4">
-                        <x-label for="password" value="{{ __('Password') }}" />
-                        <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-                    </div>
-        
-                    <div class="block mt-4">
-                        <label for="remember_me" class="flex items-center">
-                            <x-checkbox id="remember_me" name="remember" />
-                            <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                        </label>
-                    </div>
-        
-                    <div class="flex items-center justify-end mt-4">
-                        @if (Route::has('password.request'))
-                            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                                {{ __('Forgot your password?') }}
-                            </a>
-                        @endif
-        
-                        <x-button class="ml-4">
-                            {{ __('Log in') }}
-                        </x-button>
-                    </div>
-                </form>
-          --}}
+            {{--
+            <x-validation-errors class="mb-4" />
+
+            @if (session('status'))
+            <div class="mb-4 text-sm font-medium text-green-600">
+                {{ session('status') }}
+            </div>
+            @endif
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+                <h1 class="mb-1 text-2xl font-bold text-gray-800">Bienvenido a SchoolBok!</h1>
+                <p class="text-sm font-normal text-gray-600 mb-7">Sistema de Control Escolar "Vicente Guerrero Saldaña"
+                </p>
+
+                <div>
+                    <x-label for="email" value="{{ __('Email') }}" />
+                    <x-input id="email" class="block w-full mt-1" type="email" name="email" :value="old('email')"
+                        required autofocus autocomplete="username" />
+                </div>
+
+                <div class="mt-4">
+                    <x-label for="password" value="{{ __('Password') }}" />
+                    <x-input id="password" class="block w-full mt-1" type="password" name="password" required
+                        autocomplete="current-password" />
+                </div>
+
+                <div class="block mt-4">
+                    <label for="remember_me" class="flex items-center">
+                        <x-checkbox id="remember_me" name="remember" />
+                        <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                    </label>
+                </div>
+
+                <div class="flex items-center justify-end mt-4">
+                    @if (Route::has('password.request'))
+                    <a class="text-sm text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        href="{{ route('password.request') }}">
+                        {{ __('Forgot your password?') }}
+                    </a>
+                    @endif
+
+                    <x-button class="ml-4">
+                        {{ __('Log in') }}
+                    </x-button>
+                </div>
+            </form>
+            --}}
         </section>
     </div>
 

@@ -16,9 +16,8 @@ class Schedule extends Model
      * @var array
      */
     protected $fillable = [
-        'start_time',
-        'end_time',
-        'day',
+        'name',
+        'group_id',
     ];
 
     /**
@@ -28,11 +27,15 @@ class Schedule extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'day' => 'date',
     ];
 
     public function courseSchedules(): HasMany
     {
         return $this->hasMany(CourseSchedule::class);
+    }
+
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
     }
 }

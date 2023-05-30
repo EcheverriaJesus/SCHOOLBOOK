@@ -79,7 +79,7 @@ class CrearAlumno extends Component
         'genderT' => 'required|string|max:10',
         'genderS' => 'required|string|max:10',
         'emailT' => ['required','email','unique:tutors,email'],
-        'emailS' => 'required|email|unique:students,email',
+        'emailS' => 'required|email|unique:students,email|unique:users,email',
         'phoneT' => 'required|digits:10|unique:tutors,phone',
         'phoneS' => 'required|digits:10|unique:students,phone',
         'student_status' => 'required|boolean',
