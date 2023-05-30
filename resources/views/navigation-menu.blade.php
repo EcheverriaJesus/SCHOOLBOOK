@@ -17,8 +17,8 @@
                         <x-application-mark> </x-application-mark>
                     </a>
                 </div>
-                <h1 class="justify-start hidden text-2xl font-semibold text-black sm:flex flotar">Bienvenido a
-                    SCHOOLBOOK
+                <h1 class="justify-start hidden text-xl font-semibold text-black sm:flex flotar">Bienvenido a
+                    SCHOOLBOOK  {{ Auth::user()->name }}
                 </h1>
                 {{-- Perfil y cerrar sesion --}}
                 <div class="flex items-center">
@@ -111,8 +111,7 @@
                     </a>
                 </li>
 
-                
-                @role('alumno|docente')
+                @role('docente|alumno')
                 <li @class(['bg-amber-300 rounded-lg'=> request()->routeIs('courses.groups')])>
                     <a href="{{route('courses.groups')}}"
                         @class([ 'flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white'=>
@@ -129,7 +128,6 @@
                         <span class="flex-1 ml-3 whitespace-nowrap">Mis Grupos</span>
                     </a>
                 </li>
-               
                 @endrole
                 @role('admin')
                 <div >
@@ -154,16 +152,37 @@
                         
                     </li>
                     <ul id="dropdown-example" class="hidden py-2 space-y-2">
-                        <li >
+                        {{-- <li >
                             <a href="{{ route('subjects.index') }}"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-amber-300 ">Gestión de Materias
                             </a>
-                        </li>
-                        <li>
+                        </li> --}}
+                        {{-- <li>
                             <a href="{{route('subjects.assign-teacher')}}"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-amber-300">Asignación de Materias
                             </a>
+                        </li> --}}
+                        <li class="flex items-center justify-center w-full">
+                            <a href="{{ route('subjects.index') }}"
+                                class="flex items-center w-full gap-5 p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-amber-300 ">
+                                <svg fill="#284CDA" sidebar-toggle-item class="w-6 h-6"  viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10 13h-4v-1h4v1zm2.318-4.288l3.301 3.299-4.369.989 1.068-4.288zm11.682-5.062l-7.268 7.353-3.401-3.402 7.267-7.352 3.402 3.401zm-6 8.916v.977c0 4.107-6 2.457-6 2.457s1.518 6-2.638 6h-7.362v-20h14.056l1.977-2h-18.033v24h10.189c3.163 0 9.811-7.223 9.811-9.614v-3.843l-2 2.023z"/></path>
+                                </svg>
+                                Gestión de Materias
+                            </a>
                         </li>
+                        <li class="flex items-center justify-center w-full">
+                            <a href="{{ route('subjects.assign-teacher') }}"
+                                class="flex items-center w-full gap-5 p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-amber-300 ">
+                                <svg fill="#284CDA" sidebar-toggle-item class="w-6 h-6"  viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M20.997 18.529c-.372.223-1.044.565-1.997.904v-5.038c-3.979.327-6.323 1.521-7 1.954-.677-.433-3.022-1.627-7-1.954v5.037c-.954-.339-1.625-.681-1.996-.902l-.004-1.944c-.008-2.036.06-2.531 1.863-2.929 2.28-.507 4.616-.775 5.225-2.323.282-.713.117-1.509-.488-2.365-1.588-2.246-2.007-4.36-1.183-5.952.645-1.244 2.018-2.017 3.583-2.017 1.562 0 2.932.766 3.573 1.999.827 1.587.409 3.709-1.175 5.973-.6.857-.762 1.652-.481 2.362.607 1.534 2.929 1.815 5.219 2.323 1.805.398 1.873.898 1.863 2.957l-.002 1.915zm-2.997 2.465c-1.588.287-3.853.925-5.5 1.638v-5.431c1.216-.783 3.666-1.472 5.5-1.707v5.5zm-6.5 1.638c-1.648-.713-3.912-1.351-5.5-1.638v-5.5c1.834.235 4.284.924 5.5 1.707v5.431zm7.851-9.952c-2.865-.632-5.663-.951-4.133-3.134 3.885-5.555.702-9.546-3.218-9.546s-7.12 4.022-3.218 9.546c1.557 2.203-1.328 2.516-4.134 3.134-2.56.566-2.656 1.783-2.648 3.91l.004 2.475s.957.758 2.996 1.431v1.352c.148.022 3.57.457 7 2.131 3.429-1.673 6.866-2.111 7-2.131v-1.352c2.039-.673 2.996-1.431 2.996-1.431l.003-2.451c.01-2.143-.077-3.366-2.648-3.934z"/></path>
+                                </svg>
+                                Asignacion de Materias
+                            </a>
+                        </li>
+
                     </ul>
                 </div>
                 @endrole
@@ -189,10 +208,11 @@
                     </a>
                 </li>
                 @endrole
+              
 
                 @role('alumno|docente')
                 <li>
-                    <a href="#"
+                    <a href="{{ route('profile.show') }}"
                         class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-amber-300 dark:hover:bg-gray-700">
                         <svg fill="#284CDA" width="32" height="32" xmlns="http://www.w3.org/2000/svg"
                             fill-rule="evenodd" clip-rule="evenodd">
@@ -225,9 +245,9 @@
                         </button>
                     </li>
                     <ul id="dropdown-history" class="hidden py-2 space-y-2">
-                        <li class="flex w-full justify-center items-center">
+                        <li class="flex items-center justify-center w-full">
                             <a href="{{ route('historial.mostrar') }}"
-                                class="flex gap-5 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-amber-300 ">
+                                class="flex items-center w-full gap-5 p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-amber-300 ">
                                 <svg fill="#284CDA" sidebar-toggle-item class="w-6 h-6"  viewBox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path d="m21 4c0-.478-.379-1-1-1h-16c-.62 0-1 .519-1 1v16c0 .621.52 1 1 1h16c.478 0 1-.379 1-1zm-16.5.5h15v15h-15zm13.5 10.75c0-.414-.336-.75-.75-.75h-4.5c-.414 0-.75.336-.75.75s.336.75.75.75h4.5c.414 0 .75-.336.75-.75zm-11.772-.537 1.25 1.114c.13.116.293.173.455.173.185 0 .37-.075.504-.222l2.116-2.313c.12-.131.179-.296.179-.459 0-.375-.303-.682-.684-.682-.185 0-.368.074-.504.221l-1.66 1.815-.746-.665c-.131-.116-.293-.173-.455-.173-.379 0-.683.307-.683.682 0 .188.077.374.228.509zm11.772-2.711c0-.414-.336-.75-.75-.75h-4.5c-.414 0-.75.336-.75.75s.336.75.75.75h4.5c.414 0 .75-.336.75-.75zm-11.772-1.613 1.25 1.114c.13.116.293.173.455.173.185 0 .37-.074.504-.221l2.116-2.313c.12-.131.179-.296.179-.46 0-.374-.303-.682-.684-.682-.185 0-.368.074-.504.221l-1.66 1.815-.746-.664c-.131-.116-.293-.173-.455-.173-.379 0-.683.306-.683.682 0 .187.077.374.228.509zm11.772-1.639c0-.414-.336-.75-.75-.75h-4.5c-.414 0-.75.336-.75.75s.336.75.75.75h4.5c.414 0 .75-.336.75-.75z"/></path>
@@ -236,9 +256,9 @@
                             </a>
                         </li>
                        
-                            <li class="flex w-full justify-center items-center">
+                            <li class="flex items-center justify-center w-full">
                                 <a href="{{route('subjects.assign-teacher')}}"
-                                    class="flex gap-5 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-amber-300">
+                                    class="flex items-center w-full gap-5 p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-amber-300">
                                     <svg fill="#284CDA" sidebar-toggle-item class="w-6 h-6"  viewBox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path d="M22 0v14.386c0 2.391-6.648 9.614-9.811 9.614h-10.189v-24h20zm-10.638 22c4.156 0 2.638-6 2.638-6s6 1.65 6-2.457v-11.543h-16v20h7.362zm.638-4v1h-5v-1h5zm-5-2h5v1h-5v-1zm0-2h10v1h-10v-1zm0-2h10v1h-10v-1zm3.691-3.174l-2.055.001-.39 1.172-1.246.001 2.113-5.689 1.086-.001 2.133 5.686-1.246.001-.395-1.171zm4.373-2.015l1.41-.001.001 1.019-1.41.001.001 1.594-1.074.001-.001-1.594-1.414.001-.001-1.019 1.414-.001-.001-1.528h1.074l.001 1.527zm-6.112 1.067l1.422-.001-.717-2.129-.705 2.13z"/></path>
@@ -293,7 +313,7 @@
                 </li>
                 @endrole
                 
-                {{-- @role('admin') --}}
+                @role('admin')
                  <li>
                     <a href="{{route('user.index')}}"
                         class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-amber-300 dark:hover:bg-gray-700">
@@ -307,7 +327,7 @@
                         <span class="flex-1 ml-3 whitespace-nowrap">Usuarios</span>
                     </a>
                 </li>
-               {{--  @endrole --}}
+                @endrole
                
                 @role('admin')
                 <li @class(['bg-amber-300 rounded-lg' => request()->routeIs('contributions.index', 'contributions.create', 'contributions.edit', 'contributions.show')])>
@@ -387,6 +407,49 @@
                             </path>
                         </svg>
                         <span class="flex-1 ml-3 whitespace-nowrap">Cursos</span>
+                    </a>
+                </li>
+                @endrole
+                 @role('admin')
+                <li @class(['bg-amber-300 rounded-lg' => request()->routeIs('schedule.index', 'schedule.create', 'schedule.edit', 'schedule.show')])>
+                    <a href="{{route('schedule.index')}}"
+                        @class([ 'flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white'=>
+                        true,
+                        'hover:bg-amber-300 dark:hover:bg-gray-700' => !request()->routeIs('schedule.index'),
+                        'bg-amber-300' => request()->routeIs('schedule.index', 'schedule.create', 'schedule.edit',
+                        'schedule.show')
+                        ])
+                        >
+                        <svg fill="#284CDA" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M17 3v-2c0-.552.447-1 1-1s1 .448 1 1v2c0 .552-.447 1-1 1s-1-.448-1-1zm-12 1c.553 0 1-.448 1-1v-2c0-.552-.447-1-1-1-.553 0-1 .448-1 1v2c0 .552.447 1 1 1zm13 13v-3h-1v4h3v-1h-2zm-5 .5c0 2.481 2.019 4.5 4.5 4.5s4.5-2.019 4.5-4.5-2.019-4.5-4.5-4.5-4.5 2.019-4.5 4.5zm11 0c0 3.59-2.91 6.5-6.5 6.5s-6.5-2.91-6.5-6.5 2.91-6.5 6.5-6.5 6.5 2.91 6.5 6.5zm-14.237 3.5h-7.763v-13h19v1.763c.727.33 1.399.757 2 1.268v-9.031h-3v1c0 1.316-1.278 2.339-2.658 1.894-.831-.268-1.342-1.111-1.342-1.984v-.91h-9v1c0 1.316-1.278 2.339-2.658 1.894-.831-.268-1.342-1.111-1.342-1.984v-.91h-3v21h11.031c-.511-.601-.938-1.273-1.268-2z"/></svg>
+                        <span class="flex-1 ml-3 whitespace-nowrap">Horarios</span>
+                    </a>
+                </li>
+                @endrole
+                @role('alumno')
+                <li @class(['bg-amber-300 rounded-lg' => request()->routeIs('schedule.student')])>
+                    <a href="{{route('schedule.student')}}"
+                        @class([ 'flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white'=>
+                        true,
+                        'hover:bg-amber-300 dark:hover:bg-gray-700' => !request()->routeIs('schedule.index'),
+                        'bg-amber-300' => request()->routeIs('schedule.student')
+                        ])
+                        >
+                        <svg fill="#284CDA" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M17 3v-2c0-.552.447-1 1-1s1 .448 1 1v2c0 .552-.447 1-1 1s-1-.448-1-1zm-12 1c.553 0 1-.448 1-1v-2c0-.552-.447-1-1-1-.553 0-1 .448-1 1v2c0 .552.447 1 1 1zm13 13v-3h-1v4h3v-1h-2zm-5 .5c0 2.481 2.019 4.5 4.5 4.5s4.5-2.019 4.5-4.5-2.019-4.5-4.5-4.5-4.5 2.019-4.5 4.5zm11 0c0 3.59-2.91 6.5-6.5 6.5s-6.5-2.91-6.5-6.5 2.91-6.5 6.5-6.5 6.5 2.91 6.5 6.5zm-14.237 3.5h-7.763v-13h19v1.763c.727.33 1.399.757 2 1.268v-9.031h-3v1c0 1.316-1.278 2.339-2.658 1.894-.831-.268-1.342-1.111-1.342-1.984v-.91h-9v1c0 1.316-1.278 2.339-2.658 1.894-.831-.268-1.342-1.111-1.342-1.984v-.91h-3v21h11.031c-.511-.601-.938-1.273-1.268-2z"/></svg>
+                        <span class="flex-1 ml-3 whitespace-nowrap">Horario</span>
+                    </a>
+                </li>
+                @endrole
+                @role('docente')
+                <li @class(['bg-amber-300 rounded-lg' => request()->routeIs('schedule.teacher')])>
+                    <a href="{{route('schedule.teacher')}}"
+                        @class([ 'flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white'=>
+                        true,
+                        'hover:bg-amber-300 dark:hover:bg-gray-700' => !request()->routeIs('schedule.teacher'),
+                        'bg-amber-300' => request()->routeIs('schedule.teacher')
+                        ])
+                        >
+                        <svg fill="#284CDA" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M17 3v-2c0-.552.447-1 1-1s1 .448 1 1v2c0 .552-.447 1-1 1s-1-.448-1-1zm-12 1c.553 0 1-.448 1-1v-2c0-.552-.447-1-1-1-.553 0-1 .448-1 1v2c0 .552.447 1 1 1zm13 13v-3h-1v4h3v-1h-2zm-5 .5c0 2.481 2.019 4.5 4.5 4.5s4.5-2.019 4.5-4.5-2.019-4.5-4.5-4.5-4.5 2.019-4.5 4.5zm11 0c0 3.59-2.91 6.5-6.5 6.5s-6.5-2.91-6.5-6.5 2.91-6.5 6.5-6.5 6.5 2.91 6.5 6.5zm-14.237 3.5h-7.763v-13h19v1.763c.727.33 1.399.757 2 1.268v-9.031h-3v1c0 1.316-1.278 2.339-2.658 1.894-.831-.268-1.342-1.111-1.342-1.984v-.91h-9v1c0 1.316-1.278 2.339-2.658 1.894-.831-.268-1.342-1.111-1.342-1.984v-.91h-3v21h11.031c-.511-.601-.938-1.273-1.268-2z"/></svg>
+                        <span class="flex-1 ml-3 whitespace-nowrap">Horario</span>
                     </a>
                 </li>
                 @endrole
